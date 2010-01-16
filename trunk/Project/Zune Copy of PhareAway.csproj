@@ -41,9 +41,7 @@
     <DefineConstants>TRACE;ZUNE</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Program.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
