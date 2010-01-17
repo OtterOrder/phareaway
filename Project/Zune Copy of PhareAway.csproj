@@ -41,6 +41,7 @@
     <DefineConstants>TRACE;ZUNE</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="PhareAwayGame.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
