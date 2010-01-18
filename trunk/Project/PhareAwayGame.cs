@@ -27,7 +27,6 @@ namespace PhareAway
 
         protected override void LoadContent()
         {
-
         }
 
         protected override void Update(GameTime gameTime)
@@ -37,6 +36,8 @@ namespace PhareAway
 
         protected override void Draw(GameTime gameTime)
         {
+            graphics.GraphicsDevice.Clear(Color.DeepPink);
+
             base.Draw(gameTime);
         }
     }
