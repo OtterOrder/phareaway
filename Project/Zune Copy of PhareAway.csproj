@@ -70,6 +70,12 @@
       <Private>False</Private>
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <NestedContentProject Include="Resources\Resources.contentproj">
+      <Project>2b786b41-f110-4729-973d-0b4f527b36dd</Project>
+      <Visible>false</Visible>
+    </NestedContentProject>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
