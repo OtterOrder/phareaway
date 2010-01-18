@@ -13,14 +13,31 @@ namespace PhareAway
 
         private GraphicsDeviceManager graphics;
 
-        private const int BackBufferWidth = 1024;
-        private const int BackBufferHeight = 768;
+        private const int BackBufferWidth = 1280;
+        private const int BackBufferHeight = 720;
 
         public PhareAwayGame()
         {
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = BackBufferWidth;
             graphics.PreferredBackBufferHeight = BackBufferHeight;
+
+            Content.RootDirectory = "Resources";
+        }
+
+        protected override void LoadContent()
+        {
+
+        }
+
+        protected override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+        }
+
+        protected override void Draw(GameTime gameTime)
+        {
+            base.Draw(gameTime);
         }
     }
 }
