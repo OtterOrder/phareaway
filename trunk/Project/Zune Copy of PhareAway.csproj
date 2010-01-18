@@ -70,16 +70,6 @@
       <Private>False</Private>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <NestedContentProject Include="Graphics\Graphics.contentproj">
-      <Project>c042a0b3-6500-4fcd-b841-721b51602d57</Project>
-      <Visible>false</Visible>
-    </NestedContentProject>
-    <NestedContentProject Include="Sounds\Sounds.contentproj">
-      <Project>8ee0df5b-3a96-44a4-b821-39b96d0ebdf0</Project>
-      <Visible>false</Visible>
-    </NestedContentProject>
-  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
