@@ -38,7 +38,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Graphics\" />
+    <Compile Include="Graphics\Backgrounds\bg_Space_01.png">
+      <Name>bg_Space_01</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="Sounds\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />

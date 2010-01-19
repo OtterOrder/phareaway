@@ -12,6 +12,9 @@ namespace PhareAway
     {
 
         private GraphicsDeviceManager graphics;
+        private SpriteBatch spriteBatch;
+
+        private Level level;
 
         private const int BackBufferWidth = 1280;
         private const int BackBufferHeight = 720;
@@ -27,6 +30,9 @@ namespace PhareAway
 
         protected override void LoadContent()
         {
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            level = new Level(Services);
         }
 
         protected override void Update(GameTime gameTime)
@@ -37,6 +43,8 @@ namespace PhareAway
         protected override void Draw(GameTime gameTime)
         {
             graphics.GraphicsDevice.Clear(Color.DeepPink);
+
+            level.Draw(gameTime, spriteBatch, graphics);
 
             base.Draw(gameTime);
         }
