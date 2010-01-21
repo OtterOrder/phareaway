@@ -52,11 +52,13 @@ namespace PhareAway
 
             spriteBatch.Draw(background, Vector2.Zero, source, Color.White, 0, Vector2.Zero, 0.5f, SpriteEffects.None, 1.0f);
 
+            //-----------------------------
             source.X = source.Y = 0;
             source.Height = Anim.Height;
             source.Width = Anim.Width;
 
-            spriteBatch.Draw(Anim.CurrentFrame, Vector2.Zero, source, Color.White, 0, Vector2.Zero, 0.5f, SpriteEffects.None, 0.8f);
+            Vector2 pos = new Vector2(100.0f, 20.0f);
+            spriteBatch.Draw(Anim.CurrentFrame, pos, source, Color.White, 0, Vector2.Zero, 0.5f, SpriteEffects.None, 0.8f);
 
             spriteBatch.End();
         }
