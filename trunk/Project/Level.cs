@@ -12,6 +12,7 @@ namespace PhareAway
     class Level
     {
         private Texture2D background;
+        private Animation Anim;
 
         private float speed;
         private float posY;
@@ -29,13 +30,18 @@ namespace PhareAway
 
             background = Content.Load<Texture2D>("Graphics/Backgrounds/bg_Space_01");
 
-            speed = -2.0f;
+            speed = -0.2f;
             posY = 0;
+
+            Anim = new Animation("Graphics/Sprites/Inside/Characters/Archi/Archi_Walk_", 4, 15, Content);
+            Anim.Loop = true;
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch, GraphicsDeviceManager graphics)
         {
-            posY += speed;
+            posY += speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+
+            Anim.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
 
             spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.None);
 
@@ -45,6 +51,12 @@ namespace PhareAway
             Rectangle source = new Rectangle(0, (int)posY, background.Width * 20, background.Height * 10);
 
             spriteBatch.Draw(background, Vector2.Zero, source, Color.White, 0, Vector2.Zero, 0.5f, SpriteEffects.None, 1.0f);
+
+            source.X = source.Y = 0;
+            source.Height = Anim.Height;
+            source.Width = Anim.Width;
+
+            spriteBatch.Draw(Anim.CurrentFrame, Vector2.Zero, source, Color.White, 0, Vector2.Zero, 0.5f, SpriteEffects.None, 0.8f);
 
             spriteBatch.End();
         }

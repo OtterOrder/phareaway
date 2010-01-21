@@ -84,6 +84,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Animation.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="PhareAwayGame.cs" />
     <Compile Include="Program.cs" />
