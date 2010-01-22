@@ -12,8 +12,8 @@ namespace PhareAway
         public Vector2      _mScale = new Vector2(1.0f, 1.0f);
         public float        _mDepth = 1.0f;
 
-        public  Vector2     _mSpeed;
-        private Vector2     _mPosition;
+        public Vector2      _mSpeed = Vector2.Zero;
+        private Vector2     _mPosition = Vector2.Zero;
 
         //-------------------------------------------------------------------------
         public Background(string _FileName, ContentManager _ContentManager)
