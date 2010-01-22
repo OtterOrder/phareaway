@@ -13,6 +13,8 @@ namespace PhareAway
     class Level
     {
         private Texture2D background;
+
+        private Background Bg;
         private Sprite Spr;
 
         private float speed;
@@ -32,10 +34,9 @@ namespace PhareAway
         {
             content = new ContentManager(serviceProvider, "Resources");
 
-            background = Content.Load<Texture2D>("Graphics/Backgrounds/bg_Space_01");
+            Bg = new Background("Graphics/Backgrounds/bg_Space_01", Content);
+            Bg._mSpeed.Y = -50.0f;
 
-            speed = -0.2f;
-            posY = 0;
 
             Spr = new Sprite("Graphics/Sprites/Inside/Characters/Archi/Archi_Walk", Content, 4, 15);
             Spr._mDepth = 0.9f;
@@ -50,25 +51,34 @@ namespace PhareAway
 
         public void Update(GameTime gameTime)
         {
-            posY += speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-
+            Bg.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
             Spr.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
 
             ////. Test
-            /*
             CurKeyboardState = Keyboard.GetState();
 
-            if (CurKeyboardState.IsKeyDown(Keys.Up) && LastKeyboardState.IsKeyUp(Keys.Up) && Spr.AnimPlayer != null)
-                Spr.AnimPlayer.CurrentFrame = Spr.AnimPlayer.CurrentFrame + 1;
+            if (CurKeyboardState.IsKeyDown(Keys.Right) /*&& LastKeyboardState.IsKeyUp(Keys.Right)*/)
+            {
+                Spr._mPosition.X += 2.0f;
+            }
             else
-            if (CurKeyboardState.IsKeyDown(Keys.Down) && LastKeyboardState.IsKeyUp(Keys.Down) && Spr.AnimPlayer != null)
-                Spr.AnimPlayer.CurrentFrame = Spr.AnimPlayer.CurrentFrame - 1;
+            if (CurKeyboardState.IsKeyDown(Keys.Left) /*&& LastKeyboardState.IsKeyUp(Keys.Left)*/)
+            {
+                Spr._mPosition.X -= 2.0f;
+            }
 
-            if (CurKeyboardState.IsKeyDown(Keys.Enter) && LastKeyboardState.IsKeyUp(Keys.Enter) && Spr.AnimPlayer != null)
-                Spr.AnimPlayer.Pause = !Spr.AnimPlayer.Pause;
+
+            if (CurKeyboardState.IsKeyDown(Keys.Up))
+            {
+                Spr._mPosition.Y -= 2.0f;
+            }
+            else
+            if (CurKeyboardState.IsKeyDown(Keys.Down))
+            {
+                Spr._mPosition.Y += 2.0f;
+            }
 
             LastKeyboardState = CurKeyboardState;
-            */
             ////.
         }
 
@@ -78,15 +88,28 @@ namespace PhareAway
 
             graphics.GraphicsDevice.SamplerStates[0].AddressU = TextureAddressMode.Wrap;
             graphics.GraphicsDevice.SamplerStates[0].AddressV = TextureAddressMode.Wrap;
+            
+            graphics.GraphicsDevice.SamplerStates[0].MinFilter = TextureFilter.Linear;
+            graphics.GraphicsDevice.SamplerStates[0].MagFilter = TextureFilter.Linear;
+            /*
+            Rectangle source = new Rectangle(0, (int)posY, background.Width * 20, background.Height * 10);
+
+            spriteBatch.Draw(background, Vector2.Zero, source, Color.White, 0, Vector2.Zero, 0.5f, SpriteEffects.None, 1.0f);
+            */
+
+            Bg.Draw(spriteBatch);
+
+            spriteBatch.End();
+
+            //-----------------------
+            spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.None);
+
+            graphics.GraphicsDevice.SamplerStates[0].AddressU = TextureAddressMode.Clamp;
+            graphics.GraphicsDevice.SamplerStates[0].AddressV = TextureAddressMode.Clamp;
 
             graphics.GraphicsDevice.SamplerStates[0].MinFilter = TextureFilter.Point;
             graphics.GraphicsDevice.SamplerStates[0].MagFilter = TextureFilter.Point;
 
-            Rectangle source = new Rectangle(0, (int)posY, background.Width * 20, background.Height * 10);
-
-            spriteBatch.Draw(background, Vector2.Zero, source, Color.White, 0, Vector2.Zero, 0.5f, SpriteEffects.None, 1.0f);
-
-            //-----------------------
             Spr.Draw(spriteBatch);
 
             spriteBatch.End();

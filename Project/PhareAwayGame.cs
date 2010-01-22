@@ -16,8 +16,8 @@ namespace PhareAway
 
         private Level level;
 
-        private const int BackBufferWidth = 1280;
-        private const int BackBufferHeight = 720;
+        public const int BackBufferWidth = 1280;
+        public const int BackBufferHeight = 720;
 
         public PhareAwayGame()
         {

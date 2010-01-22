@@ -5,26 +5,27 @@ namespace PhareAway
 
     class AnimationPlayer
     {
-        private UInt32          _mNbFrames  = 0;
+        private UInt32 _mNbFrames = 0;
 
-        private float           _mFps       = 0.0f;
-        private float           _mTime      = 0.0f;
+        private float _mFps = 0.0f;
+        private float _mTime = 0.0f;
 
-        private float           _mSpeed     = 1.0f;
-        private int             _mState     = 0;
+        private float _mSpeed = 1.0f;
+        private int _mState = 0;
 
-        private int             _mCurrentFrame = 0;
+        private int _mCurrentFrame = 0;
 
-        enum AnimState{
+        enum AnimState
+        {
             Pause = 1,
             Loop = 1 << 1
         }
 
         //-------------------------------------------------------------------------
-        public AnimationPlayer (UInt32 _NbFrames, float _Fps)
+        public AnimationPlayer(UInt32 _NbFrames, float _Fps)
         {
-            _mNbFrames  = _NbFrames;
-            _mFps       = _Fps;
+            _mNbFrames = _NbFrames;
+            _mFps = _Fps;
         }
 
         //-------------------------------------------------------------------------
@@ -47,8 +48,9 @@ namespace PhareAway
         public bool Loop
         {
             get { return ((_mState & (int)AnimationPlayer.AnimState.Loop) == (int)AnimationPlayer.AnimState.Loop); }
-            
-            set {
+
+            set
+            {
                 if (value)
                     _mState = _mState | (int)AnimationPlayer.AnimState.Loop;
                 else
@@ -76,7 +78,7 @@ namespace PhareAway
         }
 
         //-------------------------------------------------------------------------
-        public void Update (float _Dt)  // Seconds
+        public void Update(float _Dt)  // Seconds
         {
             if (Pause)
                 return;
@@ -85,9 +87,9 @@ namespace PhareAway
 
             _mCurrentFrame = (int)(_mTime * _mFps);
 
-            if(_mCurrentFrame >= _mNbFrames)
+            if (_mCurrentFrame >= _mNbFrames)
             {
-                if(Loop)
+                if (Loop)
                 {
                     _mTime = 0.0f;
                     _mCurrentFrame = 0;

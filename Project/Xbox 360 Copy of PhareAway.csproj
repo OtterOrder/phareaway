@@ -43,7 +43,8 @@
     <XnaCompressContent>true</XnaCompressContent>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Animation.cs" />
+    <Compile Include="AnimationPlayer.cs" />
+    <Compile Include="Background.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="PhareAwayGame.cs" />
     <Compile Include="Program.cs">
