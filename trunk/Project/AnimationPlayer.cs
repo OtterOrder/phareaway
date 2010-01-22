@@ -11,13 +11,13 @@ namespace PhareAway
         private float _mTime = 0.0f;
 
         private float _mSpeed = 1.0f;
-        private int _mState = 0;
+        private int _mState = 1;
 
         private int _mCurrentFrame = 0;
 
         enum AnimState
         {
-            Pause = 1,
+            Play = 1,
             Loop = 1 << 1
         }
 
@@ -58,29 +58,29 @@ namespace PhareAway
             }
         }
 
-        public bool Pause
+        public bool Play
         {
-            get { return ((_mState & (int)AnimationPlayer.AnimState.Pause) == (int)AnimationPlayer.AnimState.Pause); }
+            get { return ((_mState & (int)AnimationPlayer.AnimState.Play) == (int)AnimationPlayer.AnimState.Play); }
 
             set
             {
                 if (value)
-                    _mState = _mState | (int)AnimationPlayer.AnimState.Pause;
+                    _mState = _mState | (int)AnimationPlayer.AnimState.Play;
                 else
-                    _mState = _mState & ~(int)AnimationPlayer.AnimState.Pause;
+                    _mState = _mState & ~(int)AnimationPlayer.AnimState.Play;
             }
         }
 
         public int CurrentFrame
         {
             get { return _mCurrentFrame; }
-            set { _mCurrentFrame = Math.Min(Math.Max(value, 0), (int)_mNbFrames - 1); Pause = true; }
+            set { _mCurrentFrame = Math.Min(Math.Max(value, 0), (int)_mNbFrames - 1); Play = false; }
         }
 
         //-------------------------------------------------------------------------
         public void Update(float _Dt)  // Seconds
         {
-            if (Pause)
+            if (!Play)
                 return;
 
             _mTime += _Dt * _mSpeed;
