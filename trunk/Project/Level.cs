@@ -6,16 +6,20 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Audio;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework.Input;
 
 namespace PhareAway
 {
     class Level
     {
         private Texture2D background;
-        private Animation Anim;
+        private Sprite Spr;
 
         private float speed;
         private float posY;
+
+        KeyboardState CurKeyboardState;
+        KeyboardState LastKeyboardState;
 
         // Level content.        
         public ContentManager Content
@@ -33,16 +37,39 @@ namespace PhareAway
             speed = -0.2f;
             posY = 0;
 
-            Anim = new Animation("Graphics/Sprites/Inside/Characters/Archi/Archi_Walk_", 4, 15, Content);
-            Anim.Loop = true;
+            Spr = new Sprite("Graphics/Sprites/Inside/Characters/Archi/Archi_Walk", Content, 4, 15);
+            Spr._mDepth = 0.9f;
+            Spr._mPosition.X = 205.42f;
+            Spr._mPosition.Y = 105.42f;
+            Spr.AnimPlayer.Loop = true;
+            Spr.AnimPlayer.Pause = true;
+            Spr.AnimPlayer.Speed = 0.25f;
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            posY += speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+
+            Spr.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
+
+            ////. Test
+            CurKeyboardState = Keyboard.GetState();
+
+            if (CurKeyboardState.IsKeyDown(Keys.Up) && LastKeyboardState.IsKeyUp(Keys.Up))
+                Spr.AnimPlayer.CurrentFrame = Spr.AnimPlayer.CurrentFrame + 1;
+            else
+            if (CurKeyboardState.IsKeyDown(Keys.Down) && LastKeyboardState.IsKeyUp(Keys.Down))
+                Spr.AnimPlayer.CurrentFrame = Spr.AnimPlayer.CurrentFrame - 1;
+
+            if (CurKeyboardState.IsKeyDown(Keys.Enter) && LastKeyboardState.IsKeyUp(Keys.Enter))
+                Spr.AnimPlayer.Pause = !Spr.AnimPlayer.Pause;
+
+            LastKeyboardState = CurKeyboardState;
+            ////.
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch, GraphicsDeviceManager graphics)
         {
-            posY += speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-
-            Anim.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
-
             spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.None);
 
             graphics.GraphicsDevice.SamplerStates[0].AddressU = TextureAddressMode.Wrap;
@@ -52,13 +79,8 @@ namespace PhareAway
 
             spriteBatch.Draw(background, Vector2.Zero, source, Color.White, 0, Vector2.Zero, 0.5f, SpriteEffects.None, 1.0f);
 
-            //-----------------------------
-            source.X = source.Y = 0;
-            source.Height = Anim.Height;
-            source.Width = Anim.Width;
-
-            Vector2 pos = new Vector2(100.0f, 20.0f);
-            spriteBatch.Draw(Anim.CurrentFrame, pos, source, Color.White, 0, Vector2.Zero, 0.5f, SpriteEffects.None, 0.8f);
+            //-----------------------
+            Spr.Draw(spriteBatch);
 
             spriteBatch.End();
         }

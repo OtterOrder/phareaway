@@ -1,43 +1,30 @@
 using System;
-using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Audio;
-using System.Linq;
-using System.Text;
 
 namespace PhareAway
 {
-    class Animation
+
+    class AnimationPlayer
     {
-        private Texture2D[]     _mpFrames   = null;
         private UInt32          _mNbFrames  = 0;
 
         private float           _mFps       = 0.0f;
         private float           _mTime      = 0.0f;
 
         private float           _mSpeed     = 1.0f;
-        private bool            _mLoop      = false;
+        private int             _mState     = 0;
 
         private int             _mCurrentFrame = 0;
 
-        //-------------------------------------------------------------------------
-        public Animation (string _FileBase, UInt32 _NbFrames, float _Fps, ContentManager _ContentManager)
-        {
-            _mpFrames   = new Texture2D [_NbFrames];
+        enum AnimState{
+            Pause = 1,
+            Loop = 1 << 1
+        }
 
+        //-------------------------------------------------------------------------
+        public AnimationPlayer (UInt32 _NbFrames, float _Fps)
+        {
             _mNbFrames  = _NbFrames;
             _mFps       = _Fps;
-
-            string FileName;
-            for (UInt32 i = 0; i < _mNbFrames; i++)
-            {
-                FileName = _FileBase;
-                FileName += i;
-
-                _mpFrames[i] = _ContentManager.Load<Texture2D>(FileName);
-            }
         }
 
         //-------------------------------------------------------------------------
@@ -59,35 +46,48 @@ namespace PhareAway
 
         public bool Loop
         {
-            get { return _mLoop; }
-            set { _mLoop = value; }
+            get { return ((_mState & (int)AnimationPlayer.AnimState.Loop) == (int)AnimationPlayer.AnimState.Loop); }
+            
+            set {
+                if (value)
+                    _mState = _mState | (int)AnimationPlayer.AnimState.Loop;
+                else
+                    _mState = _mState & ~(int)AnimationPlayer.AnimState.Loop;
+            }
         }
 
-        public int Height
+        public bool Pause
         {
-            get { return _mpFrames[0].Height; }
+            get { return ((_mState & (int)AnimationPlayer.AnimState.Pause) == (int)AnimationPlayer.AnimState.Pause); }
+
+            set
+            {
+                if (value)
+                    _mState = _mState | (int)AnimationPlayer.AnimState.Pause;
+                else
+                    _mState = _mState & ~(int)AnimationPlayer.AnimState.Pause;
+            }
         }
 
-        public int Width
+        public int CurrentFrame
         {
-            get { return _mpFrames[0].Width; }
-        }
-
-        public Texture2D CurrentFrame
-        {
-            get { return _mpFrames[_mCurrentFrame]; }
+            get { return _mCurrentFrame; }
+            set { _mCurrentFrame = Math.Min(Math.Max(value, 0), (int)_mNbFrames - 1); Pause = true; }
         }
 
         //-------------------------------------------------------------------------
         public void Update (float _Dt)  // Seconds
         {
+            if (Pause)
+                return;
+
             _mTime += _Dt * _mSpeed;
 
             _mCurrentFrame = (int)(_mTime * _mFps);
 
             if(_mCurrentFrame >= _mNbFrames)
             {
-                if(_mLoop)
+                if(Loop)
                 {
                     _mTime = 0.0f;
                     _mCurrentFrame = 0;
