@@ -45,23 +45,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Graphics\Sprites\Inside\Characters\Archi\Archi_Walk_0.png">
-      <Name>Archi_Walk_0</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Graphics\Sprites\Inside\Characters\Archi\Archi_Walk_1.png">
-      <Name>Archi_Walk_1</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Graphics\Sprites\Inside\Characters\Archi\Archi_Walk_2.png">
-      <Name>Archi_Walk_2</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Graphics\Sprites\Inside\Characters\Archi\Archi_Walk_3.png">
-      <Name>Archi_Walk_3</Name>
+    <Compile Include="Graphics\Sprites\Inside\Characters\Archi\Archi_Walk.png">
+      <Name>Archi_Walk</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

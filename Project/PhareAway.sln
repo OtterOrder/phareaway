@@ -5,8 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhareAway", "PhareAway.cspr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xbox 360 Copy of PhareAway", "Xbox 360 Copy of PhareAway.csproj", "{989D4352-3BC7-462A-88FC-DB9E72C80A4C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zune Copy of PhareAway", "Zune Copy of PhareAway.csproj", "{D8E52F1C-3B68-4C72-9A16-7B0E67FE5C5C}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -47,22 +45,6 @@ Global
 		{989D4352-3BC7-462A-88FC-DB9E72C80A4C}.Release|Xbox 360.Build.0 = Release|Xbox 360
 		{989D4352-3BC7-462A-88FC-DB9E72C80A4C}.Release|Xbox 360.Deploy.0 = Release|Xbox 360
 		{989D4352-3BC7-462A-88FC-DB9E72C80A4C}.Release|Zune.ActiveCfg = Release|Xbox 360
-		{D8E52F1C-3B68-4C72-9A16-7B0E67FE5C5C}.Debug|Mixed Platforms.ActiveCfg = Debug|Zune
-		{D8E52F1C-3B68-4C72-9A16-7B0E67FE5C5C}.Debug|Mixed Platforms.Build.0 = Debug|Zune
-		{D8E52F1C-3B68-4C72-9A16-7B0E67FE5C5C}.Debug|Mixed Platforms.Deploy.0 = Debug|Zune
-		{D8E52F1C-3B68-4C72-9A16-7B0E67FE5C5C}.Debug|x86.ActiveCfg = Debug|Zune
-		{D8E52F1C-3B68-4C72-9A16-7B0E67FE5C5C}.Debug|Xbox 360.ActiveCfg = Debug|Zune
-		{D8E52F1C-3B68-4C72-9A16-7B0E67FE5C5C}.Debug|Zune.ActiveCfg = Debug|Zune
-		{D8E52F1C-3B68-4C72-9A16-7B0E67FE5C5C}.Debug|Zune.Build.0 = Debug|Zune
-		{D8E52F1C-3B68-4C72-9A16-7B0E67FE5C5C}.Debug|Zune.Deploy.0 = Debug|Zune
-		{D8E52F1C-3B68-4C72-9A16-7B0E67FE5C5C}.Release|Mixed Platforms.ActiveCfg = Release|Zune
-		{D8E52F1C-3B68-4C72-9A16-7B0E67FE5C5C}.Release|Mixed Platforms.Build.0 = Release|Zune
-		{D8E52F1C-3B68-4C72-9A16-7B0E67FE5C5C}.Release|Mixed Platforms.Deploy.0 = Release|Zune
-		{D8E52F1C-3B68-4C72-9A16-7B0E67FE5C5C}.Release|x86.ActiveCfg = Release|Zune
-		{D8E52F1C-3B68-4C72-9A16-7B0E67FE5C5C}.Release|Xbox 360.ActiveCfg = Release|Zune
-		{D8E52F1C-3B68-4C72-9A16-7B0E67FE5C5C}.Release|Zune.ActiveCfg = Release|Zune
-		{D8E52F1C-3B68-4C72-9A16-7B0E67FE5C5C}.Release|Zune.Build.0 = Release|Zune
-		{D8E52F1C-3B68-4C72-9A16-7B0E67FE5C5C}.Release|Zune.Deploy.0 = Release|Zune
 		{2B786B41-F110-4729-973D-0B4F527B36DD}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{2B786B41-F110-4729-973D-0B4F527B36DD}.Debug|x86.ActiveCfg = Debug|x86
 		{2B786B41-F110-4729-973D-0B4F527B36DD}.Debug|Xbox 360.ActiveCfg = Debug|x86
