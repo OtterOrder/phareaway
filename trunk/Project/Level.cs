@@ -41,9 +41,11 @@ namespace PhareAway
             Spr._mDepth = 0.9f;
             Spr._mPosition.X = 205.42f;
             Spr._mPosition.Y = 105.42f;
-            Spr.AnimPlayer.Loop = true;
-            Spr.AnimPlayer.Pause = true;
-            Spr.AnimPlayer.Speed = 0.25f;
+            if (Spr.AnimPlayer != null)
+            {
+                Spr.AnimPlayer.Loop = true;
+                Spr.AnimPlayer.Speed = 1.0f;
+            }
         }
 
         public void Update(GameTime gameTime)
@@ -53,18 +55,20 @@ namespace PhareAway
             Spr.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
 
             ////. Test
+            /*
             CurKeyboardState = Keyboard.GetState();
 
-            if (CurKeyboardState.IsKeyDown(Keys.Up) && LastKeyboardState.IsKeyUp(Keys.Up))
+            if (CurKeyboardState.IsKeyDown(Keys.Up) && LastKeyboardState.IsKeyUp(Keys.Up) && Spr.AnimPlayer != null)
                 Spr.AnimPlayer.CurrentFrame = Spr.AnimPlayer.CurrentFrame + 1;
             else
-            if (CurKeyboardState.IsKeyDown(Keys.Down) && LastKeyboardState.IsKeyUp(Keys.Down))
+            if (CurKeyboardState.IsKeyDown(Keys.Down) && LastKeyboardState.IsKeyUp(Keys.Down) && Spr.AnimPlayer != null)
                 Spr.AnimPlayer.CurrentFrame = Spr.AnimPlayer.CurrentFrame - 1;
 
-            if (CurKeyboardState.IsKeyDown(Keys.Enter) && LastKeyboardState.IsKeyUp(Keys.Enter))
+            if (CurKeyboardState.IsKeyDown(Keys.Enter) && LastKeyboardState.IsKeyUp(Keys.Enter) && Spr.AnimPlayer != null)
                 Spr.AnimPlayer.Pause = !Spr.AnimPlayer.Pause;
 
             LastKeyboardState = CurKeyboardState;
+            */
             ////.
         }
 
@@ -74,6 +78,9 @@ namespace PhareAway
 
             graphics.GraphicsDevice.SamplerStates[0].AddressU = TextureAddressMode.Wrap;
             graphics.GraphicsDevice.SamplerStates[0].AddressV = TextureAddressMode.Wrap;
+
+            graphics.GraphicsDevice.SamplerStates[0].MinFilter = TextureFilter.Point;
+            graphics.GraphicsDevice.SamplerStates[0].MagFilter = TextureFilter.Point;
 
             Rectangle source = new Rectangle(0, (int)posY, background.Width * 20, background.Height * 10);
 
