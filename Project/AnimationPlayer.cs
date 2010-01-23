@@ -3,7 +3,7 @@ using System;
 namespace PhareAway
 {
 
-    class AnimationPlayer
+    public class AnimationPlayer
     {
         private UInt32 _mNbFrames = 0;
 
