@@ -33,7 +33,7 @@ namespace PhareAway
         }
 
         //-------------------------------------------------------------------------
-        public void Update(float _Dt)  // Seconds
+        public void Update(float _Dt)  // MilliSeconds
         {
             _mPosition += _mSpeed * _Dt;
         }
