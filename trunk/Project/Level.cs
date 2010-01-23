@@ -29,12 +29,11 @@ namespace PhareAway
         {
             content = new ContentManager(serviceProvider, "Resources");
 
-            Bg = new Background("Graphics/Backgrounds/bg_Space_01", Content);
+            Bg = SceneManager.Singleton.GetNewBackground("Graphics/Backgrounds/bg_Space_01", Content);
             Bg._mDepth = 0.5f;
-            Bg._mSpeed.Y = -50.0f;
+            Bg._mSpeed.Y = -0.05f;
 
-
-            Spr = new Sprite("Graphics/Sprites/Inside/Characters/Archi/Archi_Walk", Content, 4, 15);
+            Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Characters/Archi/Archi_Walk", Content, 4, 15);
             Spr._mDepth = 0.06f;
             //Spr._mPosition.X = 205.42f;
             //Spr._mPosition.Y = 105.42f;
@@ -45,38 +44,37 @@ namespace PhareAway
             }
         }
 
-        public void Update(GameTime gameTime)
+        public void Update(float _Dt)
         {
-            Bg.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
-            Spr.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
-
             ////. Test
             CurKeyboardState = Keyboard.GetState();
 
             bool Play = false;
 
+            float Speed = 0.1f*_Dt;
+
             if (CurKeyboardState.IsKeyDown(Keys.Right) /*&& LastKeyboardState.IsKeyUp(Keys.Right)*/)
             {
-                Spr._mPosition.X += 2.0f;
+                Spr._mPosition.X += Speed;
                 Play = true;
             }
             else
             if (CurKeyboardState.IsKeyDown(Keys.Left) /*&& LastKeyboardState.IsKeyUp(Keys.Left)*/)
             {
-                Spr._mPosition.X -= 2.0f;
+                Spr._mPosition.X -= Speed;
                 Play = true;
             }
 
 
             if (CurKeyboardState.IsKeyDown(Keys.Up))
             {
-                Spr._mPosition.Y -= 2.0f;
+                Spr._mPosition.Y -= Speed;
                 Play = true;
             }
             else
             if (CurKeyboardState.IsKeyDown(Keys.Down))
             {
-                Spr._mPosition.Y += 2.0f;
+                Spr._mPosition.Y += Speed;
                 Play = true;
             }
 
@@ -91,34 +89,5 @@ namespace PhareAway
             LastKeyboardState = CurKeyboardState;
             ////.
         }
-
-        public void Draw(GameTime gameTime, SpriteBatch spriteBatch, GraphicsDeviceManager graphics)
-        {
-            spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.None);
-
-            graphics.GraphicsDevice.SamplerStates[0].AddressU = TextureAddressMode.Wrap;
-            graphics.GraphicsDevice.SamplerStates[0].AddressV = TextureAddressMode.Wrap;
-            
-            graphics.GraphicsDevice.SamplerStates[0].MinFilter = TextureFilter.Linear;
-            graphics.GraphicsDevice.SamplerStates[0].MagFilter = TextureFilter.Linear;
-
-            Bg.Draw(spriteBatch);
-
-            spriteBatch.End();
-
-            //-----------------------
-            spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.None);
-
-            graphics.GraphicsDevice.SamplerStates[0].AddressU = TextureAddressMode.Clamp;
-            graphics.GraphicsDevice.SamplerStates[0].AddressV = TextureAddressMode.Clamp;
-
-            graphics.GraphicsDevice.SamplerStates[0].MinFilter = TextureFilter.Point;
-            graphics.GraphicsDevice.SamplerStates[0].MagFilter = TextureFilter.Point;
-
-            Spr.Draw(spriteBatch);
-
-            spriteBatch.End();
-        }
-
     }
 }

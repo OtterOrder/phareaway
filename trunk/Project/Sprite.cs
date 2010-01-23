@@ -48,10 +48,10 @@ namespace PhareAway
         }
 
         //-------------------------------------------------------------------------
-        public void Update (float _Dt)  // Seconds
+        public void Update(float _Dt)  // MilliSeconds
         {
             if (_mAnimPlayer != null)
-                _mAnimPlayer.Update(_Dt);
+                _mAnimPlayer.Update(_Dt / 1000.0f);
         }
 
         //-------------------------------------------------------------------------

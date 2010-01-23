@@ -39,14 +39,17 @@ namespace PhareAway
         {
             base.Update(gameTime);
 
-            level.Update(gameTime);
+            float Dt = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+
+            level.Update(Dt);
+            SceneManager.Singleton.Update(Dt);
         }
 
         protected override void Draw(GameTime gameTime)
         {
             graphics.GraphicsDevice.Clear(Color.DeepPink);
 
-            level.Draw(gameTime, spriteBatch, graphics);
+            SceneManager.Singleton.Draw(spriteBatch, graphics);
 
             base.Draw(gameTime);
         }
