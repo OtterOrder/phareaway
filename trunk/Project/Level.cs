@@ -10,10 +10,10 @@ using Microsoft.Xna.Framework.Input;
 
 namespace PhareAway
 {
-    class Level
+    public class Level
     {
         private Background Bg;
-        private Sprite Spr;
+        private Sprite Spr, Spr2;
 
         KeyboardState CurKeyboardState;
         KeyboardState LastKeyboardState;
@@ -30,11 +30,11 @@ namespace PhareAway
             content = new ContentManager(serviceProvider, "Resources");
 
             Bg = SceneManager.Singleton.GetNewBackground("Graphics/Backgrounds/bg_Space_01", Content);
-            Bg._mDepth = 0.5f;
+            Bg.Depth = 0.5f;
             Bg._mSpeed.Y = -0.05f;
 
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Characters/Archi/Archi_Walk", Content, 4, 15);
-            Spr._mDepth = 0.06f;
+            Spr.Depth = 0.06f;
             //Spr._mPosition.X = 205.42f;
             //Spr._mPosition.Y = 105.42f;
             if (Spr.AnimPlayer != null)
@@ -42,6 +42,9 @@ namespace PhareAway
                 Spr.AnimPlayer.Loop = true;
                 Spr.AnimPlayer.Speed = 1.0f;
             }
+
+            Spr2 = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Characters/Archi/Archi_Walk", Content);
+            Spr2.Depth = 0.07f;
         }
 
         public void Update(float _Dt)

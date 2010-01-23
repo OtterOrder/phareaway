@@ -1,11 +1,12 @@
 using System;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
 
 namespace PhareAway
 {
-    class Sprite
+    public class Sprite
     {
         private Texture2D       _mSpr = null;
         private AnimationPlayer _mAnimPlayer = null;
@@ -14,7 +15,7 @@ namespace PhareAway
         public Vector2          _mPosition = Vector2.Zero;
         public Vector2          _mOrigin = Vector2.Zero;
         public Vector2          _mScale = new Vector2(1.0f, 1.0f);
-        public float            _mDepth = 1.0f;
+        private float           _mDepth = 1.0f;
 
         //-------------------------------------------------------------------------
         public Sprite(string _FileName, ContentManager _ContentManager)
@@ -47,6 +48,12 @@ namespace PhareAway
             get { return _mAnimPlayer; }
         }
 
+        public float Depth
+        {
+            get { return _mDepth; }
+            set { _mDepth = value; SceneManager.Singleton.SortSprites(); }
+        }
+
         //-------------------------------------------------------------------------
         public void Update(float _Dt)  // MilliSeconds
         {
@@ -66,16 +73,20 @@ namespace PhareAway
 
             _SprBatch.Draw(_mSpr, _mPosition, Rect, Color.White, 0, _mOrigin, _mScale, SpriteEffects.None, _mDepth);
         }
+    }
 
-        //-------------------------------------------------------------------------
-        public static bool operator < (Sprite _spr1, Sprite _spr2)
+    //-------------------------------------------------------------------------
+    public class SpriteComparer : IComparer<Sprite>
+    {
+        public int Compare(Sprite _Spr1, Sprite _Spr2)
         {
-            return _spr1._mDepth < _spr2._mDepth;
-        }
+            if (_Spr1.Depth > _Spr2.Depth)
+                return -1;
+            else
+            if (_Spr1.Depth < _Spr2.Depth)
+                return 1;
 
-        public static bool operator > (Sprite _spr1, Sprite _spr2)
-        {
-            return _spr1._mDepth > _spr2._mDepth;
+            return 0;
         }
     }
 }

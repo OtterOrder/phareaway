@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace PhareAway
 {
-    class SceneManager
+    public class SceneManager
     {
         private static SceneManager _mSingleton = null;
 
@@ -36,6 +36,8 @@ namespace PhareAway
             Sprite spr = new Sprite(_FileName, _ContentManager);
             _mSprList.Add(spr);
 
+            _mSprList.Sort(new SpriteComparer());
+
             return spr;
         }
 
@@ -43,6 +45,8 @@ namespace PhareAway
         {
             Sprite spr = new Sprite(_FileName, _ContentManager, _NbFrames, _Fps);
             _mSprList.Add(spr);
+
+            _mSprList.Sort(new SpriteComparer());
 
             return spr;
         }
@@ -52,7 +56,20 @@ namespace PhareAway
             Background bg = new Background(_FileName, _ContentManager);
             _mBgList.Add(bg);
 
+            _mBgList.Sort(new BackgroundComparer());
+
             return bg;
+        }
+
+        //-------------------------------------------------------------------------
+        public void SortSprites()
+        {
+            _mSprList.Sort(new SpriteComparer());
+        }
+
+        public void SortBackgrounds()
+        {
+            _mBgList.Sort(new BackgroundComparer());
         }
 
         //-------------------------------------------------------------------------
