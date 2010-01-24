@@ -35,7 +35,7 @@ namespace PhareAway
 
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Characters/Archi/Archi_Walk", Content, 4, 15);
             Spr.Depth = 0.06f;
-            Spr._mPosition.X = 205.42f;
+            Spr._mPosition.X = 405.42f;
             Spr._mPosition.Y = 105.42f;
             Spr.SetBoundingBox(0, new Vector2(0.0f, 0.0f), new Vector2(Spr.Width, Spr.Height));
             if (Spr.AnimPlayer != null)
@@ -46,6 +46,8 @@ namespace PhareAway
 
             Spr2 = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Characters/Archi/Archi_Walk", Content);
             Spr2.Depth = 0.07f;
+            Spr2._mPosition.X = 100.0f;
+            Spr2._mPosition.Y = 100.0f;
             Spr2.SetBoundingBox(1, new Vector2(0.0f, 0.0f), new Vector2(Spr2.Width, Spr2.Height));
         }
 
@@ -98,7 +100,7 @@ namespace PhareAway
 
                 BoundingBox Collision = CollisionsManager.Singleton.Collide(Spr, 1);
                 if (Collision != null)
-                    Spr._mPosition.Y += Speed;
+                    Spr._mPosition.Y -= Speed;
                 else
                     Play = true;
             }
