@@ -17,6 +17,8 @@ namespace PhareAway
         public Vector2          _mScale = new Vector2(1.0f, 1.0f);
         private float           _mDepth = 1.0f;
 
+        private BoundingBox     _mBBox = null;
+
         //-------------------------------------------------------------------------
         public Sprite(string _FileName, ContentManager _ContentManager)
         {
@@ -52,6 +54,22 @@ namespace PhareAway
         {
             get { return _mDepth; }
             set { _mDepth = value; SceneManager.Singleton.SortSprites(); }
+        }
+
+        public void SetBoundingBox(UInt32 _Type, Vector2 _Position, Vector2 _Size)
+        {
+            if(_mBBox == null)
+                _mBBox = CollisionsManager.Singleton.GetNewBoundingBox(_Type, this, _Position, _Size);
+            else
+            {
+                _mBBox.mRelativePostion = _Position;
+                _mBBox.mSize = _Size;
+            }
+        }
+
+        public BoundingBox GetBoundingBox()
+        {
+            return _mBBox;
         }
 
         //-------------------------------------------------------------------------

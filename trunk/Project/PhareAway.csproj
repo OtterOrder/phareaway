@@ -84,14 +84,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AnimationPlayer.cs" />
-    <Compile Include="Background.cs" />
-    <Compile Include="Level.cs" />
-    <Compile Include="PhareAwayGame.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Src\AnimationPlayer.cs" />
+    <Compile Include="Src\Background.cs" />
+    <Compile Include="Src\Collisions\BoundingBox.cs" />
+    <Compile Include="Src\Collisions\CollisionsManager.cs" />
+    <Compile Include="Src\Level.cs" />
+    <Compile Include="Src\PhareAwayGame.cs" />
+    <Compile Include="Src\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SceneManager.cs" />
-    <Compile Include="Sprite.cs" />
+    <Compile Include="Src\SceneManager.cs" />
+    <Compile Include="Src\Sprite.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">

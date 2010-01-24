@@ -43,26 +43,16 @@
     <XnaCompressContent>true</XnaCompressContent>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AnimationPlayer.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Background.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Level.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="PhareAwayGame.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Program.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SceneManager.cs" />
-    <Compile Include="Sprite.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Src\AnimationPlayer.cs" />
+    <Compile Include="Src\Background.cs" />
+    <Compile Include="Src\Collisions\BoundingBox.cs" />
+    <Compile Include="Src\Collisions\CollisionsManager.cs" />
+    <Compile Include="Src\Level.cs" />
+    <Compile Include="Src\PhareAwayGame.cs" />
+    <Compile Include="Src\Program.cs" />
+    <Compile Include="Src\SceneManager.cs" />
+    <Compile Include="Src\Sprite.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Xna.Framework">
