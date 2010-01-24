@@ -111,52 +111,8 @@ namespace PhareAway
             ItBBox.Reset();
             while (ItBBox.MoveNext())
             {
-                if (   BBoxSpr.Left >= ItBBox.Current.Left && BBoxSpr.Left <= ItBBox.Current.Right      // Spr Left-Top corner
-                    && BBoxSpr.Top  >= ItBBox.Current.Top  && BBoxSpr.Top  <= ItBBox.Current.Bottom)
-                {
+                if (ItBBox.Current.Collide(BBoxSpr))
                     return ItBBox.Current;
-                }
-                else
-                if (   BBoxSpr.Right >= ItBBox.Current.Left && BBoxSpr.Right <= ItBBox.Current.Right    // Spr Right-Top corner
-                    && BBoxSpr.Top   >= ItBBox.Current.Top && BBoxSpr.Top    <= ItBBox.Current.Bottom)
-                {
-                    return ItBBox.Current;
-                }
-                else
-                if (   BBoxSpr.Left   >= ItBBox.Current.Left && BBoxSpr.Left   <= ItBBox.Current.Right  // Spr Left-Bottom corner
-                    && BBoxSpr.Bottom >= ItBBox.Current.Top  && BBoxSpr.Bottom <= ItBBox.Current.Bottom)
-                {
-                    return ItBBox.Current;
-                }
-                else
-                if (   BBoxSpr.Right  >= ItBBox.Current.Left && BBoxSpr.Right  <= ItBBox.Current.Right  // Spr Right-Bottom corner
-                    && BBoxSpr.Bottom >= ItBBox.Current.Top  && BBoxSpr.Bottom <= ItBBox.Current.Bottom)
-                {
-                    return ItBBox.Current;
-                }
-                if (   ItBBox.Current.Left >= BBoxSpr.Left && ItBBox.Current.Left <= BBoxSpr.Right      // Left-Top corner
-                    && ItBBox.Current.Top  >= BBoxSpr.Top  && ItBBox.Current.Top  <= BBoxSpr.Bottom)
-                {
-                    return ItBBox.Current;
-                }
-                else
-                if (   ItBBox.Current.Right >= BBoxSpr.Left && ItBBox.Current.Right <= BBoxSpr.Right    // Right-Top corner
-                    && ItBBox.Current.Top   >= BBoxSpr.Top  && ItBBox.Current.Top   <= BBoxSpr.Bottom)
-                {
-                    return BBoxSpr;
-                }
-                else
-                if (   ItBBox.Current.Left   >= BBoxSpr.Left && ItBBox.Current.Left   <= BBoxSpr.Right  // Left-Bottom corner
-                    && ItBBox.Current.Bottom >= BBoxSpr.Top  && ItBBox.Current.Bottom <= BBoxSpr.Bottom)
-                {
-                    return BBoxSpr;
-                }
-                else
-                if (   ItBBox.Current.Right  >= BBoxSpr.Left && ItBBox.Current.Right  <= BBoxSpr.Right  // Right-Bottom corner
-                    && ItBBox.Current.Bottom >= BBoxSpr.Top  && ItBBox.Current.Bottom <= BBoxSpr.Bottom)
-                {
-                    return BBoxSpr;
-                }
             }
 
             return null;
