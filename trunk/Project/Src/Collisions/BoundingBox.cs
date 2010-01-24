@@ -65,6 +65,34 @@ namespace PhareAway
             _mTop = Pos.Y;
             _mBottom = Pos.Y + mSize.Y;
         }
+        
+        //-------------------------------------------------------------------------
+        public bool Contains(float _X, float _Y)
+        {
+            if (   _X >= Left && _X <= Right
+                && _Y >= Top  && _Y <= Bottom)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool Collide (BoundingBox _BBox)
+        {
+            if (Contains(_BBox.Left, _BBox.Top)
+                || Contains(_BBox.Right, _BBox.Top)
+                || Contains(_BBox.Left, _BBox.Bottom)
+                || Contains(_BBox.Right, _BBox.Bottom)
+                || _BBox.Contains(Left, Top)
+                || _BBox.Contains(Right, Top)
+                || _BBox.Contains(Left, Bottom)
+                || _BBox.Contains(Right, Bottom)
+                )
+                return true;
+
+            return false;
+        }
     }
 
     /*
