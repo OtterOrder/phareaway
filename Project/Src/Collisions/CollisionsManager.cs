@@ -66,18 +66,7 @@ namespace PhareAway
 
             return BBox;
         }
-        /*
-        //-------------------------------------------------------------------------
-        public void SortSprites()
-        {
-            _mSprList.Sort(new SpriteComparer());
-        }
 
-        public void SortBackgrounds()
-        {
-            _mBgList.Sort(new BackgroundComparer());
-        }
-        */
         //-------------------------------------------------------------------------
         public BoundingBox Collide(Sprite _Spr, UInt32 _Type)
         {

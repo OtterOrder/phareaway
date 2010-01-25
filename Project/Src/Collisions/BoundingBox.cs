@@ -57,7 +57,7 @@ namespace PhareAway
         //-------------------------------------------------------------------------
         public void Update ()
         {
-            Vector2 Pos = _mSpr._mPosition - _mSpr._mOrigin;
+            Vector2 Pos = _mSpr._mPosition - _mSpr._mOrigin - mRelativePostion;
 
             _mLeft = Pos.X;
             _mRight = Pos.X + mSize.X;
