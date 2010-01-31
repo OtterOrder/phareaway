@@ -16,6 +16,7 @@ namespace PhareAway
         public Vector2          mOrigin = Vector2.Zero;
         public Vector2          mScale = new Vector2(1.0f, 1.0f);
         private float           _mDepth = 1.0f;
+        public SpriteEffects    mFilp = SpriteEffects.None;
 
         private BoundingBox     _mBBox = null;
 
@@ -94,7 +95,7 @@ namespace PhareAway
 
             Rectangle Rect = new Rectangle(Frame*_mWidth, 0, _mWidth, Height);
 
-            _SprBatch.Draw(_mSpr, mPosition, Rect, Color.White, 0, mOrigin, mScale, SpriteEffects.None, _mDepth);
+            _SprBatch.Draw(_mSpr, mPosition, Rect, Color.White, 0, mOrigin, mScale, mFilp, _mDepth);
         }
     }
 

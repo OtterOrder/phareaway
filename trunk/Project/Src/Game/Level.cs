@@ -36,7 +36,7 @@ namespace PhareAway
             // Ground
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Collisions/Ground", Content);
             Spr.Depth = 0.39f;
-            Spr.mPosition.Y = 400.0f;
+            Spr.mPosition = new Vector2(100.0f, 400.0f);
             Spr.mScale.X = ((float)PhareAwayGame.BackBufferWidth / (float)Spr.Width) /2.0f;
             Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
 

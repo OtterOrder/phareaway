@@ -66,6 +66,15 @@ namespace PhareAway
         {
             UpdateInputs(_Dt);
 
+            UpdatePhysique(_Dt);
+
+            _mSprites[_mState].mPosition = _mPosition;
+        }
+
+        //-----------------------------------
+        private void UpdatePhysique(float _Dt)
+        {
+            // If the character is in air, apply the gravity
             if (CollisionsManager.Singleton.Collide(_mSprites[_mState], 2, new Vector2(0.0f, 1.0f)) == null)
             {
                 _mGravity = 0.01f;
@@ -73,33 +82,52 @@ namespace PhareAway
 
             _mSpeed.Y += _mGravity * _Dt;
 
-            BoundingBox Collision = CollisionsManager.Singleton.Collide(_mSprites[_mState], 2, new Vector2(0.0f, _mSpeed.Y));
-            if (Collision != null)
+            // Update vertical collisions
+            if (_mSpeed.Y != 0.0f)
             {
-                if (_mSpeed.Y >= 0.0f)
-                    _mPosition.Y = Collision.Top - _mSprites[_mState].GetBoundingBox().Size.Y - 0.5f;
+                BoundingBox Collision = CollisionsManager.Singleton.Collide(_mSprites[_mState], 2, new Vector2(0.0f, _mSpeed.Y));
+                if (Collision != null)
+                {
+                    if (_mSpeed.Y >= 0.0f)
+                        _mPosition.Y = Collision.Top - _mSprites[_mState].GetBoundingBox().Size.Y - 0.1f;
+                    else
+                        _mPosition.Y = Collision.Bottom + 0.1f;
+
+                    _mSpeed.Y = 0.0f;
+                    _mGravity = 0.0f;
+                }
                 else
-                    _mPosition.Y = Collision.Bottom;
-
-                _mSpeed.Y = 0.0f;
-                _mGravity = 0.0f;
+                {
+                    _mPosition.Y += _mSpeed.Y;
+                }
             }
-            else
+
+            // Update horizontal collisions
+            if (_mSpeed.X != 0.0f)
             {
-                _mPosition.Y += _mSpeed.Y;
+                BoundingBox Collision = CollisionsManager.Singleton.Collide(_mSprites[_mState], 2, new Vector2(_mSpeed.X, 0.0f));
+                if (Collision != null)
+                {
+                    if (_mSpeed.X >= 0.0f)
+                        _mPosition.X = Collision.Left - _mSprites[_mState].GetBoundingBox().Size.X - 0.1f;
+                    else
+                        _mPosition.X = Collision.Right + 0.1f;
+
+                    _mSpeed.X = 0.0f;
+                }
+                else
+                {
+                    _mPosition.X += _mSpeed.X;
+                }
             }
-
-            _mPosition.X += _mSpeed.X;
-
-            _mSprites[_mState].mPosition = _mPosition;
         }
 
-        //-------------------------------------------------------------------------
+        //-----------------------------------
         private void UpdateInputs(float _Dt)
         {
             KeyboardState lKeyboardState = Keyboard.GetState();
 
-            float Speed = 0.2f * _Dt;
+            float Speed = 0.1f * _Dt;
 
             _mSpeed.X = 0.0f;
 
