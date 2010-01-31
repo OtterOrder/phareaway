@@ -13,7 +13,7 @@ namespace PhareAway
     public class Level
     {
         private Background Bg;
-        private Sprite Spr2;
+        private Sprite Spr2, bgDecor;
         private Player _mPlayer;
 
         // Level content.        
@@ -37,6 +37,11 @@ namespace PhareAway
             Spr2._mPosition.X = 100.0f;
             Spr2._mPosition.Y = 100.0f;
             Spr2.SetBoundingBox(1, new Vector2(0.0f, 0.0f), new Vector2(Spr2.Width, Spr2.Height));
+
+            bgDecor = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Background", Content);
+            bgDecor.Depth = 0.4f;
+            bgDecor._mPosition.X = 100.0f;
+            bgDecor._mPosition.Y = 100.0f;
 
             _mPlayer = new Player(_Game);
         }
