@@ -91,7 +91,6 @@
     <Compile Include="Src\Collisions\CollisionsManager.cs" />
     <Compile Include="Src\Game\Level.cs" />
     <Compile Include="Src\Game\PhareAwayGame.cs" />
-    <Compile Include="Src\Game\Player.cs" />
     <Compile Include="Src\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Src\SceneManager.cs" />
