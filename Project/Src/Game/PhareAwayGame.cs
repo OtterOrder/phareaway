@@ -32,7 +32,7 @@ namespace PhareAway
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            level = new Level(Services);
+            level = new Level(Services, this);
         }
 
         protected override void Update(GameTime gameTime)
