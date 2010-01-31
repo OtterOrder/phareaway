@@ -68,7 +68,7 @@ namespace PhareAway
         }
 
         //-------------------------------------------------------------------------
-        public BoundingBox Collide(Sprite _Spr, UInt32 _Type)
+        public BoundingBox Collide(Sprite _Spr, UInt32 _Type, Vector2 _Offset)
         {
             if (_Spr.GetBoundingBox() == null)
                 return null;
@@ -90,7 +90,7 @@ namespace PhareAway
             if (lList == null)
                 return null;
 
-            BoundingBox BBoxSpr = _Spr.GetBoundingBox();
+            BoundingBox BBoxSpr = new BoundingBox(_Spr, _Spr.GetBoundingBox().mRelativePostion + _Offset, _Spr.GetBoundingBox().mSize);
 
             lList.Update();
             BBoxSpr.Update();

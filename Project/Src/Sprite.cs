@@ -12,12 +12,14 @@ namespace PhareAway
         private AnimationPlayer _mAnimPlayer = null;
         private int             _mWidth;
 
-        public Vector2          _mPosition = Vector2.Zero;
-        public Vector2          _mOrigin = Vector2.Zero;
-        public Vector2          _mScale = new Vector2(1.0f, 1.0f);
+        public Vector2          mPosition = Vector2.Zero;
+        public Vector2          mOrigin = Vector2.Zero;
+        public Vector2          mScale = new Vector2(1.0f, 1.0f);
         private float           _mDepth = 1.0f;
 
         private BoundingBox     _mBBox = null;
+
+        public bool             mVisible = true;
 
         //-------------------------------------------------------------------------
         public Sprite(string _FileName, ContentManager _ContentManager)
@@ -30,8 +32,11 @@ namespace PhareAway
         {
             _mSpr = _ContentManager.Load<Texture2D>(_FileName);
 
-            _mAnimPlayer = new AnimationPlayer(_NbFrames, _Fps);
-            _mWidth = _mSpr.Width / (int)_NbFrames;
+            if (_NbFrames > 1)
+            {
+                _mAnimPlayer = new AnimationPlayer(_NbFrames, _Fps);
+                _mWidth = _mSpr.Width / (int)_NbFrames;
+            }
         }
 
         //-------------------------------------------------------------------------
@@ -89,7 +94,7 @@ namespace PhareAway
 
             Rectangle Rect = new Rectangle(Frame*_mWidth, 0, _mWidth, Height);
 
-            _SprBatch.Draw(_mSpr, _mPosition, Rect, Color.White, 0, _mOrigin, _mScale, SpriteEffects.None, _mDepth);
+            _SprBatch.Draw(_mSpr, mPosition, Rect, Color.White, 0, mOrigin, mScale, SpriteEffects.None, _mDepth);
         }
     }
 

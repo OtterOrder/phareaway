@@ -54,16 +54,21 @@ namespace PhareAway
             get { return _mBottom; }
         }
 
+        public Vector2 Size
+        {
+            get { return mSize * _mSpr.mScale; }
+        }
+
         //-------------------------------------------------------------------------
         public void Update ()
         {
-            Vector2 Pos = _mSpr._mPosition - _mSpr._mOrigin - mRelativePostion;
+            Vector2 Pos = _mSpr.mPosition - _mSpr.mOrigin*_mSpr.mScale + mRelativePostion;
 
             _mLeft = Pos.X;
-            _mRight = Pos.X + mSize.X;
+            _mRight = Pos.X + mSize.X * _mSpr.mScale.X;
 
             _mTop = Pos.Y;
-            _mBottom = Pos.Y + mSize.Y;
+            _mBottom = Pos.Y + mSize.Y * _mSpr.mScale.Y;
         }
         
         //-------------------------------------------------------------------------

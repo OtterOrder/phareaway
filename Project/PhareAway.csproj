@@ -86,6 +86,7 @@
   <ItemGroup>
     <Compile Include="Src\AnimationPlayer.cs" />
     <Compile Include="Src\Background.cs" />
+    <Compile Include="Src\Character.cs" />
     <Compile Include="Src\Collisions\BoundingBox.cs" />
     <Compile Include="Src\Collisions\CollisionsManager.cs" />
     <Compile Include="Src\Game\Level.cs" />

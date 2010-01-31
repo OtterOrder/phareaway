@@ -13,8 +13,8 @@ namespace PhareAway
     public class Level
     {
         private Background Bg;
-        private Sprite Spr2, bgDecor;
-        private Player _mPlayer;
+        private Sprite Spr, bgDecor;
+        private Character _mArchi;
 
         // Level content.        
         public ContentManager Content
@@ -31,24 +31,34 @@ namespace PhareAway
             Bg.Depth = 0.5f;
             Bg._mSpeed.Y = -0.05f;
 
+            _mArchi = new Character();
 
-            Spr2 = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Characters/Archi/Archi_Walk", Content);
-            Spr2.Depth = 0.07f;
-            Spr2._mPosition.X = 100.0f;
-            Spr2._mPosition.Y = 100.0f;
-            Spr2.SetBoundingBox(1, new Vector2(0.0f, 0.0f), new Vector2(Spr2.Width, Spr2.Height));
+            // Ground
+            Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Collisions/Ground", Content);
+            Spr.Depth = 0.39f;
+            Spr.mPosition.Y = 400.0f;
+            Spr.mScale.X = ((float)PhareAwayGame.BackBufferWidth / (float)Spr.Width) /2.0f;
+            Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
 
+            Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Collisions/Ground", Content);
+            Spr.Depth = 0.39f;
+            Spr.mPosition.Y = 500.0f;
+            Spr.mScale.X = ((float)PhareAwayGame.BackBufferWidth / (float)Spr.Width);
+            Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+
+            //
             bgDecor = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Background", Content);
             bgDecor.Depth = 0.4f;
-            bgDecor._mPosition.X = 100.0f;
-            bgDecor._mPosition.Y = 100.0f;
+            bgDecor.mPosition.X = 100.0f;
+            bgDecor.mPosition.Y = 100.0f;
 
-            _mPlayer = new Player(_Game);
+            //_mPlayer = new Player(_Game);
+            _mArchi.Init(Content);
         }
 
         public void Update(float _Dt)
         {
-           
+            _mArchi.Update(_Dt);
         }
     }
 }

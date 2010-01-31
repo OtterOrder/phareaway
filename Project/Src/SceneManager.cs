@@ -117,7 +117,8 @@ namespace PhareAway
             ItSpr.Reset();
             while (ItSpr.MoveNext())
             {
-                ItSpr.Current.Draw(_SprBatch);
+                if(ItSpr.Current.mVisible)
+                    ItSpr.Current.Draw(_SprBatch);
             }
 
             _SprBatch.End();
