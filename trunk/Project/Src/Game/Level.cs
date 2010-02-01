@@ -52,8 +52,23 @@ namespace PhareAway
             bgDecor.mPosition.X = 100.0f;
             bgDecor.mPosition.Y = 100.0f;
 
-            //_mPlayer = new Player(_Game);
-            _mArchi.Init(Content);
+            //-----------------
+            // Init Player
+            CharacterParameters Params = new CharacterParameters();
+            Params.mFileBase = "Graphics/Sprites/Inside/Characters/Archi/";
+
+            Params.mSpritesParams[0].mFileName = "Archi_Idle";
+
+            Params.mSpritesParams[1].mFileName = "Archi_Walk";
+            Params.mSpritesParams[1].mNbFrames = 4;
+            Params.mSpritesParams[1].mFps = 15.0f;
+            Params.mSpritesParams[1].mLoop = true;
+
+            Params.mSpritesParams[2].mFileName = "Archi_Jump";
+
+            Params.mSpritesParams[3].mFileName = "Archi_Fall";
+
+            _mArchi.Init(Content, Params);
         }
 
         public void Update(float _Dt)
