@@ -58,13 +58,13 @@ namespace PhareAway
         }
 
         //-------------------------------------------------------------------------
-        public void Init(ContentManager _ContentManager, CharacterParameters _Parameters)
+        public void Init(ContentManager _ContentManager, CharacterParameters _Parameters, UInt32 _SceneId)
         {
             _mSprites = new Sprite[NbSprites];
 
             for (int i = 0; i < NbSprites; i++)
             {
-                _mSprites[i] = SceneManager.Singleton.GetNewSprite(_Parameters.mFileBase + _Parameters.mSpritesParams[i].mFileName, _ContentManager, _Parameters.mSpritesParams[i].mNbFrames, _Parameters.mSpritesParams[i].mFps);
+                _mSprites[i] = SceneManager.Singleton.GetNewSprite(_Parameters.mFileBase + _Parameters.mSpritesParams[i].mFileName, _ContentManager, _Parameters.mSpritesParams[i].mNbFrames, _Parameters.mSpritesParams[i].mFps, _SceneId);
                 if (_mSprites[i].AnimPlayer != null)
                     _mSprites[i].AnimPlayer.Loop = _Parameters.mSpritesParams[i].mLoop;
 
@@ -74,8 +74,6 @@ namespace PhareAway
 
             _mSprites[(int)_mState].mVisible = true;
         }
-
-
 
         //------------------------------------------------------------------
         private Sprite GetCurrentSprite()
