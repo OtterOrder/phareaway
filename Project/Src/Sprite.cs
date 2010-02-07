@@ -70,7 +70,7 @@ namespace PhareAway
                 _mBBox = CollisionsManager.Singleton.GetNewBoundingBox(_Type, this, _Position, _Size);
             else
             {
-                _mBBox.mRelativePostion = _Position;
+                _mBBox.mPostion = _Position;
                 _mBBox.mSize = _Size;
             }
         }

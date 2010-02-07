@@ -64,7 +64,7 @@ namespace PhareAway
                 _SprBatch.End();
 
                 // Rendu sprite
-                _SprBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.None, camera._mTransform);
+                _SprBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.None, camera.mTransform);
 
                 _GraphicsManager.GraphicsDevice.SamplerStates[0].AddressU = TextureAddressMode.Clamp;
                 _GraphicsManager.GraphicsDevice.SamplerStates[0].AddressV = TextureAddressMode.Clamp;

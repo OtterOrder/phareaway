@@ -48,7 +48,8 @@ namespace PhareAway
 
         private Sprite[]    _mSprites = null;
 
-        private float       _mGravity = 0.001f;
+        public  float       mGravityValue = 0.01f;
+        private float       _mGravity = 0.0f;
         private Vector2      _mPosition = new Vector2();
         // Temp ?
         public Vector2 GetPosition() { return _mPosition; }
@@ -67,9 +68,15 @@ namespace PhareAway
 
             for (int i = 0; i < NbSprites; i++)
             {
-                _mSprites[i] = SceneManager.Singleton.GetNewSprite(_Parameters.mFileBase + _Parameters.mSpritesParams[i].mFileName, _ContentManager, _Parameters.mSpritesParams[i].mNbFrames, _Parameters.mSpritesParams[i].mFps, _SceneId);
+                _mSprites[i] = SceneManager.Singleton.GetNewSprite( _Parameters.mFileBase + _Parameters.mSpritesParams[i].mFileName,
+                                                                    _ContentManager,
+                                                                    _SceneId,
+                                                                    _Parameters.mSpritesParams[i].mNbFrames,
+                                                                    _Parameters.mSpritesParams[i].mFps);
                 if (_mSprites[i].AnimPlayer != null)
                     _mSprites[i].AnimPlayer.Loop = _Parameters.mSpritesParams[i].mLoop;
+
+                _mSprites[i].mOrigin = new Vector2((float)_mSprites[i].Width / 2.0f, (float)_mSprites[i].Height);
 
                 _mSprites[i].SetBoundingBox(0, new Vector2(0.0f, 0.0f), new Vector2(_mSprites[i].Width, _mSprites[i].Height));
                 _mSprites[i].mVisible = false;
@@ -82,6 +89,11 @@ namespace PhareAway
         private Sprite GetCurrentSprite()
         {
             return _mSprites[(int)_mState];
+        }
+
+        private Sprite GetSprite(State _State)
+        {
+            return _mSprites[(int)_State];
         }
 
         private void SetCurrentSprite(State _State)
@@ -98,6 +110,15 @@ namespace PhareAway
             {
                 _mSprites[Idx].AnimPlayer.CurrentFrame = 0;
                 _mSprites[Idx].AnimPlayer.Play = true;
+            }
+        }
+
+        private BoundingBox BBox
+        {
+            get
+            {
+                GetCurrentSprite().GetBoundingBox().Update();
+                return GetCurrentSprite().GetBoundingBox();
             }
         }
 
@@ -135,7 +156,7 @@ namespace PhareAway
             // If the character is in air, apply the gravity
             if (CollisionsManager.Singleton.Collide(GetCurrentSprite(), 2, new Vector2(0.0f, 0.5f)) == null)
             {
-                _mGravity = 0.01f;
+                _mGravity = mGravityValue;
             }
 
             _mSpeed.Y += _mGravity * _Dt;
@@ -147,9 +168,9 @@ namespace PhareAway
                 if (Collision != null)
                 {
                     if (_mSpeed.Y >= 0.0f)
-                        _mPosition.Y = Collision.Top - GetCurrentSprite().GetBoundingBox().Size.Y - 0.1f;
+                        PlaceToTop(Collision); //_mPosition.Y = Collision.Top - (BBox.mPostion.Y + BBox.Size.Y - GetCurrentSprite().mOrigin.Y) - 0.1f;
                     else
-                        _mPosition.Y = Collision.Bottom + 0.1f;
+                        PlaceToBottom(Collision); //_mPosition.Y = Collision.Bottom + (GetCurrentSprite().mOrigin.Y - BBox.mPostion.Y) + 0.1f;
 
                     _mSpeed.Y = 0.0f;
                     _mGravity = 0.0f;
@@ -167,9 +188,9 @@ namespace PhareAway
                 if (Collision != null)
                 {
                     if (_mSpeed.X >= 0.0f)
-                        _mPosition.X = Collision.Left - GetCurrentSprite().GetBoundingBox().Size.X - 0.1f;
+                        PlaceToLeft(Collision);
                     else
-                        _mPosition.X = Collision.Right + 0.1f;
+                        PlaceToRight(Collision);
 
                     _mSpeed.X = 0.0f;
                 }
@@ -178,6 +199,26 @@ namespace PhareAway
                     _mPosition.X += _mSpeed.X;
                 }
             }
+        }
+
+        private void PlaceToTop(BoundingBox _BBox)
+        {
+            _mPosition.Y = _BBox.Top - (BBox.mPostion.Y + BBox.Size.Y - GetCurrentSprite().mOrigin.Y) - 0.1f;
+        }
+
+        private void PlaceToBottom(BoundingBox _BBox)
+        {
+            _mPosition.Y = _BBox.Bottom + (GetCurrentSprite().mOrigin.Y - BBox.mPostion.Y) + 0.1f;
+        }
+
+        private void PlaceToLeft (BoundingBox _BBox)
+        {
+            _mPosition.X = _BBox.Left - (BBox.mPostion.X + BBox.Size.X - GetCurrentSprite().mOrigin.X) - 0.1f;
+        }
+
+        private void PlaceToRight(BoundingBox _BBox)
+        {
+            _mPosition.X = _BBox.Right + (GetCurrentSprite().mOrigin.X - BBox.mPostion.X) + 0.1f;
         }
 
         //-----------------------------------
@@ -189,14 +230,14 @@ namespace PhareAway
 
             _mSpeed.X = 0.0f;
 
-            if (lKeyboardState.IsKeyDown(Keys.Right))
+            if (InputManager.Singleton.IsKeyPressed(Keys.Right))
                 _mSpeed.X = Speed;
 
-            if (lKeyboardState.IsKeyDown(Keys.Left))
+            if (InputManager.Singleton.IsKeyPressed(Keys.Left))
                 _mSpeed.X = -Speed;
 
-            if (lKeyboardState.IsKeyDown(Keys.Up))
-                _mSpeed.Y = -Speed;
+            if (InputManager.Singleton.IsKeyJustPressed(Keys.Up) && (_mState == State.Idle || _mState == State.Walk))
+                _mSpeed.Y = -Speed*4.0f;
         }
 
         //-----------------------------------

@@ -47,7 +47,7 @@ namespace PhareAway
             return spr;
         }
 
-        public Sprite GetNewSprite(string _FileName, ContentManager _ContentManager, UInt32 _NbFrames, float _Fps, UInt32 _SceneId)
+        public Sprite GetNewSprite(string _FileName, ContentManager _ContentManager, UInt32 _SceneId, UInt32 _NbFrames, float _Fps)
         {
             Sprite spr = new Sprite(_FileName, _ContentManager, _NbFrames, _Fps);
             _mSceneList[(int)_SceneId].AddSprite(spr);

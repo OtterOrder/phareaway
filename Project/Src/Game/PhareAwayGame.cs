@@ -39,6 +39,8 @@ namespace PhareAway
         {
             base.Update(gameTime);
 
+            InputManager.Singleton.Update();
+
             float Dt = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
             level.Update(Dt);

@@ -57,6 +57,12 @@ namespace PhareAway
 
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Collisions/Ground", Content, _mSceneInside);
             Spr.Depth = 0.39f;
+            Spr.mPosition = new Vector2(400.0f, 480.0f);
+            Spr.mScale.X = ((float)PhareAwayGame.BackBufferWidth / (float)Spr.Width) / 42.0f;
+            Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+
+            Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Collisions/Ground", Content, _mSceneInside);
+            Spr.Depth = 0.39f;
             Spr.mPosition.Y = 500.0f;
             Spr.mScale.X = ((float)PhareAwayGame.BackBufferWidth / (float)Spr.Width);
             Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
@@ -89,8 +95,8 @@ namespace PhareAway
         public void Update(float _Dt)
         {
             _mArchi.Update(_Dt);
-            _mCamArchi._mFocus = _mArchi.GetPosition();
-            _mCamPhilo._mFocus = _mArchi.GetPosition();
+            _mCamArchi.mFocus = _mArchi.GetPosition();
+            _mCamPhilo.mFocus = _mArchi.GetPosition();
         }
     }
 }

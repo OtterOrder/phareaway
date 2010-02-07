@@ -90,7 +90,8 @@ namespace PhareAway
             if (lList == null)
                 return null;
 
-            BoundingBox BBoxSpr = new BoundingBox(_Spr, _Spr.GetBoundingBox().mRelativePostion + _Offset, _Spr.GetBoundingBox().mSize);
+            _Spr.GetBoundingBox().Update();
+            BoundingBox BBoxSpr = new BoundingBox(_Spr, _Spr.GetBoundingBox().mPostion + _Offset, _Spr.GetBoundingBox().mSize);
 
             lList.Update();
             BBoxSpr.Update();

@@ -52,6 +52,7 @@
     <Compile Include="Src\Collisions\CollisionsManager.cs" />
     <Compile Include="Src\Game\Level.cs" />
     <Compile Include="Src\Game\PhareAwayGame.cs" />
+    <Compile Include="Src\InputManager.cs" />
     <Compile Include="Src\Program.cs" />
     <Compile Include="Src\Scene.cs" />
     <Compile Include="Src\SceneManager.cs" />
