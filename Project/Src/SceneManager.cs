@@ -38,6 +38,7 @@ namespace PhareAway
 
             return id;
         }
+
         public Sprite GetNewSprite(string _FileName, ContentManager _ContentManager, UInt32 _SceneId)
         {
             Sprite spr = new Sprite(_FileName, _ContentManager);
@@ -60,6 +61,14 @@ namespace PhareAway
             _mSceneList[(int)_SceneId].AddBackground(bg);
 
             return bg;
+        }
+
+        public Camera GetNewCamera(UInt32 _SceneId)
+        {
+            Camera camera = new Camera();
+            _mSceneList[(int)_SceneId].AddCamera(camera);
+
+            return camera;
         }
 
         //-------------------------------------------------------------------------

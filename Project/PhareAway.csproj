@@ -84,6 +84,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Src\Camera.cs" />
     <Compile Include="Src\Scene.cs" />
     <Compile Include="Src\AnimationPlayer.cs" />
     <Compile Include="Src\Background.cs" />

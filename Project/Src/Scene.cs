@@ -12,6 +12,7 @@ namespace PhareAway
     {
         private List<Sprite>        _mSprList = new List<Sprite>();
         private List<Background>    _mBgList  = new List<Background>();
+        private List<Camera>        _mCamList = new List<Camera>();  
 
         private UInt32 _mId;
 
@@ -24,6 +25,11 @@ namespace PhareAway
         //-------------------------------------------------------------------------
         public void Update(float _Dt)
         {
+
+            foreach (Camera camera in _mCamList)
+            {
+                camera.Update(_Dt);
+            }
 
             IEnumerator<Background> ItBg = _mBgList.GetEnumerator();
             ItBg.Reset();
@@ -43,42 +49,49 @@ namespace PhareAway
 
         public void Draw(SpriteBatch _SprBatch, GraphicsDeviceManager _GraphicsManager)
         {
-            _SprBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.None);
-
-            _GraphicsManager.GraphicsDevice.SamplerStates[0].AddressU = TextureAddressMode.Wrap;
-            _GraphicsManager.GraphicsDevice.SamplerStates[0].AddressV = TextureAddressMode.Wrap;
-
-            _GraphicsManager.GraphicsDevice.SamplerStates[0].MinFilter = TextureFilter.Linear;
-            _GraphicsManager.GraphicsDevice.SamplerStates[0].MagFilter = TextureFilter.Linear;
-
-            IEnumerator<Background> ItBg = _mBgList.GetEnumerator();
-            ItBg.Reset();
-            while (ItBg.MoveNext())
+            foreach (Camera camera in _mCamList)
             {
-                ItBg.Current.Draw(_SprBatch);
+                // Camera de la scène
+                camera.SetCamera(_GraphicsManager);
+
+                // Rendu background
+                _SprBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.None);
+
+                _GraphicsManager.GraphicsDevice.SamplerStates[0].AddressU = TextureAddressMode.Wrap;
+                _GraphicsManager.GraphicsDevice.SamplerStates[0].AddressV = TextureAddressMode.Wrap;
+
+                _GraphicsManager.GraphicsDevice.SamplerStates[0].MinFilter = TextureFilter.Linear;
+                _GraphicsManager.GraphicsDevice.SamplerStates[0].MagFilter = TextureFilter.Linear;
+
+                IEnumerator<Background> ItBg = _mBgList.GetEnumerator();
+                ItBg.Reset();
+                while (ItBg.MoveNext())
+                {
+                    ItBg.Current.Draw(_SprBatch);
+                }
+
+                _SprBatch.End();
+
+                //-----------------------
+                // Rendu sprite
+                _SprBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.None, camera._mTransform);
+
+                _GraphicsManager.GraphicsDevice.SamplerStates[0].AddressU = TextureAddressMode.Clamp;
+                _GraphicsManager.GraphicsDevice.SamplerStates[0].AddressV = TextureAddressMode.Clamp;
+
+                _GraphicsManager.GraphicsDevice.SamplerStates[0].MinFilter = TextureFilter.Point;
+                _GraphicsManager.GraphicsDevice.SamplerStates[0].MagFilter = TextureFilter.Point;
+
+                IEnumerator<Sprite> ItSpr = _mSprList.GetEnumerator();
+                ItSpr.Reset();
+                while (ItSpr.MoveNext())
+                {
+                    if (ItSpr.Current.mVisible)
+                        ItSpr.Current.Draw(_SprBatch);
+                }
+
+                _SprBatch.End();
             }
-
-            _SprBatch.End();
-
-            //-----------------------
-            _SprBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.None);
-
-            _GraphicsManager.GraphicsDevice.SamplerStates[0].AddressU = TextureAddressMode.Clamp;
-            _GraphicsManager.GraphicsDevice.SamplerStates[0].AddressV = TextureAddressMode.Clamp;
-
-            _GraphicsManager.GraphicsDevice.SamplerStates[0].MinFilter = TextureFilter.Point;
-            _GraphicsManager.GraphicsDevice.SamplerStates[0].MagFilter = TextureFilter.Point;
-
-            IEnumerator<Sprite> ItSpr = _mSprList.GetEnumerator();
-            ItSpr.Reset();
-            while (ItSpr.MoveNext())
-            {
-                if (ItSpr.Current.mVisible)
-                    ItSpr.Current.Draw(_SprBatch);
-            }
-
-            _SprBatch.End();
-
         }
 
         public void AddSprite(Sprite _Spr)
@@ -89,6 +102,11 @@ namespace PhareAway
         public void AddBackground(Background _Bg)
         {
             _mBgList.Add(_Bg);
+        }
+
+        public void AddCamera(Camera _Cam)
+        {
+            _mCamList.Add(_Cam);
         }
 
         public void SortSprites()

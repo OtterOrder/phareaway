@@ -49,7 +49,10 @@ namespace PhareAway
         private Sprite[]    _mSprites = null;
 
         private float       _mGravity = 0.001f;
-        private Vector2     _mPosition = new Vector2();
+        private Vector2      _mPosition = new Vector2();
+        // Temp ?
+        public Vector2 GetPosition() { return _mPosition; }
+
         private Vector2     _mSpeed = new Vector2();
 
         //-------------------------------------------------------------------------

@@ -19,6 +19,9 @@ namespace PhareAway
         private UInt32 _mSceneOutside;
         private UInt32 _mSceneInside;
 
+        private Camera _mCamArchi;
+        private Camera _mCamPhilo;
+
         // Level content.        
         public ContentManager Content
         {
@@ -31,6 +34,11 @@ namespace PhareAway
             content = new ContentManager(serviceProvider, "Resources");
 
             _mSceneInside = SceneManager.Singleton.CreateScene();
+
+            _mCamArchi = SceneManager.Singleton.GetNewCamera(_mSceneInside);
+            _mCamArchi.SetViewportParam(0, 0, 426, 720);
+            _mCamPhilo = SceneManager.Singleton.GetNewCamera(_mSceneInside);
+            _mCamPhilo.SetViewportParam(852, 0, 426, 720);
 
             Bg = SceneManager.Singleton.GetNewBackground("Graphics/Backgrounds/bg_Space_01", Content, _mSceneInside);
             Bg.Depth = 0.5f;
@@ -79,6 +87,8 @@ namespace PhareAway
         public void Update(float _Dt)
         {
             _mArchi.Update(_Dt);
+            _mCamArchi._mFocus = _mArchi.GetPosition();
+            _mCamPhilo._mFocus = _mArchi.GetPosition();
         }
     }
 }
