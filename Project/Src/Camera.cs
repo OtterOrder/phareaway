@@ -48,7 +48,6 @@ namespace PhareAway
 
             _mPosition.X += (int)((mFocus.X - _mPosition.X) * mMoveSpeed * _Dt);
             _mPosition.Y += (int)((mFocus.Y - _mPosition.Y) * mMoveSpeed * _Dt);
-
         }
 
         public void SetCamera(GraphicsDeviceManager _GraphicsManager)

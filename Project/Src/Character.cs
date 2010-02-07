@@ -16,10 +16,28 @@ namespace PhareAway
         public bool   mLoop = false;
     }
 
+    public class GameParameters
+    {
+        public float mWalkSpeed = 0.1f;
+        public float mJumpSpeed = 0.4f;
+        public float mFallSpeed = 0.4f;
+    }
+
+    public class InputParameters
+    {
+        public Keys mRight = 0;
+        public Keys mLeft  = 0;
+        public Keys mUp    = 0;
+        public Keys mDown  = 0;
+    }
+
     public class CharacterParameters
     {
         public string    mFileBase = "";
         public SpriteParameters[] mSpritesParams = null;
+        public GameParameters  mGameParams = null;
+        public InputParameters mInputParams = null;
+        public float mDepth = 0.5f;
 
         public CharacterParameters ()
         {
@@ -27,6 +45,9 @@ namespace PhareAway
 
             for (int i = 0; i < Character.NbSprites; i++)
                 mSpritesParams[i] = new SpriteParameters();
+
+            mGameParams  = new GameParameters();
+            mInputParams = new InputParameters();
         }
     }
 
@@ -35,6 +56,9 @@ namespace PhareAway
     public class Character
     {
         public const int NbSprites = 4;
+
+        private GameParameters  _mGameParams = null;
+        private InputParameters _mInputParams = null;
 
         public enum State
         {
@@ -51,8 +75,6 @@ namespace PhareAway
         public  float       mGravityValue = 0.01f;
         private float       _mGravity = 0.0f;
         private Vector2      _mPosition = new Vector2();
-        // Temp ?
-        public Vector2 GetPosition() { return _mPosition; }
 
         private Vector2     _mSpeed = new Vector2();
 
@@ -76,16 +98,21 @@ namespace PhareAway
                 if (_mSprites[i].AnimPlayer != null)
                     _mSprites[i].AnimPlayer.Loop = _Parameters.mSpritesParams[i].mLoop;
 
+                _mSprites[i].Depth = _Parameters.mDepth;
                 _mSprites[i].mOrigin = new Vector2((float)_mSprites[i].Width / 2.0f, (float)_mSprites[i].Height);
-
                 _mSprites[i].SetBoundingBox(0, new Vector2(0.0f, 0.0f), new Vector2(_mSprites[i].Width, _mSprites[i].Height));
                 _mSprites[i].mVisible = false;
             }
 
             _mSprites[(int)_mState].mVisible = true;
+
+            _mGameParams  = _Parameters.mGameParams;
+            _mInputParams = _Parameters.mInputParams;
         }
 
         //------------------------------------------------------------------
+        public Vector2 GetPosition() { return _mPosition; }
+
         private Sprite GetCurrentSprite()
         {
             return _mSprites[(int)_mState];
@@ -159,7 +186,7 @@ namespace PhareAway
                 _mGravity = mGravityValue;
             }
 
-            _mSpeed.Y += _mGravity * _Dt;
+            _mSpeed.Y = Math.Min(_mSpeed.Y + _mGravity * _Dt, _mGameParams.mFallSpeed*_Dt);
 
             // Update vertical collisions
             if (_mSpeed.Y != 0.0f)
@@ -226,18 +253,16 @@ namespace PhareAway
         {
             KeyboardState lKeyboardState = Keyboard.GetState();
 
-            float Speed = 0.1f * _Dt;
-
             _mSpeed.X = 0.0f;
 
-            if (InputManager.Singleton.IsKeyPressed(Keys.Right))
-                _mSpeed.X = Speed;
+            if (InputManager.Singleton.IsKeyPressed(_mInputParams.mRight))
+                _mSpeed.X = _mGameParams.mWalkSpeed * _Dt;
 
-            if (InputManager.Singleton.IsKeyPressed(Keys.Left))
-                _mSpeed.X = -Speed;
+            if (InputManager.Singleton.IsKeyPressed(_mInputParams.mLeft))
+                _mSpeed.X = - _mGameParams.mWalkSpeed * _Dt;
 
-            if (InputManager.Singleton.IsKeyJustPressed(Keys.Up) && (_mState == State.Idle || _mState == State.Walk))
-                _mSpeed.Y = -Speed*4.0f;
+            if (InputManager.Singleton.IsKeyJustPressed(_mInputParams.mUp) && (_mState == State.Idle || _mState == State.Walk))
+                _mSpeed.Y = -_mGameParams.mJumpSpeed * _Dt;
         }
 
         //-----------------------------------
