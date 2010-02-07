@@ -4,7 +4,7 @@ namespace PhareAway
 {
     public class BoundingBox
     {
-        public Vector2 mRelativePostion = Vector2.Zero;
+        public Vector2 mPostion = Vector2.Zero;
         public Vector2 mSize = Vector2.Zero;
 
         private Sprite  _mSpr;
@@ -17,7 +17,7 @@ namespace PhareAway
         //-------------------------------------------------------------------------
         public BoundingBox(Sprite _Spr, Vector2 _Position, Vector2 _Size)
         {
-            mRelativePostion = _Position;
+            mPostion = _Position;
             mSize = _Size;
 
             _mSpr = _Spr;
@@ -62,7 +62,7 @@ namespace PhareAway
         //-------------------------------------------------------------------------
         public void Update ()
         {
-            Vector2 Pos = _mSpr.mPosition - _mSpr.mOrigin*_mSpr.mScale + mRelativePostion;
+            Vector2 Pos = _mSpr.mPosition - _mSpr.mOrigin*_mSpr.mScale + mPostion;
 
             _mLeft = Pos.X;
             _mRight = Pos.X + mSize.X * _mSpr.mScale.X;

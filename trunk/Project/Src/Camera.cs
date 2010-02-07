@@ -15,9 +15,9 @@ namespace PhareAway
         private Vector2 _mPosition;
         private Vector2 _mScreenCenter;
 
-        public Vector2  _mFocus { get; set; }
-        public Matrix   _mTransform { get; set; }
-        public float    _mMoveSpeed { get; set; }
+        public Vector2  mFocus { get; set; }
+        public Matrix   mTransform { get; set; }
+        public float    mMoveSpeed { get; set; }
 
         public Camera()
         {
@@ -27,7 +27,7 @@ namespace PhareAway
             _mViewport.Y = 0;
             _mScreenCenter = new Vector2(_mViewport.Width / 2, _mViewport.Height / 2);
 
-            _mMoveSpeed = 0.01f;
+            mMoveSpeed = 0.01f;
         }
 
         public void SetViewportParam(int _PosX, int _PosY, int _Width, int _Height)
@@ -41,13 +41,13 @@ namespace PhareAway
 
         public void Update(float _Dt)
         {
-            _mTransform = Matrix.Identity *
+            mTransform = Matrix.Identity *
                           Matrix.CreateTranslation(-_mPosition.X, -_mPosition.Y, 0) *
                           Matrix.CreateTranslation(_mScreenCenter.X, _mScreenCenter.Y, 0);
 
 
-            _mPosition.X += (int)((_mFocus.X - _mPosition.X) * _mMoveSpeed * _Dt);
-            _mPosition.Y += (int)((_mFocus.Y - _mPosition.Y) * _mMoveSpeed * _Dt);
+            _mPosition.X += (int)((mFocus.X - _mPosition.X) * mMoveSpeed * _Dt);
+            _mPosition.Y += (int)((mFocus.Y - _mPosition.Y) * mMoveSpeed * _Dt);
 
         }
 
