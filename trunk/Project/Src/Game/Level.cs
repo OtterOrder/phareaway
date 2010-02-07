@@ -33,12 +33,14 @@ namespace PhareAway
         {
             content = new ContentManager(serviceProvider, "Resources");
 
+            // Scènes 
             _mSceneInside = SceneManager.Singleton.CreateScene();
 
+            // Caméras
             _mCamArchi = SceneManager.Singleton.GetNewCamera(_mSceneInside);
-            _mCamArchi.SetViewportParam(0, 0, 426, 720);
+            _mCamArchi.SetViewportParam(0, 0, 428, 720);
             _mCamPhilo = SceneManager.Singleton.GetNewCamera(_mSceneInside);
-            _mCamPhilo.SetViewportParam(852, 0, 426, 720);
+            _mCamPhilo.SetViewportParam(852, 0, 428, 720);
 
             Bg = SceneManager.Singleton.GetNewBackground("Graphics/Backgrounds/bg_Space_01", Content, _mSceneInside);
             Bg.Depth = 0.5f;

@@ -10,14 +10,14 @@ namespace PhareAway
 {
     public class Camera
     {
-        Viewport _mViewport;
+        private Viewport _mViewport;
 
-        private float _mMoveSpeed;
         private Vector2 _mPosition;
         private Vector2 _mScreenCenter;
 
         public Vector2  _mFocus { get; set; }
         public Matrix   _mTransform { get; set; }
+        public float    _mMoveSpeed { get; set; }
 
         public Camera()
         {
@@ -37,7 +37,6 @@ namespace PhareAway
             _mViewport.X = _PosX;
             _mViewport.Y = _PosY;
             _mScreenCenter = new Vector2(_mViewport.Width / 2, _mViewport.Height / 2);
-
         }
 
         public void Update(float _Dt)
