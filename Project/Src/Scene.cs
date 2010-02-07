@@ -25,26 +25,20 @@ namespace PhareAway
         //-------------------------------------------------------------------------
         public void Update(float _Dt)
         {
-
             foreach (Camera camera in _mCamList)
             {
                 camera.Update(_Dt);
             }
 
-            IEnumerator<Background> ItBg = _mBgList.GetEnumerator();
-            ItBg.Reset();
-            while (ItBg.MoveNext())
+            foreach (Background ItBg in _mBgList)
             {
-                ItBg.Current.Update(_Dt);
+                ItBg.Update(_Dt);
             }
 
-            IEnumerator<Sprite> ItSpr = _mSprList.GetEnumerator();
-            ItSpr.Reset();
-            while (ItSpr.MoveNext())
+            foreach (Sprite ItSpr in _mSprList)
             {
-                ItSpr.Current.Update(_Dt);
+                ItSpr.Update(_Dt);
             }
-
         }
 
         public void Draw(SpriteBatch _SprBatch, GraphicsDeviceManager _GraphicsManager)
@@ -63,16 +57,12 @@ namespace PhareAway
                 _GraphicsManager.GraphicsDevice.SamplerStates[0].MinFilter = TextureFilter.Linear;
                 _GraphicsManager.GraphicsDevice.SamplerStates[0].MagFilter = TextureFilter.Linear;
 
-                IEnumerator<Background> ItBg = _mBgList.GetEnumerator();
-                ItBg.Reset();
-                while (ItBg.MoveNext())
+                foreach (Background ItBg in _mBgList)
                 {
-                    ItBg.Current.Draw(_SprBatch);
+                    ItBg.Draw(_SprBatch);
                 }
-
                 _SprBatch.End();
 
-                //-----------------------
                 // Rendu sprite
                 _SprBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.None, camera._mTransform);
 
@@ -82,14 +72,11 @@ namespace PhareAway
                 _GraphicsManager.GraphicsDevice.SamplerStates[0].MinFilter = TextureFilter.Point;
                 _GraphicsManager.GraphicsDevice.SamplerStates[0].MagFilter = TextureFilter.Point;
 
-                IEnumerator<Sprite> ItSpr = _mSprList.GetEnumerator();
-                ItSpr.Reset();
-                while (ItSpr.MoveNext())
+                foreach (Sprite ItSpr in _mSprList)
                 {
-                    if (ItSpr.Current.mVisible)
-                        ItSpr.Current.Draw(_SprBatch);
+                    if (ItSpr.mVisible)
+                        ItSpr.Draw(_SprBatch);
                 }
-
                 _SprBatch.End();
             }
         }
