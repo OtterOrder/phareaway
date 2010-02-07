@@ -16,6 +16,9 @@ namespace PhareAway
         private Sprite Spr, bgDecor;
         private Character _mArchi;
 
+        private UInt32 _mSceneOutside;
+        private UInt32 _mSceneInside;
+
         // Level content.        
         public ContentManager Content
         {
@@ -27,27 +30,29 @@ namespace PhareAway
         {
             content = new ContentManager(serviceProvider, "Resources");
 
-            Bg = SceneManager.Singleton.GetNewBackground("Graphics/Backgrounds/bg_Space_01", Content);
+            _mSceneInside = SceneManager.Singleton.CreateScene();
+
+            Bg = SceneManager.Singleton.GetNewBackground("Graphics/Backgrounds/bg_Space_01", Content, _mSceneInside);
             Bg.Depth = 0.5f;
             Bg._mSpeed.Y = -0.05f;
 
             _mArchi = new Character();
 
             // Ground
-            Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Collisions/Ground", Content);
+            Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Collisions/Ground", Content, _mSceneInside);
             Spr.Depth = 0.39f;
             Spr.mPosition = new Vector2(100.0f, 400.0f);
             Spr.mScale.X = ((float)PhareAwayGame.BackBufferWidth / (float)Spr.Width) /2.0f;
             Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
 
-            Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Collisions/Ground", Content);
+            Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Collisions/Ground", Content, _mSceneInside);
             Spr.Depth = 0.39f;
             Spr.mPosition.Y = 500.0f;
             Spr.mScale.X = ((float)PhareAwayGame.BackBufferWidth / (float)Spr.Width);
             Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
 
             //
-            bgDecor = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Background", Content);
+            bgDecor = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Background", Content, _mSceneInside);
             bgDecor.Depth = 0.4f;
             bgDecor.mPosition.X = 100.0f;
             bgDecor.mPosition.Y = 100.0f;
@@ -68,7 +73,7 @@ namespace PhareAway
 
             Params.mSpritesParams[3].mFileName = "Archi_Fall";
 
-            _mArchi.Init(Content, Params);
+            _mArchi.Init(Content, Params, _mSceneInside);
         }
 
         public void Update(float _Dt)

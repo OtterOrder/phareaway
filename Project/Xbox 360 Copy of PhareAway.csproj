@@ -52,6 +52,7 @@
     <Compile Include="Src\Game\Level.cs" />
     <Compile Include="Src\Game\PhareAwayGame.cs" />
     <Compile Include="Src\Program.cs" />
+    <Compile Include="Src\Scene.cs" />
     <Compile Include="Src\SceneManager.cs" />
     <Compile Include="Src\Sprite.cs" />
   </ItemGroup>

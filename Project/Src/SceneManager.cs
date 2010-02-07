@@ -10,8 +10,7 @@ namespace PhareAway
     {
         private static SceneManager _mSingleton = null;
 
-        private List<Sprite>        _mSprList = new List<Sprite>();
-        private List<Background>    _mBgList  = new List<Background>();
+        private List<Scene>         _mSceneList = new List<Scene>();
 
         //-------------------------------------------------------------------------
         private SceneManager ()
@@ -31,26 +30,34 @@ namespace PhareAway
         }
 
         //-------------------------------------------------------------------------
-        public Sprite GetNewSprite(string _FileName, ContentManager _ContentManager)
+        public UInt32 CreateScene()
+        {
+            UInt32 id = (UInt32)_mSceneList.Count;
+            Scene scene = new Scene(id);
+            _mSceneList.Add(scene);
+
+            return id;
+        }
+        public Sprite GetNewSprite(string _FileName, ContentManager _ContentManager, UInt32 _SceneId)
         {
             Sprite spr = new Sprite(_FileName, _ContentManager);
-            _mSprList.Add(spr);
+            _mSceneList[(int)_SceneId].AddSprite(spr);
 
             return spr;
         }
 
-        public Sprite GetNewSprite(string _FileName, ContentManager _ContentManager, UInt32 _NbFrames, float _Fps)
+        public Sprite GetNewSprite(string _FileName, ContentManager _ContentManager, UInt32 _NbFrames, float _Fps, UInt32 _SceneId)
         {
             Sprite spr = new Sprite(_FileName, _ContentManager, _NbFrames, _Fps);
-            _mSprList.Add(spr);
+            _mSceneList[(int)_SceneId].AddSprite(spr);
 
             return spr;
         }
 
-        public Background GetNewBackground(string _FileName, ContentManager _ContentManager)
+        public Background GetNewBackground(string _FileName, ContentManager _ContentManager, UInt32 _SceneId)
         {
             Background bg = new Background(_FileName, _ContentManager);
-            _mBgList.Add(bg);
+            _mSceneList[(int)_SceneId].AddBackground(bg);
 
             return bg;
         }
@@ -58,70 +65,37 @@ namespace PhareAway
         //-------------------------------------------------------------------------
         public void SortSprites()
         {
-            _mSprList.Sort(new SpriteComparer());
+            foreach (Scene scene in _mSceneList)
+            {
+                scene.SortSprites();
+            }
         }
 
         public void SortBackgrounds()
         {
-            _mBgList.Sort(new BackgroundComparer());
+            foreach (Scene scene in _mSceneList)
+            {
+                scene.SortBackgrounds();
+            }
         }
 
         //-------------------------------------------------------------------------
         public void Update(float _Dt)
         {
-            IEnumerator<Background> ItBg = _mBgList.GetEnumerator();
-            ItBg.Reset();
-            while (ItBg.MoveNext())
+            foreach (Scene scene in _mSceneList)
             {
-                ItBg.Current.Update(_Dt);
-            }
-
-            IEnumerator<Sprite> ItSpr = _mSprList.GetEnumerator();
-            ItSpr.Reset();
-            while (ItSpr.MoveNext())
-            {
-                ItSpr.Current.Update(_Dt);
+                scene.Update(_Dt);
             }
         }
 
         //-------------------------------------------------------------------------
         public void Draw(SpriteBatch _SprBatch, GraphicsDeviceManager _GraphicsManager)
         {
-            _SprBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.None);
 
-            _GraphicsManager.GraphicsDevice.SamplerStates[0].AddressU = TextureAddressMode.Wrap;
-            _GraphicsManager.GraphicsDevice.SamplerStates[0].AddressV = TextureAddressMode.Wrap;
-
-            _GraphicsManager.GraphicsDevice.SamplerStates[0].MinFilter = TextureFilter.Linear;
-            _GraphicsManager.GraphicsDevice.SamplerStates[0].MagFilter = TextureFilter.Linear;
-
-            IEnumerator<Background> ItBg = _mBgList.GetEnumerator();
-            ItBg.Reset();
-            while (ItBg.MoveNext())
+            foreach (Scene scene in _mSceneList)
             {
-                ItBg.Current.Draw(_SprBatch);
-            }
-
-            _SprBatch.End();
-
-            //-----------------------
-            _SprBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.None);
-
-            _GraphicsManager.GraphicsDevice.SamplerStates[0].AddressU = TextureAddressMode.Clamp;
-            _GraphicsManager.GraphicsDevice.SamplerStates[0].AddressV = TextureAddressMode.Clamp;
-
-            _GraphicsManager.GraphicsDevice.SamplerStates[0].MinFilter = TextureFilter.Point;
-            _GraphicsManager.GraphicsDevice.SamplerStates[0].MagFilter = TextureFilter.Point;
-
-            IEnumerator<Sprite> ItSpr = _mSprList.GetEnumerator();
-            ItSpr.Reset();
-            while (ItSpr.MoveNext())
-            {
-                if(ItSpr.Current.mVisible)
-                    ItSpr.Current.Draw(_SprBatch);
-            }
-
-            _SprBatch.End();
+                scene.Draw(_SprBatch, _GraphicsManager);
+            }  
         }
     }
 }
