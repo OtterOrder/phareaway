@@ -48,7 +48,9 @@ namespace PhareAway
             Bg._mSpeed.Y = -0.05f;
 
             _mArchi = new Character();
+            _mArchi.SetPosition(new Vector2(150, 900));
             _mPhilo = new Character();
+            _mPhilo.SetPosition(new Vector2(450, 900));
 
             // Ground
             /*Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Collisions/Ground", Content, _mSceneInside);

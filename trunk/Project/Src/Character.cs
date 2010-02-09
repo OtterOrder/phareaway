@@ -113,6 +113,8 @@ namespace PhareAway
         //------------------------------------------------------------------
         public Vector2 GetPosition() { return _mPosition; }
 
+        public void SetPosition(Vector2 _Position) { _mPosition = _Position; }
+
         private Sprite GetCurrentSprite()
         {
             return _mSprites[(int)_mState];
