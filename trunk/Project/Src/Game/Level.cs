@@ -51,26 +51,15 @@ namespace PhareAway
             _mArchi.SetPosition(new Vector2(150, 900));
             _mPhilo = new Character();
             _mPhilo.SetPosition(new Vector2(450, 900));
+            
+            // Ladder
+            Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Ladder", Content, _mSceneInside);
+            Spr.Depth = 0.5f;
+            Spr.mPosition = new Vector2(500.0f, 1120.0f);
+            Spr.mOrigin = new Vector2((float)Spr.Width / 2.0f, (float)Spr.Height);
+            Spr.SetBoundingBox(3, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
 
             // Ground
-            /*Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Collisions/Ground", Content, _mSceneInside);
-            Spr.Depth = 0.39f;
-            Spr.mPosition = new Vector2(100.0f, 400.0f);
-            Spr.mScale.X = ((float)PhareAwayGame.BackBufferWidth / (float)Spr.Width) /2.0f;
-            Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
-
-            Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Collisions/Ground", Content, _mSceneInside);
-            Spr.Depth = 0.39f;
-            Spr.mPosition = new Vector2(400.0f, 480.0f);
-            Spr.mScale.X = ((float)PhareAwayGame.BackBufferWidth / (float)Spr.Width) / 42.0f;
-            Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
-
-            Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Collisions/Ground", Content, _mSceneInside);
-            Spr.Depth = 0.39f;
-            Spr.mPosition.Y = 500.0f;
-            Spr.mScale.X = ((float)PhareAwayGame.BackBufferWidth / (float)Spr.Width);
-            Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));*/
-
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Collisions/Ground", Content, _mSceneInside);
             Spr.Depth = 0.39f;
             Spr.mPosition.X = 110.0f;
@@ -106,7 +95,6 @@ namespace PhareAway
             bgDecor = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Background", Content, _mSceneInside);
             bgDecor.Depth = 0.7f;
             bgDecor.mPosition.X = 100.0f;
-            bgDecor.mPosition.Y = 100.0f;
 
             //-----------------
             // Init Players
@@ -125,9 +113,16 @@ namespace PhareAway
 
             ArchiParams.mSpritesParams[3].mFileName = "Archi_Fall";
 
+            ArchiParams.mSpritesParams[4].mFileName = "Archi_Climb";
+            ArchiParams.mSpritesParams[4].mNbFrames = 4;
+            ArchiParams.mSpritesParams[4].mFps = 15.0f;
+            ArchiParams.mSpritesParams[4].mLoop = true;
+
             ArchiParams.mInputParams.mRight = Keys.D;
             ArchiParams.mInputParams.mLeft  = Keys.Q;
             ArchiParams.mInputParams.mUp    = Keys.Z;
+            ArchiParams.mInputParams.mDown  = Keys.S;
+            ArchiParams.mInputParams.mJump  = Keys.LeftShift;
 
             _mArchi.Init(Content, ArchiParams, _mSceneInside);
 
@@ -146,9 +141,16 @@ namespace PhareAway
 
             PhiloParams.mSpritesParams[3].mFileName = "Philo_Fall";
 
+            PhiloParams.mSpritesParams[4].mFileName = "Philo_Climb";
+            PhiloParams.mSpritesParams[4].mNbFrames = 4;
+            PhiloParams.mSpritesParams[4].mFps = 15.0f;
+            PhiloParams.mSpritesParams[4].mLoop = true;
+
             PhiloParams.mInputParams.mRight = Keys.M;
             PhiloParams.mInputParams.mLeft  = Keys.K;
             PhiloParams.mInputParams.mUp    = Keys.O;
+            PhiloParams.mInputParams.mDown  = Keys.L;
+            PhiloParams.mInputParams.mJump  = Keys.N;
 
             _mPhilo.Init(Content, PhiloParams, _mSceneInside);
         }

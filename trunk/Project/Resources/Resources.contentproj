@@ -105,8 +105,22 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Graphics\Sprites\Inside\Decor\Corner_vertR.png">
-      <Name>Corner_vertR</Name>
+    <Compile Include="Graphics\Sprites\Inside\Decor\Ladder.png">
+      <Name>Ladder</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Graphics\Sprites\Inside\Characters\Archi\Archi_Climb.png">
+      <Name>Archi_Climb</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Graphics\Sprites\Inside\Characters\Philo\Philo_Climb.png">
+      <Name>Philo_Climb</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -114,6 +128,11 @@
   <ItemGroup>
     <Compile Include="Graphics\Sprites\Inside\Decor\Corner_vertL.png">
       <Name>Corner_vertL</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Graphics\Sprites\Inside\Decor\Corner_vertR.png">
+      <Name>Corner_vertR</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

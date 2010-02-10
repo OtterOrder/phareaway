@@ -11,7 +11,7 @@ namespace PhareAway
         private float _mTime = 0.0f;
 
         private float _mSpeed = 1.0f;
-        private int _mState = 1;
+        private int   _mState = 1;
 
         private int _mCurrentFrame = 0;
 
@@ -97,6 +97,19 @@ namespace PhareAway
                 else
                 {
                     _mCurrentFrame = (int)(_mNbFrames - 1);
+                }
+            }
+            else
+            if (_mCurrentFrame < 0)
+            {
+                if (Loop)
+                {
+                    _mTime = (float)(_mNbFrames -1) / _mFps;
+                    _mCurrentFrame = (int)(_mNbFrames -1);
+                }
+                else
+                {
+                    _mCurrentFrame = 0;
                 }
             }
         }

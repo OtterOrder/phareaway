@@ -18,9 +18,10 @@ namespace PhareAway
 
     public class GameParameters
     {
-        public float mWalkSpeed = 0.1f;
-        public float mJumpSpeed = 0.4f;
-        public float mFallSpeed = 0.4f;
+        public float mWalkSpeed  = 0.15f;
+        public float mJumpSpeed  = 0.15f;
+        public float mFallSpeed  = 0.4f;
+        public float mClimbSpeed = 0.1f;
     }
 
     public class InputParameters
@@ -29,6 +30,7 @@ namespace PhareAway
         public Keys mLeft  = 0;
         public Keys mUp    = 0;
         public Keys mDown  = 0;
+        public Keys mJump  = 0;
     }
 
     public class CharacterParameters
@@ -55,17 +57,18 @@ namespace PhareAway
     //-------------------------------------------------------------------------
     public class Character
     {
-        public const int NbSprites = 4;
+        public const int NbSprites = 5;
 
         private GameParameters  _mGameParams = null;
         private InputParameters _mInputParams = null;
 
         public enum State
         {
-            Idle = 0,
-            Walk = 1,
-            Jump = 2,
-            Fall = 3
+            Idle  = 0,
+            Walk  = 1,
+            Jump  = 2,
+            Fall  = 3,
+            Climb = 4
         }
 
         private State       _mState = (int)State.Idle;
@@ -157,26 +160,63 @@ namespace PhareAway
         {
             UpdateInputs(_Dt);
 
-            UpdatePhysique(_Dt);
+            UpdateLadder(_Dt);
 
-            if (_mSpeed.Y < 0.0f)
-                ChangeState(State.Jump);
-            else
-            if (_mSpeed.Y >= 0.0f && _mGravity != 0.0f)
-                ChangeState(State.Fall);
-            else
-            if (_mSpeed.X != 0.0f)
-                ChangeState(State.Walk);
-            else
-                ChangeState(State.Idle);
+            if (_mState != State.Climb)
+            {
+                UpdatePhysique(_Dt);
+                UpdateDisplacement();
+            }
 
-            if (_mSpeed.X > 0.0f)
-                GetCurrentSprite().mFlip = SpriteEffects.FlipHorizontally;
-            else
-            if (_mSpeed.X < 0.0f)
-                GetCurrentSprite().mFlip = SpriteEffects.None;
-
+            _mPosition += _mSpeed;
             _mSprites[(int)_mState].mPosition = _mPosition;
+        }
+
+        //-----------------------------------
+        private void ChangeState(State _State)
+        {
+            if (_State == _mState)
+                return;
+
+            switch (_State)
+            {
+                case State.Idle:
+                    SetCurrentSprite(State.Idle);
+                    break;
+
+                case State.Walk:
+                    SetCurrentSprite(State.Walk);
+                    break;
+
+                case State.Jump:
+                    SetCurrentSprite(State.Jump);
+                    break;
+
+                case State.Fall:
+                    SetCurrentSprite(State.Fall);
+                    break;
+
+                case State.Climb:
+                    SetCurrentSprite(State.Climb);
+                    break;
+            }
+
+            _mState = _State;
+        }
+
+        //-----------------------------------
+        private void UpdateInputs(float _Dt)
+        {
+            _mSpeed.X = 0.0f;
+
+            if (InputManager.Singleton.IsKeyPressed(_mInputParams.mRight))
+                _mSpeed.X = _mGameParams.mWalkSpeed * _Dt;
+
+            if (InputManager.Singleton.IsKeyPressed(_mInputParams.mLeft))
+                _mSpeed.X = -_mGameParams.mWalkSpeed * _Dt;
+
+            if (InputManager.Singleton.IsKeyJustPressed(_mInputParams.mJump) && (_mState == State.Idle || _mState == State.Walk))
+                _mSpeed.Y = -_mGameParams.mJumpSpeed * _Dt;
         }
 
         //-----------------------------------
@@ -197,16 +237,12 @@ namespace PhareAway
                 if (Collision != null)
                 {
                     if (_mSpeed.Y >= 0.0f)
-                        PlaceToTop(Collision); //_mPosition.Y = Collision.Top - (BBox.mPostion.Y + BBox.Size.Y - GetCurrentSprite().mOrigin.Y) - 0.1f;
+                        PlaceToTop(Collision);
                     else
-                        PlaceToBottom(Collision); //_mPosition.Y = Collision.Bottom + (GetCurrentSprite().mOrigin.Y - BBox.mPostion.Y) + 0.1f;
+                        PlaceToBottom(Collision);
 
                     _mSpeed.Y = 0.0f;
                     _mGravity = 0.0f;
-                }
-                else
-                {
-                    _mPosition.Y += _mSpeed.Y;
                 }
             }
 
@@ -222,10 +258,6 @@ namespace PhareAway
                         PlaceToRight(Collision);
 
                     _mSpeed.X = 0.0f;
-                }
-                else
-                {
-                    _mPosition.X += _mSpeed.X;
                 }
             }
         }
@@ -251,48 +283,82 @@ namespace PhareAway
         }
 
         //-----------------------------------
-        private void UpdateInputs(float _Dt)
+        private void UpdateDisplacement()
         {
-            KeyboardState lKeyboardState = Keyboard.GetState();
+            if (_mSpeed.Y < 0.0f)
+                ChangeState(State.Jump);
+            else
+            if (_mSpeed.Y >= 0.0f && _mGravity != 0.0f)
+                ChangeState(State.Fall);
+            else
+            if (_mSpeed.X != 0.0f)
+                ChangeState(State.Walk);
+            else
+                ChangeState(State.Idle);
 
-            _mSpeed.X = 0.0f;
-
-            if (InputManager.Singleton.IsKeyPressed(_mInputParams.mRight))
-                _mSpeed.X = _mGameParams.mWalkSpeed * _Dt;
-
-            if (InputManager.Singleton.IsKeyPressed(_mInputParams.mLeft))
-                _mSpeed.X = - _mGameParams.mWalkSpeed * _Dt;
-
-            if (InputManager.Singleton.IsKeyJustPressed(_mInputParams.mUp) && (_mState == State.Idle || _mState == State.Walk))
-                _mSpeed.Y = -_mGameParams.mJumpSpeed * _Dt;
+            if (_mSpeed.X > 0.0f)
+                GetCurrentSprite().mFlip = SpriteEffects.FlipHorizontally;
+            else
+            if (_mSpeed.X < 0.0f)
+                GetCurrentSprite().mFlip = SpriteEffects.None;
         }
 
         //-----------------------------------
-        private void ChangeState (State _State)
+        private void UpdateLadder(float _Dt)
         {
-            if (_State == _mState)
+            BoundingBox Ladder  = CollisionsManager.Singleton.Collide(GetCurrentSprite(), 3, Vector2.Zero);
+
+            if (Ladder == null)
                 return;
 
-            switch (_State)
+            float Direction = 0.0f;
+            BoundingBox Ground  = CollisionsManager.Singleton.Collide(GetCurrentSprite(), 2, Vector2.Zero);
+
+            if( _mSpeed.X == 0.0f || Ground != null )
             {
-                case State.Idle:
-                    SetCurrentSprite(State.Idle);
-                    break;
+                bool Up      = InputManager.Singleton.IsKeyPressed(_mInputParams.mUp);
+                bool Down    = InputManager.Singleton.IsKeyPressed(_mInputParams.mDown);
 
-                case State.Walk:
-                    SetCurrentSprite(State.Walk);
-                    break;
+                if( Up ^ Down)
+                {
+                    if( Up )
+                        Direction = -1.0f;
+                    else
+                        Direction = 1.0f;
 
-                case State.Jump:
-                    SetCurrentSprite(State.Jump);
-                    break;
+                    ChangeState(State.Climb);
 
-                case State.Fall:
-                    SetCurrentSprite(State.Fall);
-                    break;
+                    if( Up && Ground == null )
+                    {
+                        if( Ladder.Top >= (BBox.Top - _mGameParams.mClimbSpeed -1.0f) &&
+                            CollisionsManager.Singleton.Collide( new Vector2(Ladder.Right, Ladder.Top -1.0f), 3) == null )
+                        {
+                            ChangeState(State.Idle);
+                        }
+                    }
+
+                    if( Down )
+                    {
+                        if (Ladder.Bottom <= (BBox.Bottom - _mGameParams.mClimbSpeed + 1.0f) &&
+                            CollisionsManager.Singleton.Collide(new Vector2(Ladder.Right, Ladder.Bottom +1.0f), 3) == null )
+                        {
+                            ChangeState(State.Idle);
+                        }
+                    }
+                }
             }
 
-            _mState = _State;
+            if( _mState == State.Climb)
+            {
+                _mPosition.X = Ladder.Sprite.mPosition.X;
+
+                _mSpeed.X = 0.0f;
+                _mSpeed.Y = Direction * _mGameParams.mClimbSpeed * _Dt;
+
+                GetCurrentSprite().mFlip = SpriteEffects.None;
+                if (GetCurrentSprite().AnimPlayer != null)
+                    GetCurrentSprite().AnimPlayer.Speed = Direction;
+            }
         }
     }
 }
