@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace PhareAway
 {
-    class Scene
+    public class Scene
     {
         private List<Sprite>        _mSprList = new List<Sprite>();
         private List<Background>    _mBgList  = new List<Background>();

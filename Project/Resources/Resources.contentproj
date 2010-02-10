@@ -138,6 +138,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Graphics\Sprites\Outside\Splitter.png">
+      <Name>Splitter</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="Sounds\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />

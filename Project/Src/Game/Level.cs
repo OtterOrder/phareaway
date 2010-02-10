@@ -17,11 +17,12 @@ namespace PhareAway
 
         private Character _mArchi, _mPhilo;
 
-        private UInt32 _mSceneOutside;
         private UInt32 _mSceneInside;
+        private UInt32 _mSceneOutside;
 
         private Camera _mCamArchi;
         private Camera _mCamPhilo;
+        private Camera _mCamOutside;
 
         // Level content.        
         public ContentManager Content
@@ -35,7 +36,8 @@ namespace PhareAway
             content = new ContentManager(serviceProvider, "Resources");
 
             // Scènes 
-            _mSceneInside = SceneManager.Singleton.CreateScene();
+            _mSceneInside  = SceneManager.Singleton.CreateScene();
+            _mSceneOutside = SceneManager.Singleton.CreateScene();
 
             // Caméras
             _mCamArchi = SceneManager.Singleton.GetNewCamera(_mSceneInside);
@@ -154,6 +156,22 @@ namespace PhareAway
             PhiloParams.mInputParams.mJump  = Keys.N;
 
             _mPhilo.Init(Content, PhiloParams, _mSceneInside);
+
+
+
+            // Outside
+            SceneManager.Singleton.GetScene(_mSceneOutside).AddBackground(Bg);
+
+            _mCamOutside = SceneManager.Singleton.GetNewCamera(_mSceneOutside);
+            _mCamOutside.SetViewportParam(428, 0, 424, 720);
+            _mCamOutside.Position = new Vector2(212.0f, 360.0f);
+
+            Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Outside/Splitter", Content, _mSceneOutside);
+            Spr.mScale = new Vector2(2.0f, 720.0f);
+
+            Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Outside/Splitter", Content, _mSceneOutside);
+            Spr.mPosition = new Vector2(422.0f, 0.0f);
+            Spr.mScale = new Vector2(2.0f, 720.0f);
         }
 
         public void Update(float _Dt)

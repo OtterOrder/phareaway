@@ -359,7 +359,7 @@ namespace PhareAway
 
                 GetCurrentSprite().mFlip = SpriteEffects.None;
                 if (GetCurrentSprite().AnimPlayer != null)
-                    GetCurrentSprite().AnimPlayer.Speed = Direction /4.0f;
+                    GetCurrentSprite().AnimPlayer.Speed = Direction;
             }
         }
     }
