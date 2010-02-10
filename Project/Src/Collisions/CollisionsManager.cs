@@ -68,24 +68,28 @@ namespace PhareAway
         }
 
         //-------------------------------------------------------------------------
-        public BoundingBox Collide(Sprite _Spr, UInt32 _Type, Vector2 _Offset)
+        private BBoxList GetList(UInt32 _Type)
         {
-            if (_Spr.GetBoundingBox() == null)
-                return null;
-
-            BBoxList lList = null;
-
-            // Find the list
             IEnumerator<BBoxList> ItBBoxList = _mBBoxLists.GetEnumerator();
             ItBBoxList.Reset();
             while (ItBBoxList.MoveNext())
             {
                 if (ItBBoxList.Current.mType == _Type)
                 {
-                    lList = ItBBoxList.Current;
-                    break;
+                    return ItBBoxList.Current;
                 }
             }
+
+            return null;
+        }
+
+        //-------------------------------------------------------------------------
+        public BoundingBox Collide(Sprite _Spr, UInt32 _Type, Vector2 _Offset)
+        {
+            if (_Spr.GetBoundingBox() == null)
+                return null;
+
+            BBoxList lList = GetList(_Type);
 
             if (lList == null)
                 return null;
@@ -96,12 +100,35 @@ namespace PhareAway
             lList.Update();
             BBoxSpr.Update();
 
-
             IEnumerator<BoundingBox> ItBBox = lList.mList.GetEnumerator();
             ItBBox.Reset();
             while (ItBBox.MoveNext())
             {
                 if (ItBBox.Current.Collide(BBoxSpr))
+                    return ItBBox.Current;
+            }
+
+            return null;
+        }
+
+        //-------------------------------------------------------------------------
+        public BoundingBox Collide(Vector2 _Point, UInt32 _Type)
+        {
+            if (_Point == null)
+                return null;
+
+            BBoxList lList = GetList(_Type);
+
+            if (lList == null)
+                return null;
+
+            lList.Update();
+
+            IEnumerator<BoundingBox> ItBBox = lList.mList.GetEnumerator();
+            ItBBox.Reset();
+            while (ItBBox.MoveNext())
+            {
+                if (ItBBox.Current.Collide(_Point))
                     return ItBBox.Current;
             }
 
