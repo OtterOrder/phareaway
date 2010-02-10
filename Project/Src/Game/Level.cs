@@ -95,6 +95,7 @@ namespace PhareAway
             bgDecor = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Background", Content, _mSceneInside);
             bgDecor.Depth = 0.7f;
             bgDecor.mPosition.X = 100.0f;
+            bgDecor.mPosition.Y = 100.0f;
 
             //-----------------
             // Init Players
