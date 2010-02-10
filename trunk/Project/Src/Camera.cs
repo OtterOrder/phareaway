@@ -30,6 +30,12 @@ namespace PhareAway
             mMoveSpeed = 0.01f;
         }
 
+        public Vector2 Position
+        {
+            get { return _mPosition; }
+            set { _mPosition = value; mFocus = _mPosition; }
+        }
+
         public void SetViewportParam(int _PosX, int _PosY, int _Width, int _Height)
         {
             _mViewport.Width = _Width;

@@ -71,6 +71,11 @@ namespace PhareAway
             return camera;
         }
 
+        public Scene GetScene(UInt32 _SceneId)
+        {
+            return _mSceneList[(int)_SceneId];
+        }
+
         //-------------------------------------------------------------------------
         public void SortSprites()
         {
