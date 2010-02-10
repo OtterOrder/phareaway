@@ -306,44 +306,46 @@ namespace PhareAway
         //-----------------------------------
         private void UpdateLadder(float _Dt)
         {
-            BoundingBox Ladder  = CollisionsManager.Singleton.Collide(GetCurrentSprite(), 3, Vector2.Zero);
+            BoundingBox Ground  = CollisionsManager.Singleton.Collide(GetCurrentSprite(), 2, Vector2.Zero);
+            if (_mSpeed.X != 0.0f && Ground == null)
+            {
+                ChangeState(State.Idle);
+                return;
+            }
 
+            BoundingBox Ladder  = CollisionsManager.Singleton.Collide(GetCurrentSprite(), 3, Vector2.Zero);
             if (Ladder == null)
                 return;
 
             float Direction = 0.0f;
-            BoundingBox Ground  = CollisionsManager.Singleton.Collide(GetCurrentSprite(), 2, Vector2.Zero);
 
-            if( _mSpeed.X == 0.0f || Ground != null )
+            bool Up      = InputManager.Singleton.IsKeyPressed(_mInputParams.mUp);
+            bool Down    = InputManager.Singleton.IsKeyPressed(_mInputParams.mDown);
+
+            if( Up ^ Down)
             {
-                bool Up      = InputManager.Singleton.IsKeyPressed(_mInputParams.mUp);
-                bool Down    = InputManager.Singleton.IsKeyPressed(_mInputParams.mDown);
+                if( Up )
+                    Direction = -1.0f;
+                else
+                    Direction = 1.0f;
 
-                if( Up ^ Down)
+                ChangeState(State.Climb);
+
+                if( Up && Ground == null )
                 {
-                    if( Up )
-                        Direction = -1.0f;
-                    else
-                        Direction = 1.0f;
-
-                    ChangeState(State.Climb);
-
-                    if( Up && Ground == null )
+                    if( Ladder.Top >= (BBox.Top - _mGameParams.mClimbSpeed -1.0f) &&
+                        CollisionsManager.Singleton.Collide( new Vector2(Ladder.Right, Ladder.Top -1.0f), 3) == null )
                     {
-                        if( Ladder.Top >= (BBox.Top - _mGameParams.mClimbSpeed -1.0f) &&
-                            CollisionsManager.Singleton.Collide( new Vector2(Ladder.Right, Ladder.Top -1.0f), 3) == null )
-                        {
-                            ChangeState(State.Idle);
-                        }
+                        ChangeState(State.Idle);
                     }
+                }
 
-                    if( Down )
+                if( Down )
+                {
+                    if (Ladder.Bottom <= (BBox.Bottom - _mGameParams.mClimbSpeed + 1.0f) &&
+                        CollisionsManager.Singleton.Collide(new Vector2(Ladder.Right, Ladder.Bottom +1.0f), 3) == null )
                     {
-                        if (Ladder.Bottom <= (BBox.Bottom - _mGameParams.mClimbSpeed + 1.0f) &&
-                            CollisionsManager.Singleton.Collide(new Vector2(Ladder.Right, Ladder.Bottom +1.0f), 3) == null )
-                        {
-                            ChangeState(State.Idle);
-                        }
+                        ChangeState(State.Idle);
                     }
                 }
             }
@@ -357,7 +359,7 @@ namespace PhareAway
 
                 GetCurrentSprite().mFlip = SpriteEffects.None;
                 if (GetCurrentSprite().AnimPlayer != null)
-                    GetCurrentSprite().AnimPlayer.Speed = Direction;
+                    GetCurrentSprite().AnimPlayer.Speed = Direction /4.0f;
             }
         }
     }
