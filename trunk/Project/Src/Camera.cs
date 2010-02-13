@@ -15,6 +15,9 @@ namespace PhareAway
         private Vector2 _mPosition;
         private Vector2 _mScreenCenter;
 
+        private float _mBackBufferWidth;
+        private float _mBackBufferHeight;
+
         public Vector2  mFocus { get; set; }
         public Matrix   mTransform { get; set; }
         public float    mMoveSpeed { get; set; }
@@ -27,6 +30,9 @@ namespace PhareAway
             _mViewport.Y = 0;
             _mScreenCenter = new Vector2(_mViewport.Width / 2, _mViewport.Height / 2);
 
+            _mBackBufferWidth = PhareAwayGame.BackBufferWidth;
+            _mBackBufferHeight = PhareAwayGame.BackBufferHeight;
+
             mMoveSpeed = 0.01f;
         }
 
@@ -36,12 +42,12 @@ namespace PhareAway
             set { _mPosition = value; mFocus = _mPosition; }
         }
 
-        public void SetViewportParam(int _PosX, int _PosY, int _Width, int _Height)
+        public void SetViewportParam(float _PosX, float _PosY, float _Width, float _Height)
         {
-            _mViewport.Width = _Width;
-            _mViewport.Height = _Height;
-            _mViewport.X = _PosX;
-            _mViewport.Y = _PosY;
+            _mViewport.Width = (int)(_Width * _mBackBufferWidth);
+            _mViewport.Height = (int)(_Height * _mBackBufferHeight);
+            _mViewport.X = (int)(_PosX * _mBackBufferWidth);
+            _mViewport.Y = (int)(_PosY * _mBackBufferHeight);
             _mScreenCenter = new Vector2(_mViewport.Width / 2, _mViewport.Height / 2);
         }
 

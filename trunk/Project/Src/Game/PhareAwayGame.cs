@@ -10,7 +10,6 @@ namespace PhareAway
 {
     public class PhareAwayGame : Microsoft.Xna.Framework.Game
     {
-
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
 
