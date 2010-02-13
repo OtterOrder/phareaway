@@ -16,10 +16,10 @@ namespace PhareAway
         public bool   mLoop = false;
     }
 
-    public class GameParameters
+    public class CGameParameters
     {
         public float mWalkSpeed  = 0.15f;
-        public float mJumpSpeed  = 0.15f;
+        public float mJumpSpeed  = 0.2f;
         public float mFallSpeed  = 0.4f;
         public float mClimbSpeed = 0.1f;
     }
@@ -37,8 +37,8 @@ namespace PhareAway
     {
         public string    mFileBase = "";
         public SpriteParameters[] mSpritesParams = null;
-        public GameParameters  mGameParams = null;
-        public InputParameters mInputParams = null;
+        public CGameParameters mGameParams = new CGameParameters();
+        public InputParameters mInputParams = new InputParameters();
         public float mDepth = 0.5f;
 
         public CharacterParameters ()
@@ -47,9 +47,6 @@ namespace PhareAway
 
             for (int i = 0; i < Character.NbSprites; i++)
                 mSpritesParams[i] = new SpriteParameters();
-
-            mGameParams  = new GameParameters();
-            mInputParams = new InputParameters();
         }
     }
 
@@ -59,7 +56,7 @@ namespace PhareAway
     {
         public const int NbSprites = 5;
 
-        private GameParameters  _mGameParams = null;
+        private CGameParameters _mGameParams = null;
         private InputParameters _mInputParams = null;
 
         public enum State
@@ -70,6 +67,8 @@ namespace PhareAway
             Fall  = 3,
             Climb = 4
         }
+
+        public bool         mActive = true;
 
         private State       _mState = (int)State.Idle;
 
@@ -154,13 +153,21 @@ namespace PhareAway
             }
         }
 
+        public InputParameters InputParameters
+        {
+            get { return _mInputParams; }
+        }
+
         //-------------------------------------------------------------------------
         //-------------------------------------------------------------------------
         public void Update(float _Dt)  // MilliSeconds
         {
-            UpdateInputs(_Dt);
+            if (mActive)
+            {
+                UpdateInputs(_Dt);
 
-            UpdateLadder(_Dt);
+                UpdateLadder(_Dt);
+            }
 
             if (_mState != State.Climb)
             {

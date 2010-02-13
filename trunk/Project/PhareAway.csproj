@@ -86,6 +86,7 @@
   <ItemGroup>
     <Compile Include="Src\Camera.cs" />
     <Compile Include="Src\InputManager.cs" />
+    <Compile Include="Src\Lighthouse.cs" />
     <Compile Include="Src\Scene.cs" />
     <Compile Include="Src\AnimationPlayer.cs" />
     <Compile Include="Src\Background.cs" />
