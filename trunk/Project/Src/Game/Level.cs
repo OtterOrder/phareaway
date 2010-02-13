@@ -50,9 +50,9 @@ namespace PhareAway
             Bg._mSpeed.Y = -0.05f;
 
             _mArchi = new Character();
-            _mArchi.SetPosition(new Vector2(150, 900));
+            _mArchi.SetPosition(new Vector2(150, 1050));
             _mPhilo = new Character();
-            _mPhilo.SetPosition(new Vector2(450, 900));
+            _mPhilo.SetPosition(new Vector2(450, 300));
             
             // Ladder
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Ladder", Content, _mSceneInside);
@@ -65,33 +65,122 @@ namespace PhareAway
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Collisions/Ground", Content, _mSceneInside);
             Spr.Depth = 0.39f;
             Spr.mPosition.X = 110.0f;
-            Spr.mPosition.Y = 1000.0f;
-            Spr.mScale.X = (20);
+            Spr.mPosition.Y = 1240.0f;
+            Spr.mScale.X = (581);
             Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
 
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Collisions/Ground", Content, _mSceneInside);
             Spr.Depth = 0.39f;
             Spr.mPosition.X = 110.0f;
             Spr.mPosition.Y = 1120.0f;
-            Spr.mScale.X = (20);
+            Spr.mScale.X = (581);
             Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
 
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Collisions/Ground", Content, _mSceneInside);
             Spr.Depth = 0.39f;
             Spr.mPosition.X = 110.0f;
-            Spr.mPosition.Y = 1240.0f;
-            Spr.mScale.X = (20);
+            Spr.mPosition.Y = 1000.0f;
+            Spr.mScale.X = (581);
             Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
 
+            Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Collisions/Ground", Content, _mSceneInside);
+            Spr.Depth = 0.39f;
+            Spr.mPosition.X = 110.0f;
+            Spr.mPosition.Y = 880.0f;
+            Spr.mScale.X = (581);
+            Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+
+            Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Collisions/Ground", Content, _mSceneInside);
+            Spr.Depth = 0.39f;
+            Spr.mPosition.X = 190.0f;
+            Spr.mPosition.Y = 700.0f;
+            Spr.mScale.X = (420);
+            Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+
+            Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Collisions/Ground", Content, _mSceneInside);
+            Spr.Depth = 0.39f;
+            Spr.mPosition.X = 190.0f;
+            Spr.mPosition.Y = 579.0f;
+            Spr.mScale.X = (420);
+            Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+
+            Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Collisions/Ground", Content, _mSceneInside);
+            Spr.Depth = 0.39f;
+            Spr.mPosition.X = 190.0f;
+            Spr.mPosition.Y = 459.0f;
+            Spr.mScale.X = (420);
+            Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+
+            Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Collisions/Ground", Content, _mSceneInside);
+            Spr.Depth = 0.39f;
+            Spr.mPosition.X = 190.0f;
+            Spr.mPosition.Y = 280.0f;
+            Spr.mScale.X = (420);
+            Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+
+            //Wall
+            Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Collisions/Wall", Content, _mSceneInside);
+            Spr.Depth = 0.39f;
+            Spr.mPosition.X = 100.0f;
+            Spr.mPosition.Y = 889.0f;
+            Spr.mScale.Y = (352);
+            Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+
+            Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Collisions/Wall", Content, _mSceneInside);
+            Spr.Depth = 0.39f;
+            Spr.mPosition.X = 690.0f;
+            Spr.mPosition.Y = 889.0f;
+            Spr.mScale.Y = (352);
+            Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+
+            //Lab 
+            Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Collisions/Lab", Content, _mSceneInside);
+            Spr.Depth = 0.39f;
+            Spr.mPosition.X = 189.0f;
+            Spr.mPosition.Y = 469.0f;
+            Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+
+
+            //Corners
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Corner_vertR", Content, _mSceneInside);
-            Spr.Depth = 0.40f;
+            Spr.Depth = 0.38f;
             Spr.mPosition.X = 100.0f;
             Spr.mPosition.Y = 1240.0f;
 
+            Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Corner_vertR", Content, _mSceneInside);
+            Spr.Depth = 0.38f;
+            Spr.mPosition.X = 100.0f;
+            Spr.mPosition.Y = 1120.0f;
+
+            Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Corner_vertR", Content, _mSceneInside);
+            Spr.Depth = 0.38f;
+            Spr.mPosition.X = 100.0f;
+            Spr.mPosition.Y = 1000.0f;
+
+            Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Corner_UpR", Content, _mSceneInside);
+            Spr.Depth = 0.38f;
+            Spr.mPosition.X = 100.0f;
+            Spr.mPosition.Y = 880.0f;
+
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Corner_vertL", Content, _mSceneInside);
-            Spr.Depth = 0.40f;
+            Spr.Depth = 0.38f;
             Spr.mPosition.X = 690.0f;
             Spr.mPosition.Y = 1240.0f;
+
+            Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Corner_vertL", Content, _mSceneInside);
+            Spr.Depth = 0.38f;
+            Spr.mPosition.X = 690.0f;
+            Spr.mPosition.Y = 1120.0f;
+
+            Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Corner_vertL", Content, _mSceneInside);
+            Spr.Depth = 0.38f;
+            Spr.mPosition.X = 690.0f;
+            Spr.mPosition.Y = 1000.0f;
+
+            Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Corner_UpL", Content, _mSceneInside);
+            Spr.Depth = 0.38f;
+            Spr.mPosition.X = 690.0f;
+            Spr.mPosition.Y = 880.0f;
 
             //
             bgDecor = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Background", Content, _mSceneInside);
