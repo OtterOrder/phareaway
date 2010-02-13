@@ -37,6 +37,9 @@ namespace PhareAway
 
         protected override void Update(GameTime gameTime)
         {
+            if (InputManager.Singleton.IsKeyPressed(Keys.Escape))
+                Exit();
+
             base.Update(gameTime);
 
             InputManager.Singleton.Update();

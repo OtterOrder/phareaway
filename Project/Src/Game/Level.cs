@@ -16,6 +16,7 @@ namespace PhareAway
         private Sprite Spr, bgDecor;
 
         private Character _mArchi, _mPhilo;
+        private Lighthouse _mLighthouse;
 
         private UInt32 _mSceneInside;
         private UInt32 _mSceneOutside;
@@ -261,12 +262,43 @@ namespace PhareAway
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Outside/Splitter", Content, _mSceneOutside);
             Spr.mPosition = new Vector2(422.0f, 0.0f);
             Spr.mScale = new Vector2(2.0f, 720.0f);
+
+
+            _mLighthouse = new Lighthouse();
+
+            LighthouseParameters LHParams = new LighthouseParameters();
+            LHParams.mDepth = 0.2f;
+            LHParams.mFileBase = "Graphics/Sprites/Outside/Lighthouse/";
+
+            LHParams.mSprLightouse.mFileName = "Lighthouse";
+
+            LHParams.mSprJetEngine.mFileName = "JetEngine";
+            LHParams.mSprJetEngine.mNbFrames = 3;
+            LHParams.mSprJetEngine.mFps = 5.0f;
+            LHParams.mSprJetEngine.mLoop = true;
+
+            LHParams.mGameParams.mXMin = 0.0f;
+            LHParams.mGameParams.mYMin = 0.0f;
+            LHParams.mGameParams.mXMax = 424.0f;
+            LHParams.mGameParams.mYMax = 720.0f;
+
+            _mLighthouse.SetPosition(new Vector2(212.0f, 700.0f));
+
+            _mLighthouse.Init(Content, LHParams, _mSceneOutside);
+
+            // Game Init
+            _mArchi.mActive = false;
+
+            _mLighthouse.mActive = true;
+            _mLighthouse.InputParameters = _mArchi.InputParameters;
         }
 
         public void Update(float _Dt)
         {
             _mArchi.Update(_Dt);
             _mPhilo.Update(_Dt);
+
+            _mLighthouse.Update(_Dt);
 
             _mCamArchi.mFocus = _mArchi.GetPosition();
             _mCamPhilo.mFocus = _mPhilo.GetPosition();
