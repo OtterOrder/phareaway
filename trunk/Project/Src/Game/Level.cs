@@ -331,10 +331,12 @@ namespace PhareAway
             _mCamOutside.Position = new Vector2(212.0f, 360.0f);
 
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Outside/Splitter", Content, _mSceneOutside);
+            Spr.Depth = 0.1f;
             Spr.mPosition = new Vector2(8.0f, 0.0f);
             Spr.mScale = new Vector2(2.0f, 720.0f);
 
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Outside/Splitter", Content, _mSceneOutside);
+            Spr.Depth = 0.1f;
             Spr.mPosition = new Vector2(415.0f, 0.0f);
             Spr.mScale = new Vector2(2.0f, 720.0f);
 
@@ -342,7 +344,7 @@ namespace PhareAway
             _mLighthouse = new Lighthouse();
 
             LighthouseParameters LHParams = new LighthouseParameters();
-            LHParams.mDepth = 0.2f;
+            LHParams.mDepth = 0.3f;
             LHParams.mFileBase = "Graphics/Sprites/Outside/Lighthouse/";
 
             LHParams.mSprLightouse.mFileName = "Lighthouse";
@@ -352,10 +354,10 @@ namespace PhareAway
             LHParams.mSprJetEngine.mFps = 5.0f;
             LHParams.mSprJetEngine.mLoop = true;
 
-            LHParams.mGameParams.mXMin = 0.0f;
-            LHParams.mGameParams.mYMin = 0.0f;
-            LHParams.mGameParams.mXMax = 424.0f;
-            LHParams.mGameParams.mYMax = 720.0f;
+            LHParams.mGameParams.mXMin = 30.0f;
+            LHParams.mGameParams.mYMin = 136.0f;
+            LHParams.mGameParams.mXMax = 394.0f;
+            LHParams.mGameParams.mYMax = 710.0f;
 
             _mLighthouse.SetPosition(new Vector2(212.0f, 700.0f));
 
