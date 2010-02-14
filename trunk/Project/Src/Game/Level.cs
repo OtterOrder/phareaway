@@ -44,7 +44,7 @@ namespace PhareAway
             _mCamArchi = SceneManager.Singleton.GetNewCamera(_mSceneInside);
             _mCamArchi.SetViewportParam(0, 0, 0.34f, 1.0f);
             _mCamPhilo = SceneManager.Singleton.GetNewCamera(_mSceneInside);
-            _mCamPhilo.SetViewportParam(0.66f, 0, 0.34f, 1.0f);
+            _mCamPhilo.SetViewportParam(0.66f, 0, 0.341f, 1.0f);
 
             Bg = SceneManager.Singleton.GetNewBackground("Graphics/Backgrounds/bg_Space_01", Content, _mSceneInside);
             Bg.Depth = 0.9f;
@@ -331,10 +331,11 @@ namespace PhareAway
             _mCamOutside.Position = new Vector2(212.0f, 360.0f);
 
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Outside/Splitter", Content, _mSceneOutside);
+            Spr.mPosition = new Vector2(8.0f, 0.0f);
             Spr.mScale = new Vector2(2.0f, 720.0f);
 
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Outside/Splitter", Content, _mSceneOutside);
-            Spr.mPosition = new Vector2(422.0f, 0.0f);
+            Spr.mPosition = new Vector2(415.0f, 0.0f);
             Spr.mScale = new Vector2(2.0f, 720.0f);
 
 
