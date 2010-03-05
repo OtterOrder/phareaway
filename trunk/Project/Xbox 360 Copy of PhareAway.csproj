@@ -50,6 +50,8 @@
     <Compile Include="Src\Game\Level.cs" />
     <Compile Include="Src\Game\Lighthouse.cs" />
     <Compile Include="Src\Game\PhareAwayGame.cs" />
+    <Compile Include="Src\Obstacle.cs" />
+    <Compile Include="Src\ObstacleManager.cs" />
     <Compile Include="Src\Program.cs" />
     <Compile Include="Src\Scene\Scene.cs" />
     <Compile Include="Src\Scene\SceneManager.cs" />
@@ -57,6 +59,8 @@
     <Compile Include="Src\Utilities\Background.cs" />
     <Compile Include="Src\Utilities\Camera.cs" />
     <Compile Include="Src\Utilities\InputManager.cs" />
+    <Compile Include="Src\Utilities\Obstacle.cs" />
+    <Compile Include="Src\Utilities\ObstacleManager.cs" />
     <Compile Include="Src\Utilities\Sprite.cs" />
   </ItemGroup>
   <ItemGroup>

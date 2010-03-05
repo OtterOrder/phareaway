@@ -490,6 +490,28 @@ namespace PhareAway
 
             _mLighthouse.Init(Content, LHParams, _mSceneOutside);
 
+
+            ObstaclesParameters ObsParams = new ObstaclesParameters(10, 11);
+            ObsParams.mFileBase = "Graphics/Sprites/Outside/Obstacles/";
+            ObsParams.mSprites[0] = "Obstacle_01";
+            ObsParams.mSprites[1] = "Obstacle_02";
+            ObsParams.mSprites[2] = "Obstacle_03";
+            ObsParams.mSprites[3] = "Obstacle_04";
+            ObsParams.mSprites[4] = "Obstacle_05";
+            ObsParams.mSprites[5] = "Obstacle_06";
+            ObsParams.mSprites[6] = "Obstacle_07";
+            ObsParams.mSprites[7] = "Obstacle_08";
+            ObsParams.mSprites[8] = "Obstacle_09";
+            ObsParams.mSprites[9] = "Obstacle_10";
+            ObsParams.mSprites[10]= "Obstacle_11";
+            ObsParams.mXRange = new Vector2(0.0f, 0.32f * PhareAwayGame.BackBufferWidth);
+            ObsParams.mYInit = -10.0f;
+            ObsParams.mYMax = (float)PhareAwayGame.BackBufferHeight + 20.0f;
+            ObsParams.mSpeedA = 0.1f;
+
+            ObstacleManager.Singleton.Initialize(ObsParams, Content, _mSceneOutside);
+
+
             // Game Init
             _mArchi.mActive = false;
 
@@ -499,6 +521,8 @@ namespace PhareAway
 
         public void Update(float _Dt)
         {
+            ObstacleManager.Singleton.Update(_Dt);
+
             _mArchi.Update(_Dt);
             _mPhilo.Update(_Dt);
 
