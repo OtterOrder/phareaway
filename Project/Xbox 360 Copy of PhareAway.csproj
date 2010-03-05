@@ -44,20 +44,20 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Src\AnimationPlayer.cs" />
-    <Compile Include="Src\Background.cs" />
-    <Compile Include="Src\Camera.cs" />
-    <Compile Include="Src\Character.cs" />
     <Compile Include="Src\Collisions\BoundingBox.cs" />
     <Compile Include="Src\Collisions\CollisionsManager.cs" />
+    <Compile Include="Src\Game\Character.cs" />
     <Compile Include="Src\Game\Level.cs" />
+    <Compile Include="Src\Game\Lighthouse.cs" />
     <Compile Include="Src\Game\PhareAwayGame.cs" />
-    <Compile Include="Src\InputManager.cs" />
-    <Compile Include="Src\Lighthouse.cs" />
     <Compile Include="Src\Program.cs" />
-    <Compile Include="Src\Scene.cs" />
-    <Compile Include="Src\SceneManager.cs" />
-    <Compile Include="Src\Sprite.cs" />
+    <Compile Include="Src\Scene\Scene.cs" />
+    <Compile Include="Src\Scene\SceneManager.cs" />
+    <Compile Include="Src\Utilities\AnimationPlayer.cs" />
+    <Compile Include="Src\Utilities\Background.cs" />
+    <Compile Include="Src\Utilities\Camera.cs" />
+    <Compile Include="Src\Utilities\InputManager.cs" />
+    <Compile Include="Src\Utilities\Sprite.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Xna.Framework">
