@@ -53,12 +53,60 @@ namespace PhareAway
             _mArchi = new Character();
             _mArchi.SetPosition(new Vector2(150, 1050));
             _mPhilo = new Character();
-            _mPhilo.SetPosition(new Vector2(450, 300));
+            _mPhilo.SetPosition(new Vector2(289, 646));
             
             // Ladder
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Ladder", Content, _mSceneInside);
             Spr.Depth = 0.5f;
-            Spr.mPosition = new Vector2(500.0f, 1120.0f);
+            Spr.mPosition = new Vector2(580.0f, 1000.0f);
+            Spr.mOrigin = new Vector2((float)Spr.Width / 2.0f, (float)Spr.Height);
+            Spr.SetBoundingBox(3, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+
+            Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Ladder", Content, _mSceneInside);
+            Spr.Depth = 0.5f;
+            Spr.mPosition = new Vector2(596.0f, 1240.0f);
+            Spr.mOrigin = new Vector2((float)Spr.Width / 2.0f, (float)Spr.Height);
+            Spr.SetBoundingBox(3, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+
+            Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Ladder", Content, _mSceneInside);
+            Spr.Depth = 0.5f;
+            Spr.mPosition = new Vector2(225.0f, 1240.0f);
+            Spr.mOrigin = new Vector2((float)Spr.Width / 2.0f, (float)Spr.Height);
+            Spr.SetBoundingBox(3, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+
+            Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Ladder", Content, _mSceneInside);
+            Spr.Depth = 0.5f;
+            Spr.mPosition = new Vector2(225.0f, 1120.0f);
+            Spr.mOrigin = new Vector2((float)Spr.Width / 2.0f, (float)Spr.Height);
+            Spr.SetBoundingBox(3, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+
+            Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Ladder", Content, _mSceneInside);
+            Spr.Depth = 0.5f;
+            Spr.mPosition = new Vector2(225.0f, 1000.0f);
+            Spr.mOrigin = new Vector2((float)Spr.Width / 2.0f, (float)Spr.Height);
+            Spr.SetBoundingBox(3, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+
+            Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Ladder", Content, _mSceneInside);
+            Spr.Depth = 0.5f;
+            Spr.mPosition = new Vector2(485.0f, 880.0f);
+            Spr.mOrigin = new Vector2((float)Spr.Width / 2.0f, (float)Spr.Height);
+            Spr.SetBoundingBox(3, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+
+            Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Ladder", Content, _mSceneInside);
+            Spr.Depth = 0.5f;
+            Spr.mPosition = new Vector2(485.0f, 821.0f);
+            Spr.mOrigin = new Vector2((float)Spr.Width / 2.0f, (float)Spr.Height);
+            Spr.SetBoundingBox(3, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+
+            Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Ladder", Content, _mSceneInside);
+            Spr.Depth = 0.5f;
+            Spr.mPosition = new Vector2(314.0f, 700.0f);
+            Spr.mOrigin = new Vector2((float)Spr.Width / 2.0f, (float)Spr.Height);
+            Spr.SetBoundingBox(3, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+
+            Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Ladder", Content, _mSceneInside);
+            Spr.Depth = 0.5f;
+            Spr.mPosition = new Vector2(314.0f, 580.0f);
             Spr.mOrigin = new Vector2((float)Spr.Width / 2.0f, (float)Spr.Height);
             Spr.SetBoundingBox(3, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
 
@@ -150,7 +198,7 @@ namespace PhareAway
 
             //Lab 
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Collisions/Lab", Content, _mSceneInside);
-            Spr.Depth = 0.39f;
+            Spr.Depth = 0.51f;
             Spr.mPosition.X = 189.0f;
             Spr.mPosition.Y = 469.0f;
             Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
