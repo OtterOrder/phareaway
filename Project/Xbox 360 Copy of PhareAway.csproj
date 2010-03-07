@@ -50,8 +50,6 @@
     <Compile Include="Src\Game\Level.cs" />
     <Compile Include="Src\Game\Lighthouse.cs" />
     <Compile Include="Src\Game\PhareAwayGame.cs" />
-    <Compile Include="Src\Obstacle.cs" />
-    <Compile Include="Src\ObstacleManager.cs" />
     <Compile Include="Src\Program.cs" />
     <Compile Include="Src\Scene\Scene.cs" />
     <Compile Include="Src\Scene\SceneManager.cs" />
