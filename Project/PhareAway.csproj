@@ -85,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Src\Game\Levels\Level.cs" />
+    <Compile Include="Src\Game\Levels\LevelMenu.cs" />
     <Compile Include="Src\Utilities\Camera.cs" />
     <Compile Include="Src\Utilities\InputManager.cs" />
     <Compile Include="Src\Game\Lighthouse.cs" />

@@ -22,6 +22,5 @@ namespace PhareAway
 
         public abstract void Init();
         public abstract void Update(float _Dt);
-
     }
 }
