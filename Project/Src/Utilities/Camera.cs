@@ -30,8 +30,8 @@ namespace PhareAway
             _mViewport.Y = 0;
             _mScreenCenter = new Vector2(_mViewport.Width / 2, _mViewport.Height / 2);
 
-            _mBackBufferWidth = PhareAwayGame.BackBufferWidth;
-            _mBackBufferHeight = PhareAwayGame.BackBufferHeight;
+            _mBackBufferWidth = PhareAwayGame.mBackBufferWidth;
+            _mBackBufferHeight = PhareAwayGame.mBackBufferHeight;
 
             mMoveSpeed = 0.01f;
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
@@ -10,28 +11,33 @@ namespace PhareAway
 {
     public class PhareAwayGame : Microsoft.Xna.Framework.Game
     {
-        private GraphicsDeviceManager graphics;
-        private SpriteBatch spriteBatch;
+        private GraphicsDeviceManager _mGraphics;
+        private SpriteBatch           _mSpriteBatch;
+        private ContentManager        _mContent;
 
-        private Level level;
+        private Level                 _mLevelMain;
 
-        public const int BackBufferWidth = 1280;
-        public const int BackBufferHeight = 720;
+        public const int mBackBufferWidth = 1280;
+        public const int mBackBufferHeight = 720;
 
         public PhareAwayGame()
         {
-            graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferWidth = BackBufferWidth;
-            graphics.PreferredBackBufferHeight = BackBufferHeight;
+            _mGraphics = new GraphicsDeviceManager(this);
+            _mGraphics.PreferredBackBufferWidth = mBackBufferWidth;
+            _mGraphics.PreferredBackBufferHeight = mBackBufferHeight;
 
             Content.RootDirectory = "Resources";
+
+            
         }
 
         protected override void LoadContent()
         {
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            _mSpriteBatch = new SpriteBatch(GraphicsDevice);
+            _mContent = new ContentManager(Services, "Resources");
 
-            level = new Level(Services, this);
+            _mLevelMain = new LevelMain(this, _mContent);
+            _mLevelMain.Init();
         }
 
         protected override void Update(GameTime gameTime)
@@ -45,15 +51,15 @@ namespace PhareAway
 
             float Dt = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
-            level.Update(Dt);
+            _mLevelMain.Update(Dt);
             SceneManager.Singleton.Update(Dt);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            graphics.GraphicsDevice.Clear(Color.DeepPink);
+            _mSpriteBatch.GraphicsDevice.Clear(Color.DeepPink);
 
-            SceneManager.Singleton.Draw(spriteBatch, graphics);
+            SceneManager.Singleton.Draw(_mSpriteBatch, _mGraphics);
 
             base.Draw(gameTime);
         }
