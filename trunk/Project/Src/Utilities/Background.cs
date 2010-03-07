@@ -48,7 +48,7 @@ namespace PhareAway
         //-------------------------------------------------------------------------
         public void Draw(SpriteBatch _SprBatch)
         {
-            Rectangle Rect = new Rectangle((int)_mPosition.X, (int)_mPosition.Y, PhareAwayGame.BackBufferWidth, PhareAwayGame.BackBufferHeight);
+            Rectangle Rect = new Rectangle((int)_mPosition.X, (int)_mPosition.Y, PhareAwayGame.mBackBufferWidth, PhareAwayGame.mBackBufferHeight);
 
             _SprBatch.Draw(_mBg, Vector2.Zero, Rect, Color.White, 0, Vector2.Zero, _mScale, SpriteEffects.None, _mDepth);
         }

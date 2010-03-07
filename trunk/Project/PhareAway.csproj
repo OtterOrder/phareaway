@@ -84,6 +84,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Src\Game\Levels\Level.cs" />
     <Compile Include="Src\Utilities\Camera.cs" />
     <Compile Include="Src\Utilities\InputManager.cs" />
     <Compile Include="Src\Game\Lighthouse.cs" />
@@ -93,7 +94,7 @@
     <Compile Include="Src\Game\Character.cs" />
     <Compile Include="Src\Collisions\BoundingBox.cs" />
     <Compile Include="Src\Collisions\CollisionsManager.cs" />
-    <Compile Include="Src\Game\Level.cs" />
+    <Compile Include="Src\Game\Levels\LevelMain.cs" />
     <Compile Include="Src\Game\PhareAwayGame.cs" />
     <Compile Include="Src\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
