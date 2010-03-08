@@ -67,6 +67,8 @@ namespace PhareAway
 
             base.Update(gameTime);
 
+            Timer.Singleton.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
+
             InputManager.Singleton.Update();
 
             float Dt = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
