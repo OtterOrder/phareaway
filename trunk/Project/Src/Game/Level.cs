@@ -517,6 +517,8 @@ namespace PhareAway
 
             _mLighthouse.mActive = true;
             _mLighthouse.InputParameters = _mArchi.InputParameters;
+
+            Timer.Singleton.Initialize();
         }
 
         public void Update(float _Dt)
