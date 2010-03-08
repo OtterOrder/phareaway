@@ -103,6 +103,7 @@
     <Compile Include="Src\Utilities\Obstacle.cs" />
     <Compile Include="Src\Utilities\ObstacleManager.cs" />
     <Compile Include="Src\Utilities\Sprite.cs" />
+    <Compile Include="Src\Utilities\Timer.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
