@@ -63,6 +63,12 @@ namespace PhareAway
             _mCamPhilo.mFocus = _mPhilo.GetPosition();
         }
 
+        public override void Draw(SpriteBatch _SprBatch, GraphicsDeviceManager _GraphicsManager)
+        {
+            SceneManager.Singleton.DrawScene(_SprBatch, _GraphicsManager, _mSceneInside);
+            SceneManager.Singleton.DrawScene(_SprBatch, _GraphicsManager, _mSceneOutside);
+        }
+
         private void InitDecorInside()
         {
             Bg = SceneManager.Singleton.GetNewBackground("Graphics/Backgrounds/bg_Space_01", _mContent, _mSceneInside);

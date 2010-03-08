@@ -25,5 +25,10 @@ namespace PhareAway
         {
 
         }
+
+        public override void Draw(SpriteBatch _SprBatch, GraphicsDeviceManager _GraphicsManager)
+        {
+
+        }
     }
 }

@@ -111,5 +111,10 @@ namespace PhareAway
                 scene.Draw(_SprBatch, _GraphicsManager);
             }  
         }
+
+        public void DrawScene(SpriteBatch _SprBatch, GraphicsDeviceManager _GraphicsManager, UInt32 _SceneId)
+        {
+            _mSceneList[(int)_SceneId].Draw(_SprBatch, _GraphicsManager);
+        }
     }
 }

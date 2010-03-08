@@ -81,7 +81,7 @@ namespace PhareAway
         {
             _mSpriteBatch.GraphicsDevice.Clear(Color.DeepPink);
 
-            SceneManager.Singleton.Draw(_mSpriteBatch, _mGraphics);
+            _mCurrentLevel.Draw(_mSpriteBatch, _mGraphics);
 
             base.Draw(gameTime);
         }
