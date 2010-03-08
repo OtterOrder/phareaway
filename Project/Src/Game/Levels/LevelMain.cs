@@ -75,6 +75,10 @@ namespace PhareAway
             Bg.Depth = 0.9f;
             Bg._mSpeed.Y = -0.05f;
 
+            //Gates
+            GateManager.Singleton.AddGate("Graphics/Sprites/Inside/Decor/Door_2", _mContent, _mSceneInside, new Vector2(230, 460), new Vector2(447, 1121));
+            GateManager.Singleton.AddGate("Graphics/Sprites/Inside/Decor/Door_3", _mContent, _mSceneInside, new Vector2(230, 701), new Vector2(150, 1001));
+            GateManager.Singleton.AddGate("Graphics/Sprites/Inside/Decor/Door_1", _mContent, _mSceneInside, new Vector2(650, 1001), new Vector2(150, 1241));
 
             // Ladder
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Ladder", _mContent, _mSceneInside);

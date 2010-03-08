@@ -165,8 +165,8 @@ namespace PhareAway
             if (mActive)
             {
                 UpdateInputs(_Dt);
-
                 UpdateLadder(_Dt);
+                UpdateGate(_Dt);
             }
 
             if (_mState != State.Climb)
@@ -368,6 +368,27 @@ namespace PhareAway
                 if (GetCurrentSprite().AnimPlayer != null)
                     GetCurrentSprite().AnimPlayer.Speed = Direction;
             }
+        }
+
+        //-----------------------------------
+        private void UpdateGate(float _Dt)
+        {
+            BoundingBox Gate = CollisionsManager.Singleton.Collide(GetCurrentSprite(), 4, Vector2.Zero);
+            if (Gate == null)
+                return;
+
+            bool Up = InputManager.Singleton.IsKeyJustPressed(_mInputParams.mUp);
+
+            if (Up)
+            {
+                Vector2 newPos = GateManager.Singleton.GetExitGateByPosition(_mPosition);
+                if (newPos != _mPosition)
+                {
+                    _mPosition = newPos;
+                    _mPosition.Y -= 2;
+                }
+            }
+            
         }
     }
 }
