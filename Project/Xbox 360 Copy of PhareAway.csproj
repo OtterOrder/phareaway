@@ -62,6 +62,7 @@
     <Compile Include="Src\Utilities\Obstacle.cs" />
     <Compile Include="Src\Utilities\ObstacleManager.cs" />
     <Compile Include="Src\Utilities\Sprite.cs" />
+    <Compile Include="Src\Utilities\Timer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Xna.Framework">
