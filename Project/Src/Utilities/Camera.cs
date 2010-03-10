@@ -33,6 +33,8 @@ namespace PhareAway
             _mBackBufferWidth = PhareAwayGame.mBackBufferWidth;
             _mBackBufferHeight = PhareAwayGame.mBackBufferHeight;
 
+            mFocus = new Vector2(0, 0);
+
             mMoveSpeed = 0.01f;
         }
 
@@ -54,8 +56,10 @@ namespace PhareAway
         public void Update(float _Dt)
         {
             mTransform = Matrix.Identity *
-                          Matrix.CreateTranslation(-_mPosition.X, -_mPosition.Y, 0) *
-                          Matrix.CreateTranslation(_mScreenCenter.X, _mScreenCenter.Y, 0);
+                          Matrix.CreateTranslation(-_mPosition.X, -_mPosition.Y, 0);
+
+            if(mFocus.X != 0 && mFocus.Y !=0)
+                         mTransform *= Matrix.CreateTranslation(_mScreenCenter.X, _mScreenCenter.Y, 0);
 
 
             _mPosition.X += (int)((mFocus.X - _mPosition.X) * mMoveSpeed * _Dt);
