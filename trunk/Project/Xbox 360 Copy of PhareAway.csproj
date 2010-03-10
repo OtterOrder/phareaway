@@ -50,8 +50,10 @@
     <Compile Include="Src\Game\Gate\Gate.cs" />
     <Compile Include="Src\Game\Gate\GateManager.cs" />
     <Compile Include="Src\Game\Levels\Level.cs" />
+    <Compile Include="Src\Game\Levels\LevelLogos.cs" />
     <Compile Include="Src\Game\Levels\LevelMain.cs" />
     <Compile Include="Src\Game\Levels\LevelMenu.cs" />
+    <Compile Include="Src\Game\Levels\LevelTuto.cs" />
     <Compile Include="Src\Game\Lighthouse.cs" />
     <Compile Include="Src\Game\PhareAwayGame.cs" />
     <Compile Include="Src\Program.cs" />

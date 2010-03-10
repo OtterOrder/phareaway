@@ -13,6 +13,8 @@ namespace PhareAway
     {
         Level_Main,
         Level_Menu,
+        Level_Logos,
+        Level_Tuto,
     }
 
     public class PhareAwayGame : Microsoft.Xna.Framework.Game
@@ -26,6 +28,8 @@ namespace PhareAway
         private Level                 _mCurrentLevel;
         private Level                 _mMainLevel;
         private Level                 _mMenuLevel;
+        private Level                 _mLogosLevel;
+        private Level                 _mTutoLevel;
 
         public const int mBackBufferWidth = 1280;
         public const int mBackBufferHeight = 720;
@@ -50,6 +54,10 @@ namespace PhareAway
             _mMainLevel.Init();
             _mMenuLevel = new LevelMenu(this, _mContent);
             _mMenuLevel.Init();
+            _mLogosLevel = new LevelLogos(this, _mContent);
+            _mLogosLevel.Init();
+            _mTutoLevel = new LevelTuto(this, _mContent);
+            _mTutoLevel.Init();
 
             switch (_mStartLevel)
             {
@@ -57,6 +65,10 @@ namespace PhareAway
                     _mCurrentLevel = _mMainLevel; break;
                 case LevelName.Level_Menu:
                     _mCurrentLevel = _mMenuLevel; break;
+                case LevelName.Level_Logos:
+                    _mCurrentLevel = _mLogosLevel; break;
+                case LevelName.Level_Tuto:
+                    _mCurrentLevel = _mTutoLevel; break;
             }
         }
 
@@ -84,6 +96,21 @@ namespace PhareAway
             _mCurrentLevel.Draw(_mSpriteBatch, _mGraphics);
 
             base.Draw(gameTime);
+        }
+
+        public void ChangeLevel(LevelName _Level)
+        {
+            switch (_Level)
+            {
+                case LevelName.Level_Main:
+                    _mCurrentLevel = _mMainLevel; break;
+                case LevelName.Level_Menu:
+                    _mCurrentLevel = _mMenuLevel; break;
+                case LevelName.Level_Logos:
+                    _mCurrentLevel = _mLogosLevel; break;
+                case LevelName.Level_Tuto:
+                    _mCurrentLevel = _mTutoLevel; break;
+            }
         }
     }
 }

@@ -7,7 +7,7 @@ namespace PhareAway
         /// The main entry point for the application.
         static void Main(string[] args)
         {
-            using (PhareAwayGame game = new PhareAwayGame(LevelName.Level_Main))
+            using (PhareAwayGame game = new PhareAwayGame(LevelName.Level_Logos))
             {
                 game.Run();
             }
