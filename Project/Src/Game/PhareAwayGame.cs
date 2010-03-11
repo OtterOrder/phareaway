@@ -17,6 +17,16 @@ namespace PhareAway
         Level_Tuto,
     }
 
+    public enum CollisionId
+    {
+        Character,
+        Ground,
+        Ladder,
+        Lighthouse,
+        Obstacle,
+        Gate
+    }
+
     public class PhareAwayGame : Microsoft.Xna.Framework.Game
     {
         private GraphicsDeviceManager _mGraphics;

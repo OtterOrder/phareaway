@@ -80,6 +80,11 @@ namespace PhareAway
             return _mBBox;
         }
 
+        public Rectangle Rectangle
+        {
+            get { return new Rectangle((int)(mPosition.X - mOrigin.X), (int)(mPosition.Y - mOrigin.Y), Width, Height); }
+        }
+
         //-------------------------------------------------------------------------
         public void Update(float _Dt)  // MilliSeconds
         {
@@ -98,6 +103,16 @@ namespace PhareAway
             Rectangle Rect = new Rectangle(Frame*_mWidth, 0, _mWidth, Height);
 
             _SprBatch.Draw(_mSpr, mPosition, Rect, Color.White, 0, mOrigin, mScale, mFlip, _mDepth);
+        }
+
+        //-------------------------------------------------------------------------
+        //-------------------------------------------------------------------------
+        public Color[] GetData()
+        {
+            Color [] TextData = new Color[Width * Height];
+            _mSpr.GetData(TextData);
+
+            return TextData;
         }
     }
 

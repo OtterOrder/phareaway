@@ -19,6 +19,11 @@ namespace PhareAway
                 It.Current.Update();
             }
         }
+
+        public void DeletBoundingBox (BoundingBox _BBox)
+        {
+            mList.Remove(_BBox);
+        }
     }
 
     public class CollisionsManager
@@ -67,6 +72,11 @@ namespace PhareAway
             return BBox;
         }
 
+        public void DeleteBoundingBox (UInt32 _Type, BoundingBox _BBox)
+        {
+            GetList(_Type).DeletBoundingBox(_BBox);
+        }
+
         //-------------------------------------------------------------------------
         private BBoxList GetList(UInt32 _Type)
         {
@@ -105,6 +115,35 @@ namespace PhareAway
             while (ItBBox.MoveNext())
             {
                 if (ItBBox.Current.Collide(BBoxSpr))
+                    return ItBBox.Current;
+            }
+
+            return null;
+        }
+
+        //-------------------------------------------------------------------------
+        public BoundingBox Collide(Sprite _Spr, UInt32 _Type, Vector2 _Offset, bool Precise)
+        {
+            if (_Spr.GetBoundingBox() == null)
+                return null;
+
+            BBoxList lList = GetList(_Type);
+
+            if (lList == null)
+                return null;
+
+            _Spr.GetBoundingBox().Update();
+            BoundingBox BBoxSpr = new BoundingBox(_Spr, _Spr.GetBoundingBox().mPostion + _Offset, _Spr.GetBoundingBox().mSize);
+
+            lList.Update();
+            BBoxSpr.Update();
+
+            IEnumerator<BoundingBox> ItBBox = lList.mList.GetEnumerator();
+            ItBBox.Reset();
+
+            while (ItBBox.MoveNext())
+            {
+                if (ItBBox.Current.Collide(BBoxSpr, Precise))
                     return ItBBox.Current;
             }
 

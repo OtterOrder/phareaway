@@ -26,13 +26,13 @@ namespace PhareAway
             _mEntranceSprite.Depth = 0.5f;
             _mEntranceSprite.mPosition = _Entrance;
             _mEntranceSprite.mOrigin = new Vector2((float)_mEntranceSprite.Width / 2.0f, (float)_mEntranceSprite.Height);
-            _mEntranceSprite.SetBoundingBox(4, Vector2.Zero, new Vector2(_mEntranceSprite.Width, _mEntranceSprite.Height));
+            _mEntranceSprite.SetBoundingBox((UInt32)CollisionId.Gate, Vector2.Zero, new Vector2(_mEntranceSprite.Width, _mEntranceSprite.Height));
 
             _mExitSprite = SceneManager.Singleton.GetNewSprite(_GateSprite, _ContentManager, _SceneId);
             _mExitSprite.Depth = 0.5f;
             _mExitSprite.mPosition = _Exit;
             _mExitSprite.mOrigin = new Vector2((float)_mExitSprite.Width / 2.0f, (float)_mExitSprite.Height);
-            _mExitSprite.SetBoundingBox(4, Vector2.Zero, new Vector2(_mExitSprite.Width, _mExitSprite.Height));
+            _mExitSprite.SetBoundingBox((UInt32)CollisionId.Gate, Vector2.Zero, new Vector2(_mExitSprite.Width, _mExitSprite.Height));
         }
 
         public Vector2 GetGateByEntry(Vector2 _Entry)

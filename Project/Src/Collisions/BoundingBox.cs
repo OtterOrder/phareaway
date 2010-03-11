@@ -1,4 +1,6 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace PhareAway
 {
@@ -75,7 +77,8 @@ namespace PhareAway
             _mTop = Pos.Y;
             _mBottom = Pos.Y + mSize.Y * _mSpr.mScale.Y;
         }
-        
+
+        //-------------------------------------------------------------------------
         //-------------------------------------------------------------------------
         public bool Contains(float _X, float _Y)
         {
@@ -95,7 +98,7 @@ namespace PhareAway
 
         public bool CollideWithHLine (float _X1, float _X2, float _Y)
         {
-            return (_X1 <= Left && _X2 >= Right && _Y >= Top && _Y <= Bottom);
+            return (_X1 <= Right && _X2 >= Left && _Y >= Top && _Y <= Bottom);
         }
 
         public bool CollideWithVLine(float _Y1, float _Y2, float _X)
@@ -105,7 +108,7 @@ namespace PhareAway
 
         public bool Collide (BoundingBox _BBox)
         {
-            if (Contains(_BBox.Left, _BBox.Top)
+            if (   Contains(_BBox.Left, _BBox.Top)
                 || Contains(_BBox.Right, _BBox.Top)
                 || Contains(_BBox.Left, _BBox.Bottom)
                 || Contains(_BBox.Right, _BBox.Bottom)
@@ -129,21 +132,42 @@ namespace PhareAway
 
             return false;
         }
-    }
 
-    /*
-    //-------------------------------------------------------------------------
-    public class SpriteComparer : IComparer<Sprite>
-    {
-        public int Compare(Sprite _Spr1, Sprite _Spr2)
+        public bool Collide(BoundingBox _BBox, bool Precise)
         {
-            if (_Spr1.Depth > _Spr2.Depth)
-                return -1;
-            else
-                if (_Spr1.Depth < _Spr2.Depth)
-                    return 1;
+            bool result = Collide(_BBox);
 
-            return 0;
+            if(Precise && result)
+            {
+                Color[] TextData1 = _mSpr.GetData();
+                Color[] TextData2 = _BBox.Sprite.GetData();
+
+                Rectangle Rect1 = _mSpr.Rectangle;
+                Rectangle Rect2 = _BBox.Sprite.Rectangle;
+
+                int top = Math.Max(Rect1.Top, Rect2.Top);
+                int bottom = Math.Min(Rect1.Bottom, Rect2.Bottom);
+                int left = Math.Max(Rect1.Left, Rect2.Left);
+                int right = Math.Min(Rect1.Right, Rect2.Right);
+
+                for (int y = top; y < bottom; y++)
+                {
+                    for (int x = left; x < right; x++)
+                    {
+                        Color color1 = TextData1[(x - Rect1.Left) + (y - Rect1.Top) * Rect1.Width];
+                        Color color2 = TextData2[(x - Rect2.Left) + (y - Rect2.Top) * Rect2.Width];
+
+                        if (color1.A != 0 && color2.A != 0)
+                        {
+                            return true;
+                        }
+                    }
+                }
+
+                return false;
+            }
+
+            return result;
         }
-    }*/
+    }
 }
