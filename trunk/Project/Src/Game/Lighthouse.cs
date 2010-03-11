@@ -57,7 +57,7 @@ namespace PhareAway
             _mSprLighthouse = LoadSprite(_ContentManager, _SceneId, _Parameters.mFileBase, _Parameters.mSprLightouse);
             _mSprLighthouse.mOrigin = new Vector2((float)_mSprLighthouse.Width / 2.0f, (float)_mSprLighthouse.Height);
             _mSprLighthouse.Depth = _Parameters.mDepth;
-            _mSprLighthouse.SetBoundingBox(0, new Vector2(0.0f, 0.0f), new Vector2(_mSprLighthouse.Width, _mSprLighthouse.Height));
+            _mSprLighthouse.SetBoundingBox((UInt32)CollisionId.Lighthouse, new Vector2(0.0f, 0.0f), new Vector2(_mSprLighthouse.Width, _mSprLighthouse.Height));
 
             _mSprJetEngine[0] = LoadSprite(_ContentManager, _SceneId, _Parameters.mFileBase, _Parameters.mSprJetEngine);
             _mSprJetEngine[1] = LoadSprite(_ContentManager, _SceneId, _Parameters.mFileBase, _Parameters.mSprJetEngine);
@@ -66,7 +66,7 @@ namespace PhareAway
             {
                 _mSprJetEngine[i].mOrigin = new Vector2((float)_mSprJetEngine[i].Width / 2.0f, (float)0.0f);
                 _mSprJetEngine[i].Depth = _Parameters.mDepth;
-                //_mSprJetEngine[i].SetBoundingBox(0, new Vector2(0.0f, 0.0f), new Vector2(_mSprJetEngine[i].Width, _mSprJetEngine[i].Height));
+                //_mSprJetEngine[i].SetBoundingBox((UInt32)CollisionId.Lighthouse, new Vector2(0.0f, 0.0f), new Vector2(_mSprJetEngine[i].Width, _mSprJetEngine[i].Height));
             }
         }
 
@@ -135,6 +135,15 @@ namespace PhareAway
 
             if (InputManager.Singleton.IsKeyPressed(_mInputParams.mUp))
                 _mSpeed.Y = -_mGameParams.mYSpeed;
+
+            if (CollisionsManager.Singleton.Collide(_mSprLighthouse, (UInt32)CollisionId.Obstacle, Vector2.Zero, true) != null)
+            {
+                _mSprJetEngine[1].mVisible = true;
+            }
+            else
+            {
+                _mSprJetEngine[1].mVisible = false;
+            }
         }
     }
 }

@@ -52,12 +52,13 @@ namespace PhareAway
 
         public override void Update(float _Dt)
         {
-            ObstacleManager.Singleton.Update(_Dt);
-
             _mArchi.Update(_Dt);
             _mPhilo.Update(_Dt);
 
+            ObstacleManager.Singleton.Update(_Dt);
+
             _mLighthouse.Update(_Dt);
+
 
             _mCamArchi.mFocus = _mArchi.GetPosition();
             _mCamPhilo.mFocus = _mPhilo.GetPosition();
@@ -85,55 +86,55 @@ namespace PhareAway
             Spr.Depth = 0.5f;
             Spr.mPosition = new Vector2(580.0f, 1000.0f);
             Spr.mOrigin = new Vector2((float)Spr.Width / 2.0f, (float)Spr.Height);
-            Spr.SetBoundingBox(3, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+            Spr.SetBoundingBox((UInt32)CollisionId.Ladder, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
 
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Ladder", _mContent, _mSceneInside);
             Spr.Depth = 0.5f;
             Spr.mPosition = new Vector2(596.0f, 1240.0f);
             Spr.mOrigin = new Vector2((float)Spr.Width / 2.0f, (float)Spr.Height);
-            Spr.SetBoundingBox(3, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+            Spr.SetBoundingBox((UInt32)CollisionId.Ladder, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
 
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Ladder", _mContent, _mSceneInside);
             Spr.Depth = 0.5f;
             Spr.mPosition = new Vector2(225.0f, 1240.0f);
             Spr.mOrigin = new Vector2((float)Spr.Width / 2.0f, (float)Spr.Height);
-            Spr.SetBoundingBox(3, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+            Spr.SetBoundingBox((UInt32)CollisionId.Ladder, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
 
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Ladder", _mContent, _mSceneInside);
             Spr.Depth = 0.5f;
             Spr.mPosition = new Vector2(225.0f, 1120.0f);
             Spr.mOrigin = new Vector2((float)Spr.Width / 2.0f, (float)Spr.Height);
-            Spr.SetBoundingBox(3, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+            Spr.SetBoundingBox((UInt32)CollisionId.Ladder, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
 
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Ladder", _mContent, _mSceneInside);
             Spr.Depth = 0.5f;
             Spr.mPosition = new Vector2(225.0f, 1000.0f);
             Spr.mOrigin = new Vector2((float)Spr.Width / 2.0f, (float)Spr.Height);
-            Spr.SetBoundingBox(3, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+            Spr.SetBoundingBox((UInt32)CollisionId.Ladder, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
 
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Ladder", _mContent, _mSceneInside);
             Spr.Depth = 0.5f;
             Spr.mPosition = new Vector2(485.0f, 880.0f);
             Spr.mOrigin = new Vector2((float)Spr.Width / 2.0f, (float)Spr.Height);
-            Spr.SetBoundingBox(3, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+            Spr.SetBoundingBox((UInt32)CollisionId.Ladder, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
 
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Ladder", _mContent, _mSceneInside);
             Spr.Depth = 0.5f;
             Spr.mPosition = new Vector2(485.0f, 821.0f);
             Spr.mOrigin = new Vector2((float)Spr.Width / 2.0f, (float)Spr.Height);
-            Spr.SetBoundingBox(3, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+            Spr.SetBoundingBox((UInt32)CollisionId.Ladder, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
 
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Ladder", _mContent, _mSceneInside);
             Spr.Depth = 0.5f;
             Spr.mPosition = new Vector2(314.0f, 700.0f);
             Spr.mOrigin = new Vector2((float)Spr.Width / 2.0f, (float)Spr.Height);
-            Spr.SetBoundingBox(3, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+            Spr.SetBoundingBox((UInt32)CollisionId.Ladder, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
 
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Ladder", _mContent, _mSceneInside);
             Spr.Depth = 0.5f;
             Spr.mPosition = new Vector2(314.0f, 580.0f);
             Spr.mOrigin = new Vector2((float)Spr.Width / 2.0f, (float)Spr.Height);
-            Spr.SetBoundingBox(3, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+            Spr.SetBoundingBox((UInt32)CollisionId.Ladder, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
 
             // Ground
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Collisions/Ground", _mContent, _mSceneInside);
@@ -141,56 +142,56 @@ namespace PhareAway
             Spr.mPosition.X = 110.0f;
             Spr.mPosition.Y = 1240.0f;
             Spr.mScale.X = (581);
-            Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+            Spr.SetBoundingBox((UInt32)CollisionId.Ground, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
 
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Collisions/Ground", _mContent, _mSceneInside);
             Spr.Depth = 0.39f;
             Spr.mPosition.X = 110.0f;
             Spr.mPosition.Y = 1120.0f;
             Spr.mScale.X = (581);
-            Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+            Spr.SetBoundingBox((UInt32)CollisionId.Ground, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
 
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Collisions/Ground", _mContent, _mSceneInside);
             Spr.Depth = 0.39f;
             Spr.mPosition.X = 110.0f;
             Spr.mPosition.Y = 1000.0f;
             Spr.mScale.X = (581);
-            Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+            Spr.SetBoundingBox((UInt32)CollisionId.Ground, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
 
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Collisions/Ground", _mContent, _mSceneInside);
             Spr.Depth = 0.39f;
             Spr.mPosition.X = 110.0f;
             Spr.mPosition.Y = 880.0f;
             Spr.mScale.X = (581);
-            Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+            Spr.SetBoundingBox((UInt32)CollisionId.Ground, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
 
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Collisions/Ground", _mContent, _mSceneInside);
             Spr.Depth = 0.39f;
             Spr.mPosition.X = 190.0f;
             Spr.mPosition.Y = 700.0f;
             Spr.mScale.X = (420);
-            Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+            Spr.SetBoundingBox((UInt32)CollisionId.Ground, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
 
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Collisions/Ground", _mContent, _mSceneInside);
             Spr.Depth = 0.39f;
             Spr.mPosition.X = 190.0f;
             Spr.mPosition.Y = 579.0f;
             Spr.mScale.X = (420);
-            Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+            Spr.SetBoundingBox((UInt32)CollisionId.Ground, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
 
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Collisions/Ground", _mContent, _mSceneInside);
             Spr.Depth = 0.39f;
             Spr.mPosition.X = 190.0f;
             Spr.mPosition.Y = 459.0f;
             Spr.mScale.X = (420);
-            Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+            Spr.SetBoundingBox((UInt32)CollisionId.Ground, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
 
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Collisions/Ground", _mContent, _mSceneInside);
             Spr.Depth = 0.39f;
             Spr.mPosition.X = 190.0f;
             Spr.mPosition.Y = 280.0f;
             Spr.mScale.X = (420);
-            Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+            Spr.SetBoundingBox((UInt32)CollisionId.Ground, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
 
             //Wall
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Collisions/Wall", _mContent, _mSceneInside);
@@ -198,28 +199,28 @@ namespace PhareAway
             Spr.mPosition.X = 100.0f;
             Spr.mPosition.Y = 889.0f;
             Spr.mScale.Y = (352);
-            Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+            Spr.SetBoundingBox((UInt32)CollisionId.Ground, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
 
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Collisions/Wall", _mContent, _mSceneInside);
             Spr.Depth = 0.39f;
             Spr.mPosition.X = 690.0f;
             Spr.mPosition.Y = 889.0f;
             Spr.mScale.Y = (352);
-            Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+            Spr.SetBoundingBox((UInt32)CollisionId.Ground, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
 
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Collisions/Wall", _mContent, _mSceneInside);
             Spr.Depth = 0.39f;
             Spr.mPosition.X = 180.0f;
             Spr.mPosition.Y = 289.0f;
             Spr.mScale.Y = (592);
-            Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+            Spr.SetBoundingBox((UInt32)CollisionId.Ground, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
 
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Collisions/Wall", _mContent, _mSceneInside);
             Spr.Depth = 0.39f;
             Spr.mPosition.X = 609.0f;
             Spr.mPosition.Y = 289.0f;
             Spr.mScale.Y = (592);
-            Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+            Spr.SetBoundingBox((UInt32)CollisionId.Ground, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
 
             // Wall (intérieur)
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Collisions/Wall", _mContent, _mSceneInside);
@@ -227,7 +228,7 @@ namespace PhareAway
             Spr.mPosition.X = 620.0f;
             Spr.mPosition.Y = 1130.0f;
             Spr.mScale.Y = (42);
-            Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+            Spr.SetBoundingBox((UInt32)CollisionId.Ground, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
 
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Corner_HorDown", _mContent, _mSceneInside);
             Spr.Depth = 0.38f;
@@ -239,7 +240,7 @@ namespace PhareAway
             Spr.mPosition.X = 395.0f;
             Spr.mPosition.Y = 1010.0f;
             Spr.mScale.Y = (110);
-            Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+            Spr.SetBoundingBox((UInt32)CollisionId.Ground, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
 
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Corner_HorDown", _mContent, _mSceneInside);
             Spr.Depth = 0.38f;
@@ -256,7 +257,7 @@ namespace PhareAway
             Spr.mPosition.X = 250.0f;
             Spr.mPosition.Y = 890.0f;
             Spr.mScale.Y = (42);
-            Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+            Spr.SetBoundingBox((UInt32)CollisionId.Ground, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
 
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Corner_HorDown", _mContent, _mSceneInside);
             Spr.Depth = 0.38f;
@@ -268,7 +269,7 @@ namespace PhareAway
             Spr.mPosition.X = 540.0f;
             Spr.mPosition.Y = 890.0f;
             Spr.mScale.Y = (42);
-            Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+            Spr.SetBoundingBox((UInt32)CollisionId.Ground, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
 
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Corner_HorDown", _mContent, _mSceneInside);
             Spr.Depth = 0.38f;
@@ -280,7 +281,7 @@ namespace PhareAway
             Spr.mPosition.X = 451.0f;
             Spr.mPosition.Y = 710.0f;
             Spr.mScale.Y = (82);
-            Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+            Spr.SetBoundingBox((UInt32)CollisionId.Ground, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
 
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Corner_HorDown", _mContent, _mSceneInside);
             Spr.Depth = 0.38f;
@@ -292,7 +293,7 @@ namespace PhareAway
             Spr.mPosition.X = 510.0f;
             Spr.mPosition.Y = 589.0f;
             Spr.mScale.Y = (42);
-            Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+            Spr.SetBoundingBox((UInt32)CollisionId.Ground, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
 
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Corner_HorDown", _mContent, _mSceneInside);
             Spr.Depth = 0.38f;
@@ -305,7 +306,7 @@ namespace PhareAway
             Spr.Depth = 0.51f;
             Spr.mPosition.X = 189.0f;
             Spr.mPosition.Y = 469.0f;
-            Spr.SetBoundingBox(2, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
+            Spr.SetBoundingBox((UInt32)CollisionId.Ground, Vector2.Zero, new Vector2(Spr.Width, Spr.Height));
 
 
             //Corners

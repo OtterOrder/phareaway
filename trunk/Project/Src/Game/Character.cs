@@ -102,7 +102,7 @@ namespace PhareAway
 
                 _mSprites[i].Depth = _Parameters.mDepth;
                 _mSprites[i].mOrigin = new Vector2((float)_mSprites[i].Width / 2.0f, (float)_mSprites[i].Height);
-                _mSprites[i].SetBoundingBox(0, new Vector2(0.0f, 0.0f), new Vector2(_mSprites[i].Width, _mSprites[i].Height));
+                _mSprites[i].SetBoundingBox((UInt32)CollisionId.Character, new Vector2(0.0f, 0.0f), new Vector2(_mSprites[i].Width, _mSprites[i].Height));
                 _mSprites[i].mVisible = false;
             }
 
@@ -230,7 +230,7 @@ namespace PhareAway
         private void UpdatePhysique(float _Dt)
         {
             // If the character is in air, apply the gravity
-            if (CollisionsManager.Singleton.Collide(GetCurrentSprite(), 2, new Vector2(0.0f, 0.5f)) == null)
+            if (CollisionsManager.Singleton.Collide(GetCurrentSprite(), (UInt32)CollisionId.Ground, new Vector2(0.0f, 0.5f)) == null)
             {
                 _mGravity = mGravityValue;
             }
@@ -240,7 +240,7 @@ namespace PhareAway
             // Update vertical collisions
             if (_mSpeed.Y != 0.0f)
             {
-                BoundingBox Collision = CollisionsManager.Singleton.Collide(GetCurrentSprite(), 2, new Vector2(0.0f, _mSpeed.Y));
+                BoundingBox Collision = CollisionsManager.Singleton.Collide(GetCurrentSprite(), (UInt32)CollisionId.Ground, new Vector2(0.0f, _mSpeed.Y));
                 if (Collision != null)
                 {
                     if (_mSpeed.Y >= 0.0f)
@@ -256,7 +256,7 @@ namespace PhareAway
             // Update horizontal collisions
             if (_mSpeed.X != 0.0f)
             {
-                BoundingBox Collision = CollisionsManager.Singleton.Collide(GetCurrentSprite(), 2, new Vector2(_mSpeed.X, 0.0f));
+                BoundingBox Collision = CollisionsManager.Singleton.Collide(GetCurrentSprite(), (UInt32)CollisionId.Ground, new Vector2(_mSpeed.X, 0.0f));
                 if (Collision != null)
                 {
                     if (_mSpeed.X >= 0.0f)
@@ -313,14 +313,14 @@ namespace PhareAway
         //-----------------------------------
         private void UpdateLadder(float _Dt)
         {
-            BoundingBox Ground  = CollisionsManager.Singleton.Collide(GetCurrentSprite(), 2, Vector2.Zero);
+            BoundingBox Ground = CollisionsManager.Singleton.Collide(GetCurrentSprite(), (UInt32)CollisionId.Ground, Vector2.Zero);
             if (_mSpeed.X != 0.0f && Ground == null)
             {
                 ChangeState(State.Idle);
                 return;
             }
 
-            BoundingBox Ladder  = CollisionsManager.Singleton.Collide(GetCurrentSprite(), 3, Vector2.Zero);
+            BoundingBox Ladder  = CollisionsManager.Singleton.Collide(GetCurrentSprite(), (UInt32)CollisionId.Ladder, Vector2.Zero);
             if (Ladder == null)
                 return;
 
@@ -341,7 +341,7 @@ namespace PhareAway
                 if( Up && Ground == null )
                 {
                     if( Ladder.Top >= (BBox.Top - _mGameParams.mClimbSpeed -1.0f) &&
-                        CollisionsManager.Singleton.Collide( new Vector2(Ladder.Right, Ladder.Top -1.0f), 3) == null )
+                        CollisionsManager.Singleton.Collide(new Vector2(Ladder.Right, Ladder.Top - 1.0f), (UInt32)CollisionId.Ladder) == null)
                     {
                         ChangeState(State.Idle);
                     }
@@ -350,7 +350,7 @@ namespace PhareAway
                 if( Down )
                 {
                     if (Ladder.Bottom <= (BBox.Bottom - _mGameParams.mClimbSpeed + 1.0f) &&
-                        CollisionsManager.Singleton.Collide(new Vector2(Ladder.Right, Ladder.Bottom +1.0f), 3) == null )
+                        CollisionsManager.Singleton.Collide(new Vector2(Ladder.Right, Ladder.Bottom + 1.0f), (UInt32)CollisionId.Ladder) == null)
                     {
                         ChangeState(State.Idle);
                     }

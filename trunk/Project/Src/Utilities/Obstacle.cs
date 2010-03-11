@@ -21,13 +21,16 @@ namespace PhareAway
         //-------------------------------------------------------------------------
         public void Init(ContentManager _ContentManager, string _FileName, UInt32 _SceneId, float _Depth, float _Speed, float _X, float _Y)
         {
+            if (_mSprite != null)
+                CollisionsManager.Singleton.DeleteBoundingBox((UInt32)CollisionId.Obstacle, _mSprite.GetBoundingBox());
+
             _mSprite = SceneManager.Singleton.GetNewSprite( _FileName,
                                                             _ContentManager,
                                                             _SceneId);
             _mSprite.Depth = _Depth;
             _mPosition = new Vector2(_X, _Y);
             _mSprite.mOrigin = new Vector2((float)_mSprite.Width / 2.0f, (float)_mSprite.Height / 2.0f);
-            _mSprite.SetBoundingBox(0, new Vector2(0.0f, 0.0f), new Vector2(_mSprite.Width, _mSprite.Height));
+            _mSprite.SetBoundingBox((UInt32)CollisionId.Obstacle, new Vector2(0.0f, 0.0f), new Vector2(_mSprite.Width, _mSprite.Height));
             _mSprite.mVisible = true;
 
             _mSpeed = _Speed;
@@ -45,6 +48,11 @@ namespace PhareAway
                 _mSprite.GetBoundingBox().Update();
                 return _mSprite.GetBoundingBox();
             }
+        }
+
+        public Sprite Sprite
+        {
+            get { return _mSprite; }
         }
 
         public bool Visible
