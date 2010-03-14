@@ -277,15 +277,22 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Graphics\Sprites\Menu\Logo_1.png">
-      <Name>Logo_1</Name>
+    <Compile Include="Graphics\Sprites\Menu\LOGO_ENJMIN.png">
+      <Name>LOGO_ENJMIN</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Graphics\Sprites\Menu\Logo_2.png">
-      <Name>Logo_2</Name>
+    <Compile Include="Graphics\Sprites\Menu\LOGO_SPRAITE.png">
+      <Name>LOGO_SPRAITE</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Graphics\Backgrounds\bg_Menu.png">
+      <Name>bg_Menu</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
