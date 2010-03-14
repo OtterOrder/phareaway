@@ -11,10 +11,10 @@ namespace PhareAway
 {
     public enum LevelName
     {
-        Level_Main,
-        Level_Menu,
         Level_Logos,
+        Level_Menu,
         Level_Tuto,
+        Level_Main,        
     }
 
     public enum CollisionId
