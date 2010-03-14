@@ -373,7 +373,7 @@ namespace PhareAway
         //-----------------------------------
         private void UpdateGate(float _Dt)
         {
-            BoundingBox Gate = CollisionsManager.Singleton.Collide(GetCurrentSprite(), 4, Vector2.Zero);
+            BoundingBox Gate = CollisionsManager.Singleton.Collide(GetCurrentSprite(), (UInt32)CollisionId.Gate, Vector2.Zero);
             if (Gate == null)
                 return;
 
