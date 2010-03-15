@@ -86,6 +86,11 @@ namespace PhareAway
             _mSprList.Add(_Spr);
         }
 
+        public void RemoveSprite(Sprite _Spr)
+        {
+            _mSprList.Remove(_Spr);
+        }
+
         public void AddBackground(Background _Bg)
         {
             _mBgList.Add(_Bg);

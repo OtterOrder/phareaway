@@ -76,6 +76,12 @@ namespace PhareAway
             return _mSceneList[(int)_SceneId];
         }
 
+        public void RemoveSprite (Sprite _Sprite, UInt32 _SceneId)
+        {
+            if (_Sprite != null)
+                _mSceneList[(int)_SceneId].RemoveSprite(_Sprite);
+        }
+
         //-------------------------------------------------------------------------
         public void SortSprites()
         {

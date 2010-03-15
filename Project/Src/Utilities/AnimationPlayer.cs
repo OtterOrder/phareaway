@@ -18,7 +18,8 @@ namespace PhareAway
         enum AnimState
         {
             Play = 1,
-            Loop = 1 << 1
+            Loop = 1 << 1,
+            AtEnd = 1 << 2
         }
 
         //-------------------------------------------------------------------------
@@ -71,6 +72,19 @@ namespace PhareAway
             }
         }
 
+        public bool AtEnd
+        {
+            get { return ((_mState & (int)AnimationPlayer.AnimState.AtEnd) == (int)AnimationPlayer.AnimState.AtEnd); }
+
+            set
+            {
+                if (value)
+                    _mState = _mState | (int)AnimationPlayer.AnimState.AtEnd;
+                else
+                    _mState = _mState & ~(int)AnimationPlayer.AnimState.AtEnd;
+            }
+        }
+
         public int CurrentFrame
         {
             get { return _mCurrentFrame; }
@@ -83,12 +97,16 @@ namespace PhareAway
             if (!Play)
                 return;
 
+            AtEnd = false;
+
             _mTime += _Dt * _mSpeed;
 
             _mCurrentFrame = (int)(_mTime * _mFps);
 
             if (_mCurrentFrame >= _mNbFrames)
             {
+                AtEnd = true;
+
                 if (Loop)
                 {
                     _mTime = 0.0f;
@@ -102,6 +120,8 @@ namespace PhareAway
             else
             if (_mCurrentFrame < 0)
             {
+                AtEnd = true;
+
                 if (Loop)
                 {
                     _mTime = (float)(_mNbFrames -1) / _mFps;

@@ -11,6 +11,7 @@ namespace PhareAway
     {
         public string mFileBase = "";
         public string[] mSprites = null;
+        public SpriteParameters mExplosionSpr = new SpriteParameters();
         private int _mNbObstacles = 1;
         private int _mNbSprites = 1;
         public float mDepth = 0.5f;
@@ -145,7 +146,7 @@ namespace PhareAway
             {
                 _mObstacleList[i].Update(_Dt);
 
-                if (_mObstacleList[i].GetPosition().Y >= _mParams.mYMax)
+                if (_mObstacleList[i].GetPosition().Y >= _mParams.mYMax || _mObstacleList[i].mState == Obstacle.State.Dead)
                     FreeObstacle(i);
             }
         }
@@ -174,7 +175,9 @@ namespace PhareAway
         //-----------------------------------
         private void UpdateLaunchObstacles(float _Dt)
         {
-            if (_mNbActiveObstacles < _mParams.NbObstacles && _mRand.Next(0, (int)(_mParams.mObstacleProbaA + _mParams.mObstacleProbaB * Timer.Singleton.Time) - 1) == 0)
+            if (_mNbActiveObstacles < _mParams.NbObstacles &&
+                _mRand.Next(0, (int)(_mParams.mObstacleProbaA + _mParams.mObstacleProbaB * Timer.Singleton.Time) - 1) == 0 &&
+                CollisionsManager.Singleton.CollideWithHLine(_mParams.mXRange.X, _mParams.mXRange.Y, _mParams.mYInit, (UInt32)CollisionId.Obstacle) == null)
             {
                 _mObstacleList[_mNbActiveObstacles].Init(   _mContentManager,
                                                             _mParams.mFileBase + _mParams.mSprites[_mRand.Next(0, _mParams.NbSprites-1)],
@@ -196,6 +199,23 @@ namespace PhareAway
             obs.Visible = false;
 
             _mNbActiveObstacles--;
+        }
+
+        public bool ExplodeObstacle (BoundingBox _BBox)
+        {
+            if (_BBox == null)
+                return false;
+
+            for (int i = _mNbActiveObstacles - 1; i >= 0; i--)
+            {
+                if (_mObstacleList[i].BoundingBox == _BBox)
+                {
+                    _mObstacleList[i].InitExplosion(_mContentManager, _mParams.mFileBase + _mParams.mExplosionSpr.mFileName, _mSceneId, _mParams.mExplosionSpr.mNbFrames, _mParams.mExplosionSpr.mFps);
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

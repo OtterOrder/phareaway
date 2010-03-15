@@ -136,14 +136,10 @@ namespace PhareAway
             if (InputManager.Singleton.IsKeyPressed(_mInputParams.mUp))
                 _mSpeed.Y = -_mGameParams.mYSpeed;
 
-            if (CollisionsManager.Singleton.Collide(_mSprLighthouse, (UInt32)CollisionId.Obstacle, Vector2.Zero, true) != null)
-            {
-                _mSprJetEngine[1].mVisible = true;
-            }
-            else
-            {
-                _mSprJetEngine[1].mVisible = false;
-            }
+            if (InputManager.Singleton.IsKeyJustPressed(_mInputParams.mJump))
+                FlashManager.Singleton.CreateFlash(_mPosition.X, _mPosition.Y - (float)_mSprLighthouse.Height);
+
+            ObstacleManager.Singleton.ExplodeObstacle(CollisionsManager.Singleton.Collide(_mSprLighthouse, (UInt32)CollisionId.Obstacle, Vector2.Zero, true));
         }
     }
 }
