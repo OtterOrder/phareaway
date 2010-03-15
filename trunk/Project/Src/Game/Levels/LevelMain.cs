@@ -58,6 +58,7 @@ namespace PhareAway
             ObstacleManager.Singleton.Update(_Dt);
 
             _mLighthouse.Update(_Dt);
+            FlashManager.Singleton.Update(_Dt);
 
 
             _mCamArchi.mFocus = _mArchi.GetPosition();
@@ -506,7 +507,7 @@ namespace PhareAway
             _mLighthouse = new Lighthouse();
 
             LighthouseParameters LHParams = new LighthouseParameters();
-            LHParams.mDepth = 0.3f;
+            LHParams.mDepth = 0.5f;
             LHParams.mFileBase = "Graphics/Sprites/Outside/Lighthouse/";
 
             LHParams.mSprLightouse.mFileName = "Lighthouse";
@@ -526,8 +527,20 @@ namespace PhareAway
             _mLighthouse.Init(_mContent, LHParams, _mSceneOutside);
 
 
+
+            FlashesParameters FParams = new FlashesParameters();
+            FParams.mDepth = 0.4f;
+            FParams.mFileBase = "Graphics/Sprites/Outside/Lighthouse/";
+            FParams.mFileName = "Flash";
+            FParams.mSpeed = -0.3f;
+            FParams.mYMin = 0.0f;
+
+            FlashManager.Singleton.Initialize(FParams, _mContent, _mSceneOutside);
+
+
             ObstaclesParameters ObsParams = new ObstaclesParameters(10, 11);
             ObsParams.mFileBase = "Graphics/Sprites/Outside/Obstacles/";
+            ObsParams.mDepth = 0.45f;
             ObsParams.mSprites[0] = "Obstacle_01";
             ObsParams.mSprites[1] = "Obstacle_02";
             ObsParams.mSprites[2] = "Obstacle_03";
@@ -543,6 +556,9 @@ namespace PhareAway
             ObsParams.mYInit = -10.0f;
             ObsParams.mYMax = (float)PhareAwayGame.mBackBufferHeight + 20.0f;
             ObsParams.mSpeedA = 0.1f;
+            ObsParams.mExplosionSpr.mFileName = "Explosion";
+            ObsParams.mExplosionSpr.mFps = 20.0f;
+            ObsParams.mExplosionSpr.mNbFrames = 7;
 
             ObstacleManager.Singleton.Initialize(ObsParams, _mContent, _mSceneOutside);
 

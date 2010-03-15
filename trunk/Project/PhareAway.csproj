@@ -84,6 +84,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Src\Game\Flash.cs" />
+    <Compile Include="Src\Game\FlashManager.cs" />
     <Compile Include="Src\Game\Gate\Gate.cs" />
     <Compile Include="Src\Game\Gate\GateManager.cs" />
     <Compile Include="Src\Game\Levels\Level.cs" />

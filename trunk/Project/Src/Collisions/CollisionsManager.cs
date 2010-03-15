@@ -173,5 +173,27 @@ namespace PhareAway
 
             return null;
         }
+
+
+        //-------------------------------------------------------------------------
+        public BoundingBox CollideWithHLine(float _X1, float _X2, float _Y, UInt32 _Type)
+        {
+            BBoxList lList = GetList(_Type);
+
+            if (lList == null)
+                return null;
+
+            lList.Update();
+
+            IEnumerator<BoundingBox> ItBBox = lList.mList.GetEnumerator();
+            ItBBox.Reset();
+            while (ItBBox.MoveNext())
+            {
+                if (ItBBox.Current.CollideWithHLine(_X1, _X2, _Y))
+                    return ItBBox.Current;
+            }
+
+            return null;
+        }
     }
 }
