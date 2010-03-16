@@ -363,8 +363,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Graphics\Sprites\Menu\Credit_0.png">
-      <Name>Credit_0</Name>
+    <Compile Include="Graphics\Sprites\Menu\Credits2.png">
+      <Name>Credits2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
