@@ -108,11 +108,10 @@ namespace PhareAway
                 switch(_mIDChoice)
                 {
                     case 0: _mGame.ChangeLevel(LevelName.Level_Main); break;
-                    case 1:  break;
-                    case 2:  break;
-                    case 3:  break;
+                    case 1: _mGame.ChangeLevel(LevelName.Level_Tuto); break;
+                    case 2: _mGame.ChangeLevel(LevelName.Level_Credits); break;
+                    case 3: _mGame.Exit(); break;
                 }
-               
             }
         }
 

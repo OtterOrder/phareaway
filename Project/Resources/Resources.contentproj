@@ -356,6 +356,20 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Graphics\Sprites\Menu\Tuto_0.png">
+      <Name>Tuto_0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Graphics\Sprites\Menu\Credit_0.png">
+      <Name>Credit_0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="Sounds\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
