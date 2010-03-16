@@ -14,7 +14,8 @@ namespace PhareAway
         Level_Logos,
         Level_Menu,
         Level_Tuto,
-        Level_Main,        
+        Level_Main,    
+        Level_Credits,
     }
 
     public enum CollisionId
@@ -40,6 +41,7 @@ namespace PhareAway
         private Level                 _mMenuLevel;
         private Level                 _mLogosLevel;
         private Level                 _mTutoLevel;
+        private Level                 _mCreditsLevel;
 
         public const int mBackBufferWidth = 1280;
         public const int mBackBufferHeight = 720;
@@ -68,6 +70,8 @@ namespace PhareAway
             _mLogosLevel.Init();
             _mTutoLevel = new LevelTuto(this, _mContent);
             _mTutoLevel.Init();
+            _mCreditsLevel = new LevelCredits(this, _mContent);
+            _mCreditsLevel.Init();
 
             switch (_mStartLevel)
             {
@@ -79,6 +83,8 @@ namespace PhareAway
                     _mCurrentLevel = _mLogosLevel; break;
                 case LevelName.Level_Tuto:
                     _mCurrentLevel = _mTutoLevel; break;
+                case LevelName.Level_Credits:
+                    _mCurrentLevel = _mCreditsLevel; break;
             }
         }
 
@@ -120,6 +126,8 @@ namespace PhareAway
                     _mCurrentLevel = _mLogosLevel; break;
                 case LevelName.Level_Tuto:
                     _mCurrentLevel = _mTutoLevel; break;
+                case LevelName.Level_Credits:
+                    _mCurrentLevel = _mCreditsLevel; break;
             }
         }
     }

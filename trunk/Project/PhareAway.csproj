@@ -89,6 +89,7 @@
     <Compile Include="Src\Game\Gate\Gate.cs" />
     <Compile Include="Src\Game\Gate\GateManager.cs" />
     <Compile Include="Src\Game\Levels\Level.cs" />
+    <Compile Include="Src\Game\Levels\LevelCredits.cs" />
     <Compile Include="Src\Game\Levels\LevelLogos.cs" />
     <Compile Include="Src\Game\Levels\LevelMenu.cs" />
     <Compile Include="Src\Game\Levels\LevelTuto.cs" />
