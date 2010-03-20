@@ -119,9 +119,11 @@ namespace PhareAway
                 _mSprites[i].mOrigin = new Vector2((float)_mSprites[i].Width / 2.0f, (float)_mSprites[i].Height);
                 _mSprites[i].SetBoundingBox(_mCollisionId, new Vector2(0.0f, 0.0f), new Vector2(_mSprites[i].Width, _mSprites[i].Height));
                 _mSprites[i].mVisible = false;
+                _mSprites[i].GetBoundingBox().Active = false;
             }
 
             _mSprites[(int)_mState].mVisible = true;
+            _mSprites[(int)_mState].GetBoundingBox().Active = false;
 
 
             _mMachinesSprites = new Sprite[PhareAwayGame.NbMachines];
@@ -140,6 +142,7 @@ namespace PhareAway
                 _mMachinesSprites[i].mOrigin = new Vector2((float)_mMachinesSprites[i].Width / 2.0f, (float)_mMachinesSprites[i].Height);
                 _mMachinesSprites[i].SetBoundingBox(_mCollisionId, new Vector2(0.0f, 0.0f), new Vector2(_mMachinesSprites[i].Width, _mMachinesSprites[i].Height));
                 _mMachinesSprites[i].mVisible = false;
+                _mMachinesSprites[i].GetBoundingBox().Active = false;
             }
 
             _mGameParams = _Parameters.mGameParams;
@@ -169,10 +172,12 @@ namespace PhareAway
             int Idx = (int)_State;
 
             GetCurrentSprite().mVisible = false;
+            GetCurrentSprite().GetBoundingBox().Active = false;
             _mSprites[Idx].mVisible = true;
             _mSprites[Idx].mPosition = GetCurrentSprite().mPosition;
             _mSprites[Idx].mScale = GetCurrentSprite().mScale;
             _mSprites[Idx].mFlip = GetCurrentSprite().mFlip;
+            _mSprites[Idx].GetBoundingBox().Active = true;
 
             if (_mSprites[Idx].AnimPlayer != null)
             {
@@ -186,9 +191,11 @@ namespace PhareAway
             int Idx = (int)_State;
 
             GetCurrentSprite().mVisible = false;
+            GetCurrentSprite().GetBoundingBox().Active = false;
             _mMachinesSprites[Idx].mVisible = true;
             _mMachinesSprites[Idx].mPosition = GetCurrentSprite().mPosition;
             _mMachinesSprites[Idx].mScale = GetCurrentSprite().mScale;
+            _mMachinesSprites[Idx].GetBoundingBox().Active = true;
 
             if (_mMachinesSprites[Idx].AnimPlayer != null)
             {
@@ -224,8 +231,7 @@ namespace PhareAway
             }
 
             if (_mState != State.Climb &&
-                _mState != State.Machine /*&&
-                _mState != State.MachineWait*/)
+                _mState != State.Machine)
             {
                 UpdatePhysique(_Dt);
                 UpdateDisplacement();
@@ -290,6 +296,10 @@ namespace PhareAway
             {
                 case MachineId.Pipes:
                     SetCurrentSprite(MachineId.Pipes);
+                    break;
+
+                case MachineId.Zeus:
+                    SetCurrentSprite(MachineId.Zeus);
                     break;
             }
 

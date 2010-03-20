@@ -10,6 +10,9 @@ namespace PhareAway
         public SpriteParameters mSprite = new SpriteParameters();
         public float mDepth = 0.5f;
 
+        public Vector2 mBBoxSize;
+        public Vector2 mBBoxOffset = Vector2.Zero;
+
         public Vector2 mPosition;
 
         public float mHealthMax = 100.0f;
@@ -44,7 +47,7 @@ namespace PhareAway
             _mSprite = SceneManager.Singleton.GetNewSprite(_mParams.mSprite.mFileName, _ContentManager, _SceneId, _Params.mSprite.mNbFrames, 0.0f);
             _mSprite.Depth = _mParams.mDepth;
             _mSprite.mPosition = _mParams.mPosition;
-            _mSprite.SetBoundingBox((UInt32)CollisionId.Machine, Vector2.Zero, new Vector2(_mSprite.Width, _mSprite.Height));
+            _mSprite.SetBoundingBox((UInt32)CollisionId.Machine, _mParams.mBBoxOffset, _mParams.mBBoxSize);
 
             if (_mSprite.AnimPlayer != null)
                 _mSprite.AnimPlayer.Play = false;

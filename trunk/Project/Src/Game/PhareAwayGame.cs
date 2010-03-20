@@ -33,12 +33,13 @@ namespace PhareAway
     public enum MachineId
     {
         None = -1,
-        Pipes = 0
+        Pipes = 0,
+        Zeus = 1
     }
 
     public class PhareAwayGame : Microsoft.Xna.Framework.Game
     {
-        public static int NbMachines = 1;
+        public static int NbMachines = 2;
 
         private GraphicsDeviceManager _mGraphics;
         private SpriteBatch           _mSpriteBatch;
