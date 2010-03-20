@@ -160,11 +160,11 @@ namespace PhareAway
             switch (_State)
             {
                 case State.Wait:
-                    _mNextStateTime = (float)_mRand.NextDouble() * (_mParams.mStartTimeAMax - _mParams.mStartTimeAMin) + _mParams.mStartTimeAMin + _mParams.mStartTimeB * Timer.Singleton.Time;
+                    _mNextStateTime = (float)_mRand.NextDouble() * (_mParams.mStartTimeAMax - _mParams.mStartTimeAMin) + _mParams.mStartTimeAMin + _mParams.mStartTimeB * Timer.Singleton.Seconds;
                     break;
 
                 case State.LaunchObstacles:
-                    _mNextStateTime = (float)_mRand.NextDouble() * (_mParams.mEndTimeAMax - _mParams.mEndTimeAMin) + _mParams.mEndTimeAMin + _mParams.mEndTimeB * Timer.Singleton.Time;
+                    _mNextStateTime = (float)_mRand.NextDouble() * (_mParams.mEndTimeAMax - _mParams.mEndTimeAMin) + _mParams.mEndTimeAMin + _mParams.mEndTimeB * Timer.Singleton.Seconds;
                     break;
             }
 
@@ -176,14 +176,14 @@ namespace PhareAway
         private void UpdateLaunchObstacles(float _Dt)
         {
             if (_mNbActiveObstacles < _mParams.NbObstacles &&
-                _mRand.Next(0, (int)(_mParams.mObstacleProbaA + _mParams.mObstacleProbaB * Timer.Singleton.Time) - 1) == 0 &&
+                _mRand.Next(0, (int)(_mParams.mObstacleProbaA + _mParams.mObstacleProbaB * Timer.Singleton.Seconds) - 1) == 0 &&
                 CollisionsManager.Singleton.CollideWithHLine(_mParams.mXRange.X, _mParams.mXRange.Y, _mParams.mYInit, (UInt32)CollisionId.Obstacle) == null)
             {
                 _mObstacleList[_mNbActiveObstacles].Init(   _mContentManager,
                                                             _mParams.mFileBase + _mParams.mSprites[_mRand.Next(0, _mParams.NbSprites-1)],
                                                             _mSceneId,
                                                             _mParams.mDepth,
-                                                            _mParams.mSpeedA + _mParams.mSpeedB * Timer.Singleton.Time,
+                                                            _mParams.mSpeedA + _mParams.mSpeedB * Timer.Singleton.Seconds,
                                                             _mParams.mXRange.X + (_mParams.mXRange.Y - _mParams.mXRange.X) * (float)_mRand.NextDouble(),
                                                             _mParams.mYInit);
                 _mNbActiveObstacles++;

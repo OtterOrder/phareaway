@@ -26,27 +26,34 @@ namespace PhareAway
 
     public class InputParameters
     {
-        public Keys mRight = 0;
-        public Keys mLeft  = 0;
-        public Keys mUp    = 0;
-        public Keys mDown  = 0;
-        public Keys mJump  = 0;
+        public Keys mRight  = 0;
+        public Keys mLeft   = 0;
+        public Keys mUp     = 0;
+        public Keys mDown   = 0;
+        public Keys mJump   = 0;
+        public Keys mAction = 0;
     }
 
     public class CharacterParameters
     {
         public string    mFileBase = "";
         public SpriteParameters[] mSpritesParams = null;
+        public SpriteParameters[] mMachinesSpritesParams = null;
         public CGameParameters mGameParams = new CGameParameters();
         public InputParameters mInputParams = new InputParameters();
         public float mDepth = 0.5f;
+        public UInt32 mCollisionId;
 
         public CharacterParameters ()
         {
             mSpritesParams = new SpriteParameters[Character.NbSprites];
+            mMachinesSpritesParams = new SpriteParameters[PhareAwayGame.NbMachines];
 
             for (int i = 0; i < Character.NbSprites; i++)
                 mSpritesParams[i] = new SpriteParameters();
+
+            for (int i = 0; i < PhareAwayGame.NbMachines; i++)
+                mMachinesSpritesParams[i] = new SpriteParameters();
         }
     }
 
@@ -61,24 +68,30 @@ namespace PhareAway
 
         public enum State
         {
-            Idle  = 0,
-            Walk  = 1,
-            Jump  = 2,
-            Fall  = 3,
-            Climb = 4
+            Idle        = 0,
+            Walk        = 1,
+            Jump        = 2,
+            Fall        = 3,
+            Climb       = 4,
+            Machine     = 5,
+            MachineWait = 6
         }
 
-        public bool         mActive = true;
+        public bool             mActive = true;
 
-        private State       _mState = (int)State.Idle;
+        private State           _mState = State.Idle;
+        private MachineId       _mMachineState = MachineId.None;
 
-        private Sprite[]    _mSprites = null;
+        private Sprite[]        _mSprites = null;
+        private Sprite[]        _mMachinesSprites = null;
 
-        public  float       mGravityValue = 0.01f;
-        private float       _mGravity = 0.0f;
-        private Vector2      _mPosition = new Vector2();
+        public  float           mGravityValue = 0.01f;
+        private float           _mGravity = 0.0f;
+        private Vector2         _mPosition = new Vector2();
 
-        private Vector2     _mSpeed = new Vector2();
+        private Vector2         _mSpeed = new Vector2();
+
+        private UInt32          _mCollisionId;
 
         //-------------------------------------------------------------------------
         public Character()
@@ -88,6 +101,8 @@ namespace PhareAway
         //-------------------------------------------------------------------------
         public void Init(ContentManager _ContentManager, CharacterParameters _Parameters, UInt32 _SceneId)
         {
+            _mCollisionId = _Parameters.mCollisionId;
+
             _mSprites = new Sprite[NbSprites];
 
             for (int i = 0; i < NbSprites; i++)
@@ -102,13 +117,32 @@ namespace PhareAway
 
                 _mSprites[i].Depth = _Parameters.mDepth;
                 _mSprites[i].mOrigin = new Vector2((float)_mSprites[i].Width / 2.0f, (float)_mSprites[i].Height);
-                _mSprites[i].SetBoundingBox((UInt32)CollisionId.Character, new Vector2(0.0f, 0.0f), new Vector2(_mSprites[i].Width, _mSprites[i].Height));
+                _mSprites[i].SetBoundingBox(_mCollisionId, new Vector2(0.0f, 0.0f), new Vector2(_mSprites[i].Width, _mSprites[i].Height));
                 _mSprites[i].mVisible = false;
             }
 
             _mSprites[(int)_mState].mVisible = true;
 
-            _mGameParams  = _Parameters.mGameParams;
+
+            _mMachinesSprites = new Sprite[PhareAwayGame.NbMachines];
+
+            for (int i = 0; i < PhareAwayGame.NbMachines; i++)
+            {
+                _mMachinesSprites[i] = SceneManager.Singleton.GetNewSprite( _Parameters.mFileBase + _Parameters.mMachinesSpritesParams[i].mFileName,
+                                                                            _ContentManager,
+                                                                            _SceneId,
+                                                                            _Parameters.mMachinesSpritesParams[i].mNbFrames,
+                                                                            _Parameters.mMachinesSpritesParams[i].mFps);
+                if (_mMachinesSprites[i].AnimPlayer != null)
+                    _mMachinesSprites[i].AnimPlayer.Loop = _Parameters.mMachinesSpritesParams[i].mLoop;
+
+                _mMachinesSprites[i].Depth = _Parameters.mDepth;
+                _mMachinesSprites[i].mOrigin = new Vector2((float)_mMachinesSprites[i].Width / 2.0f, (float)_mMachinesSprites[i].Height);
+                _mMachinesSprites[i].SetBoundingBox(_mCollisionId, new Vector2(0.0f, 0.0f), new Vector2(_mMachinesSprites[i].Width, _mMachinesSprites[i].Height));
+                _mMachinesSprites[i].mVisible = false;
+            }
+
+            _mGameParams = _Parameters.mGameParams;
             _mInputParams = _Parameters.mInputParams;
         }
 
@@ -119,7 +153,10 @@ namespace PhareAway
 
         private Sprite GetCurrentSprite()
         {
-            return _mSprites[(int)_mState];
+            if (_mState != State.Machine && _mState != State.MachineWait)
+                return _mSprites[(int)_mState];
+            else
+                return _mMachinesSprites[(int)_mMachineState];
         }
 
         private Sprite GetSprite(State _State)
@@ -141,6 +178,22 @@ namespace PhareAway
             {
                 _mSprites[Idx].AnimPlayer.CurrentFrame = 0;
                 _mSprites[Idx].AnimPlayer.Play = true;
+            }
+        }
+
+        private void SetCurrentSprite(MachineId _State)
+        {
+            int Idx = (int)_State;
+
+            GetCurrentSprite().mVisible = false;
+            _mMachinesSprites[Idx].mVisible = true;
+            _mMachinesSprites[Idx].mPosition = GetCurrentSprite().mPosition;
+            _mMachinesSprites[Idx].mScale = GetCurrentSprite().mScale;
+
+            if (_mMachinesSprites[Idx].AnimPlayer != null)
+            {
+                _mMachinesSprites[Idx].AnimPlayer.Restart();
+                _mMachinesSprites[Idx].AnimPlayer.Play = true;
             }
         }
 
@@ -167,28 +220,41 @@ namespace PhareAway
                 UpdateInputs(_Dt);
                 UpdateLadder(_Dt);
                 UpdateGate(_Dt);
+                UpdateMachine();
             }
 
-            if (_mState != State.Climb)
+            if (_mState != State.Climb &&
+                _mState != State.Machine /*&&
+                _mState != State.MachineWait*/)
             {
                 UpdatePhysique(_Dt);
                 UpdateDisplacement();
             }
 
+            if (_mState == State.Machine && GetCurrentSprite().AnimPlayer != null)
+            {
+                _mSpeed = Vector2.Zero;
+                if (GetCurrentSprite().AnimPlayer.AtEnd)
+                    ChangeState(State.MachineWait);
+            }
+
             _mPosition += _mSpeed;
-            _mSprites[(int)_mState].mPosition = _mPosition;
+            GetCurrentSprite().mPosition = _mPosition;
         }
 
         //-----------------------------------
         private void ChangeState(State _State)
         {
-            if (_State == _mState)
+            if (_State == _mState || (_mState == State.Machine && _State != State.MachineWait))
                 return;
 
             switch (_State)
             {
                 case State.Idle:
-                    SetCurrentSprite(State.Idle);
+                    if (_mState == State.MachineWait)
+                        return;
+                    else
+                        SetCurrentSprite(State.Idle);
                     break;
 
                 case State.Walk:
@@ -208,7 +274,28 @@ namespace PhareAway
                     break;
             }
 
+            if (_State != State.MachineWait)
+                _mMachineState = MachineId.None;
+
             _mState = _State;
+        }
+
+        //-----------------------------------
+        private void ChangeState(MachineId _State)
+        {
+            if (_State == _mMachineState && _mState == State.Machine)
+                return;
+
+            switch (_State)
+            {
+                case MachineId.Pipes:
+                    SetCurrentSprite(MachineId.Pipes);
+                    break;
+            }
+
+            ChangeState(State.Machine);
+
+            _mMachineState = _State;
         }
 
         //-----------------------------------
@@ -222,7 +309,7 @@ namespace PhareAway
             if (InputManager.Singleton.IsKeyPressed(_mInputParams.mLeft))
                 _mSpeed.X = -_mGameParams.mWalkSpeed * _Dt;
 
-            if (InputManager.Singleton.IsKeyJustPressed(_mInputParams.mJump) && (_mState == State.Idle || _mState == State.Walk))
+            if (InputManager.Singleton.IsKeyJustPressed(_mInputParams.mJump) && (_mState == State.Idle || _mState == State.Walk || _mState == State.MachineWait))
                 _mSpeed.Y = -_mGameParams.mJumpSpeed * _Dt;
         }
 
@@ -388,7 +475,25 @@ namespace PhareAway
                     _mPosition.Y -= 2;
                 }
             }
-            
+        }
+
+        //-----------------------------------
+        private void UpdateMachine()
+        {
+            if (_mState != State.Idle &&
+                _mState != State.Walk &&
+                _mState != State.MachineWait)
+                return;
+
+            if (InputManager.Singleton.IsKeyPressed(_mInputParams.mAction))
+            {
+                Machine machine = MachineManager.Singleton.Collide(_mCollisionId);
+                if (machine != null && _mState != State.Machine)
+                {
+                    ChangeState(machine.Id);
+                    machine.Repair();
+                }
+            }
         }
     }
 }

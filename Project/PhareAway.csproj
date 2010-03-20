@@ -93,6 +93,8 @@
     <Compile Include="Src\Game\Levels\LevelLogos.cs" />
     <Compile Include="Src\Game\Levels\LevelMenu.cs" />
     <Compile Include="Src\Game\Levels\LevelTuto.cs" />
+    <Compile Include="Src\Game\Machine.cs" />
+    <Compile Include="Src\Game\MachineManager.cs" />
     <Compile Include="Src\Utilities\Camera.cs" />
     <Compile Include="Src\Utilities\InputManager.cs" />
     <Compile Include="Src\Game\Lighthouse.cs" />

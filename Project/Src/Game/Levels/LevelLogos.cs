@@ -43,7 +43,7 @@ namespace PhareAway
             _mLogo2.mOrigin = new Vector2(0.0f, 0.0f);
             _mLogo2.mVisible = false;
 
-            _mStartTime = Timer.Singleton.Time;
+            _mStartTime = Timer.Singleton.Seconds;
 
         }
 
@@ -55,7 +55,7 @@ namespace PhareAway
                 ChangeLogo();
             }
 
-            float time = Timer.Singleton.Time;
+            float time = Timer.Singleton.Seconds;
             if(time - _mStartTime > _mLogoTime)
             {
                 ChangeLogo();

@@ -22,7 +22,7 @@ namespace PhareAway
             _mTime = 0.0f;
         }
 
-        public float Time
+        public float Seconds
         {
             get { return _mTime; }
         }
