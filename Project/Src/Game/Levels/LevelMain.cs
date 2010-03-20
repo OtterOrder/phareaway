@@ -420,10 +420,37 @@ namespace PhareAway
 
 
             Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Lightnings", _mContent, _mSceneInside, 6, 5.0f);
-            Spr.Depth = 0.38f;
+            Spr.Depth = 0.6f;
             Spr.mPosition.X = 294.0f;
             Spr.mPosition.Y = 736.0f;
             Spr.AnimPlayer.Loop = true;
+
+            Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/FeedingTray", _mContent, _mSceneInside, 4, 10.0f);
+            Spr.Depth = 0.38f;
+            Spr.mPosition.X = 239.0f;
+            Spr.mPosition.Y = 1197.0f;
+            Spr.AnimPlayer.Loop = true;
+
+            Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/FeedingTray", _mContent, _mSceneInside, 4, 10.0f);
+            Spr.Depth = 0.38f;
+            Spr.mPosition.X = 423.0f;
+            Spr.mPosition.Y = 1197.0f;
+            Spr.AnimPlayer.Loop = true;
+            Spr.mFlip = SpriteEffects.FlipHorizontally;
+
+            Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Hamster", _mContent, _mSceneInside, 4, 10.0f);
+            Spr.Depth = 0.39f;
+            Spr.mPosition.X = 266.0f;
+            Spr.mPosition.Y = 1255.0f;
+            Spr.AnimPlayer.Loop = true;
+
+            Spr = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Inside/Decor/Hamster", _mContent, _mSceneInside, 4, 10.0f);
+            Spr.Depth = 0.39f;
+            Spr.mPosition.X = 430.0f;
+            Spr.mPosition.Y = 1255.0f;
+            Spr.AnimPlayer.Loop = true;
+            Spr.AnimPlayer.CurrentFrame = 1;
+            Spr.mFlip = SpriteEffects.FlipHorizontally;
 
             // Machines
             MachineParameters MParams;
@@ -445,6 +472,26 @@ namespace PhareAway
             MParams.mDepth = 0.6f;
             MParams.mBBoxSize = new Vector2(64.0f, 123.0f);
             MParams.mBBoxOffset = new Vector2(-20.5f, 27.0f);
+            MachineManager.Singleton.AddMachine(_mContent, _mSceneInside, MParams);
+
+            MParams = new MachineParameters();
+            MParams.mId = MachineId.EngineL;
+            MParams.mPosition = new Vector2(257.0f, 1254.0f);
+            MParams.mSprite.mFileName = "Graphics/Sprites/Inside/Machines/Engine";
+            MParams.mSprite.mNbFrames = 13;
+            MParams.mDepth = 0.2f;
+            MParams.mBBoxSize = new Vector2(49.0f, 33.0f);
+            MParams.mBBoxOffset = new Vector2(-18.0f, -57.0f);
+            MachineManager.Singleton.AddMachine(_mContent, _mSceneInside, MParams);
+
+            MParams = new MachineParameters();
+            MParams.mId = MachineId.EngineR;
+            MParams.mPosition = new Vector2(554.0f, 1254.0f);
+            MParams.mSprite.mFileName = "Graphics/Sprites/Inside/Machines/Engine";
+            MParams.mSprite.mNbFrames = 13;
+            MParams.mDepth = 0.2f;
+            MParams.mBBoxSize = new Vector2(49.0f, 33.0f);
+            MParams.mBBoxOffset = new Vector2(-27.0f, -57.0f);
             MachineManager.Singleton.AddMachine(_mContent, _mSceneInside, MParams);
         }
 
@@ -503,6 +550,16 @@ namespace PhareAway
             ArchiParams.mMachinesSpritesParams[(int)MachineId.Zeus].mFps = 15.0f;
             ArchiParams.mMachinesSpritesParams[(int)MachineId.Zeus].mLoop = false;
 
+            ArchiParams.mMachinesSpritesParams[(int)MachineId.EngineL].mFileName = "Machines/Archi_Engine";
+            ArchiParams.mMachinesSpritesParams[(int)MachineId.EngineL].mNbFrames = 9;
+            ArchiParams.mMachinesSpritesParams[(int)MachineId.EngineL].mFps = 15.0f;
+            ArchiParams.mMachinesSpritesParams[(int)MachineId.EngineL].mLoop = false;
+
+            ArchiParams.mMachinesSpritesParams[(int)MachineId.EngineR].mFileName = "Machines/Archi_Engine";
+            ArchiParams.mMachinesSpritesParams[(int)MachineId.EngineR].mNbFrames = 9;
+            ArchiParams.mMachinesSpritesParams[(int)MachineId.EngineR].mFps = 15.0f;
+            ArchiParams.mMachinesSpritesParams[(int)MachineId.EngineR].mLoop = false;
+
             ArchiParams.mInputParams.mRight = Keys.D;
             ArchiParams.mInputParams.mLeft = Keys.Q;
             ArchiParams.mInputParams.mUp = Keys.Z;
@@ -542,6 +599,16 @@ namespace PhareAway
             PhiloParams.mMachinesSpritesParams[(int)MachineId.Zeus].mNbFrames = 8;
             PhiloParams.mMachinesSpritesParams[(int)MachineId.Zeus].mFps = 15.0f;
             PhiloParams.mMachinesSpritesParams[(int)MachineId.Zeus].mLoop = false;
+
+            PhiloParams.mMachinesSpritesParams[(int)MachineId.EngineL].mFileName = "Machines/Philo_Engine";
+            PhiloParams.mMachinesSpritesParams[(int)MachineId.EngineL].mNbFrames = 9;
+            PhiloParams.mMachinesSpritesParams[(int)MachineId.EngineL].mFps = 15.0f;
+            PhiloParams.mMachinesSpritesParams[(int)MachineId.EngineL].mLoop = false;
+
+            PhiloParams.mMachinesSpritesParams[(int)MachineId.EngineR].mFileName = "Machines/Philo_Engine";
+            PhiloParams.mMachinesSpritesParams[(int)MachineId.EngineR].mNbFrames = 9;
+            PhiloParams.mMachinesSpritesParams[(int)MachineId.EngineR].mFps = 15.0f;
+            PhiloParams.mMachinesSpritesParams[(int)MachineId.EngineR].mLoop = false;
 
             PhiloParams.mInputParams.mRight = Keys.M;
             PhiloParams.mInputParams.mLeft = Keys.K;
