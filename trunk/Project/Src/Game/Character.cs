@@ -292,7 +292,7 @@ namespace PhareAway
             if (_State == _mMachineState && _mState == State.Machine)
                 return;
 
-            switch (_State)
+            /*switch (_State)
             {
                 case MachineId.Pipes:
                     SetCurrentSprite(MachineId.Pipes);
@@ -301,7 +301,9 @@ namespace PhareAway
                 case MachineId.Zeus:
                     SetCurrentSprite(MachineId.Zeus);
                     break;
-            }
+            }*/
+
+            SetCurrentSprite(_State);
 
             ChangeState(State.Machine);
 

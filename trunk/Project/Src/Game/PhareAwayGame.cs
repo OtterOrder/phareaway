@@ -34,12 +34,14 @@ namespace PhareAway
     {
         None = -1,
         Pipes = 0,
-        Zeus = 1
+        Zeus = 1,
+        EngineL = 2,
+        EngineR = 3
     }
 
     public class PhareAwayGame : Microsoft.Xna.Framework.Game
     {
-        public static int NbMachines = 2;
+        public static int NbMachines = 4;
 
         private GraphicsDeviceManager _mGraphics;
         private SpriteBatch           _mSpriteBatch;
