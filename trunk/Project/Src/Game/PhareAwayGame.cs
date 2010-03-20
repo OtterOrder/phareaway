@@ -20,16 +20,26 @@ namespace PhareAway
 
     public enum CollisionId
     {
-        Character,
+        Archi,
+        Philo,
         Ground,
         Ladder,
         Lighthouse,
         Obstacle,
-        Gate
+        Gate,
+        Machine
+    }
+
+    public enum MachineId
+    {
+        None = -1,
+        Pipes = 0
     }
 
     public class PhareAwayGame : Microsoft.Xna.Framework.Game
     {
+        public static int NbMachines = 1;
+
         private GraphicsDeviceManager _mGraphics;
         private SpriteBatch           _mSpriteBatch;
         private ContentManager        _mContent;

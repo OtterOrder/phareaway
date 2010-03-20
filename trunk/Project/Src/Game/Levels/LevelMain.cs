@@ -60,6 +60,8 @@ namespace PhareAway
             _mLighthouse.Update(_Dt);
             FlashManager.Singleton.Update(_Dt);
 
+            MachineManager.Singleton.Update(_Dt);
+
 
             _mCamArchi.mFocus = _mArchi.GetPosition();
             _mCamPhilo.mFocus = _mPhilo.GetPosition();
@@ -416,6 +418,15 @@ namespace PhareAway
             bgDecor.mPosition.X = 100.0f;
             bgDecor.mPosition.Y = 100.0f;
 
+            // Machines
+            MachineParameters MParams = new MachineParameters();
+            MParams.mId = MachineId.Pipes;
+            MParams.mPosition = new Vector2(364.0f, 932.0f);
+            MParams.mSprite.mFileName = "Graphics/Sprites/Inside/Machines/Pipes";
+            MParams.mSprite.mNbFrames = 11;
+            MParams.mDepth = 0.6f;
+
+            MachineManager.Singleton.AddMachine(_mContent, _mSceneInside, MParams);
         }
 
         private void InitDecorOutside()
@@ -432,7 +443,6 @@ namespace PhareAway
             Spr.Depth = 0.1f;
             Spr.mPosition = new Vector2(415.0f, 0.0f);
             Spr.mScale = new Vector2(2.0f, 720.0f);
-
         }
 
         private void InitPlayers()
@@ -444,6 +454,7 @@ namespace PhareAway
 
             // Init Players
             CharacterParameters ArchiParams = new CharacterParameters();
+            ArchiParams.mCollisionId = (UInt32)CollisionId.Archi;
             ArchiParams.mDepth = 0.4f;
             ArchiParams.mFileBase = "Graphics/Sprites/Inside/Characters/Archi/";
 
@@ -463,15 +474,22 @@ namespace PhareAway
             ArchiParams.mSpritesParams[4].mFps = 15.0f;
             ArchiParams.mSpritesParams[4].mLoop = true;
 
+            ArchiParams.mMachinesSpritesParams[(int)MachineId.Pipes].mFileName = "Machines/Archi_Pipes";
+            ArchiParams.mMachinesSpritesParams[(int)MachineId.Pipes].mNbFrames = 4;
+            ArchiParams.mMachinesSpritesParams[(int)MachineId.Pipes].mFps = 10.0f;
+            ArchiParams.mMachinesSpritesParams[(int)MachineId.Pipes].mLoop = false;
+
             ArchiParams.mInputParams.mRight = Keys.D;
             ArchiParams.mInputParams.mLeft = Keys.Q;
             ArchiParams.mInputParams.mUp = Keys.Z;
             ArchiParams.mInputParams.mDown = Keys.S;
             ArchiParams.mInputParams.mJump = Keys.LeftShift;
+            ArchiParams.mInputParams.mAction = Keys.E;
 
             _mArchi.Init(_mContent, ArchiParams, _mSceneInside);
 
             CharacterParameters PhiloParams = new CharacterParameters();
+            PhiloParams.mCollisionId = (UInt32)CollisionId.Philo;
             PhiloParams.mDepth = 0.41f;
             PhiloParams.mFileBase = "Graphics/Sprites/Inside/Characters/Philo/";
 
@@ -491,11 +509,17 @@ namespace PhareAway
             PhiloParams.mSpritesParams[4].mFps = 15.0f;
             PhiloParams.mSpritesParams[4].mLoop = true;
 
+            PhiloParams.mMachinesSpritesParams[(int)MachineId.Pipes].mFileName = "Machines/Philo_Pipes";
+            PhiloParams.mMachinesSpritesParams[(int)MachineId.Pipes].mNbFrames = 4;
+            PhiloParams.mMachinesSpritesParams[(int)MachineId.Pipes].mFps = 10.0f;
+            PhiloParams.mMachinesSpritesParams[(int)MachineId.Pipes].mLoop = false;
+
             PhiloParams.mInputParams.mRight = Keys.M;
             PhiloParams.mInputParams.mLeft = Keys.K;
             PhiloParams.mInputParams.mUp = Keys.O;
             PhiloParams.mInputParams.mDown = Keys.L;
             PhiloParams.mInputParams.mJump = Keys.N;
+            PhiloParams.mInputParams.mAction = Keys.P;
 
             _mPhilo.Init(_mContent, PhiloParams, _mSceneInside);
 

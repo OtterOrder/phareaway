@@ -88,7 +88,14 @@ namespace PhareAway
         public int CurrentFrame
         {
             get { return _mCurrentFrame; }
-            set { _mCurrentFrame = Math.Min(Math.Max(value, 0), (int)_mNbFrames - 1); }
+            set { _mCurrentFrame = Math.Min(Math.Max(value, 0), (int)_mNbFrames - 1); /*_mTime = (float)_mCurrentFrame / _mFps;*/ }
+        }
+
+        public void Restart ()
+        {
+            _mCurrentFrame = 0;
+            _mTime = 0.0f;
+            AtEnd = false;
         }
 
         //-------------------------------------------------------------------------
