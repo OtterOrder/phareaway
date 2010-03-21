@@ -1,0 +1,69 @@
+---PRESENTATION DU PHARE
+-Gauche & droite : Rien
+-Centre : "phare neutre"
+
+---EXPLICATION DU BUT DU JEU
+-Gauche & droite : Rien
+-Centre : phare neutre
+
+---COMMENT ENTRER DANS LE COCKPIT
+-Gauche & droite : "utiliser le cockpit"
+-Centre : phare neutre
+
+---DEPLACER LE PHARE
+-Gauche & droite : "conduire le phare"
+-Centre : phare déplacer-tirer
+
+---TIRER & RECHARCHER (2 Etapes)
+-Gauche & droite : "énergie zeus diminue" puis "prier"
+-Centre : tir +++ puis "phare neutre"
+
+---FIN DU JEU
+-Gauche & droite : "les moteurs s'abiment"
+-Centre : "phare se déplace + lentement"
+
+---FIN DU JEU
+-Gauche & droite : "les moteurs sont morts +"
+-Centre : "phare explose(temps)"
+
+---REMPLIR LES MOTEURS (2 Etapes)
+-Gauche & droite : "prendre à manger" puis "nourrir les taupes"
+-Centre : "phare neutre"
+
+---LES MOTEURS S'ABIMENT (2 Etapes)
+-Gauche & droite : "chaudière s'abime (lent)" puis "réparer la chaudière"
+-Centre : "phare neutre"
+
+---COLLISION 1 -CHAUDIERE S'ABIME +
+-Gauche & droite : "Chaudière s'abime (crash)" 
+-Centre : "Se prend UNE météorite"
+
+---LA CHAUDIERE S'ABIME
+-Gauche & droite :"réparer la chaudière"
+-Centre : "phare neutre"
+
+---COLLISION 2 - PERDRE GRAINES
+-Gauche & droite : "perdre graines" 
+-Centre : "Se prend UNE météorite"
+
+---DESTRUCTION COCKPIT
+-Gauche & droite : "Explosion du cockpit"
+-Centre : "Se prend PLUSIEURS météorite"
+
+---REPARER COCKPIT (2 Etapes)
+-Gauche & droite : "prendre gouvernail" puis "réparer cockpit"
+-Centre : "phare neutre"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
