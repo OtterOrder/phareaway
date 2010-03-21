@@ -19,7 +19,6 @@ namespace PhareAway
         private UInt32 _mSceneLogos;
         private Camera _mDefaultCam;
 
-        private float  _mStartTime;
         private float  _mLogoTime = 3.0f;
 
         public LevelLogos(PhareAwayGame _Game, ContentManager _Content) : base(_Game, _Content)
@@ -43,7 +42,7 @@ namespace PhareAway
             _mLogo2.mOrigin = new Vector2(0.0f, 0.0f);
             _mLogo2.mVisible = false;
 
-            _mStartTime = Timer.Singleton.Seconds;
+            Timer.Singleton.Initialize();
 
         }
 
@@ -55,11 +54,10 @@ namespace PhareAway
                 ChangeLogo();
             }
 
-            float time = Timer.Singleton.Seconds;
-            if(time - _mStartTime > _mLogoTime)
+            if(Timer.Singleton.Seconds > _mLogoTime)
             {
                 ChangeLogo();
-                _mStartTime = time;
+                Timer.Singleton.Initialize();
             }
 
         }

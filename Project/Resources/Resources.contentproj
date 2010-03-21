@@ -291,13 +291,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Graphics\Backgrounds\bg_Menu.png">
-      <Name>bg_Menu</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Graphics\Sprites\Outside\Lighthouse\Flash.png">
       <Name>Flash</Name>
       <Importer>TextureImporter</Importer>
@@ -449,6 +442,13 @@
   <ItemGroup>
     <Compile Include="Graphics\Sprites\Inside\Characters\Philo\Machines\Philo_Engine.png">
       <Name>Philo_Engine</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Graphics\Backgrounds\bg_Menu.png">
+      <Name>bg_Menu</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
