@@ -35,46 +35,46 @@ namespace PhareAway
             _mDefaultCam.Position = new Vector2(0.0f, 0.0f);
 
             _mBgMenu = SceneManager.Singleton.GetNewSprite("Graphics/Backgrounds/bg_Menu", _mContent, _mSceneMenu);
-            _mBgMenu.mPosition = new Vector2(128.0f, 0.0f);
+            _mBgMenu.mPosition = new Vector2(0.0f, 0.0f);
             _mBgMenu.mOrigin = new Vector2(0.0f, 0.0f);
 
             _mMenuSprite = new Sprite[4];
 
             _mMenuSprite[0] = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Menu/NewGame_0", _mContent, _mSceneMenu);
-            _mMenuSprite[0].mPosition = new Vector2(1000.0f, 260.0f);
+            _mMenuSprite[0].mPosition = new Vector2(970.0f, 260.0f);
             _mMenuSprite[0].mOrigin = new Vector2(_mMenuSprite[0].Width, _mMenuSprite[0].Height);
 
             _mMenuSprite[1] = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Menu/HowToPlay_0", _mContent, _mSceneMenu);
-            _mMenuSprite[1].mPosition = new Vector2(1000.0f, 310.0f);
+            _mMenuSprite[1].mPosition = new Vector2(970.0f, 310.0f);
             _mMenuSprite[1].mOrigin = new Vector2(_mMenuSprite[1].Width, _mMenuSprite[1].Height);
 
             _mMenuSprite[2] = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Menu/Credits_0", _mContent, _mSceneMenu);
-            _mMenuSprite[2].mPosition = new Vector2(1000.0f, 346.0f);
+            _mMenuSprite[2].mPosition = new Vector2(970.0f, 346.0f);
             _mMenuSprite[2].mOrigin = new Vector2(_mMenuSprite[2].Width, _mMenuSprite[2].Height);
 
             _mMenuSprite[3] = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Menu/Exit_0", _mContent, _mSceneMenu);
-            _mMenuSprite[3].mPosition = new Vector2(1000.0f, 386.0f);
+            _mMenuSprite[3].mPosition = new Vector2(970.0f, 386.0f);
             _mMenuSprite[3].mOrigin = new Vector2(_mMenuSprite[3].Width, _mMenuSprite[3].Height);
 
             _mMenuSpriteSelect = new Sprite[4];
 
             _mMenuSpriteSelect[0] = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Menu/NewGame_1", _mContent, _mSceneMenu);
-            _mMenuSpriteSelect[0].mPosition = new Vector2(1000.0f, 260.0f);
+            _mMenuSpriteSelect[0].mPosition = new Vector2(970.0f, 260.0f);
             _mMenuSpriteSelect[0].mOrigin = new Vector2(_mMenuSpriteSelect[0].Width, _mMenuSpriteSelect[0].Height);
             _mMenuSpriteSelect[0].mVisible = false;
 
             _mMenuSpriteSelect[1] = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Menu/HowToPlay_1", _mContent, _mSceneMenu);
-            _mMenuSpriteSelect[1].mPosition = new Vector2(1000.0f, 310.0f);
+            _mMenuSpriteSelect[1].mPosition = new Vector2(970.0f, 310.0f);
             _mMenuSpriteSelect[1].mOrigin = new Vector2(_mMenuSpriteSelect[1].Width, _mMenuSpriteSelect[1].Height);
             _mMenuSpriteSelect[1].mVisible = false;
 
             _mMenuSpriteSelect[2] = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Menu/Credits_1", _mContent, _mSceneMenu);
-            _mMenuSpriteSelect[2].mPosition = new Vector2(1000.0f, 346.0f);
+            _mMenuSpriteSelect[2].mPosition = new Vector2(970.0f, 346.0f);
             _mMenuSpriteSelect[2].mOrigin = new Vector2(_mMenuSpriteSelect[2].Width, _mMenuSpriteSelect[2].Height);
             _mMenuSpriteSelect[2].mVisible = false;
 
             _mMenuSpriteSelect[3] = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Menu/Exit_1", _mContent, _mSceneMenu);
-            _mMenuSpriteSelect[3].mPosition = new Vector2(1000.0f, 386.0f);
+            _mMenuSpriteSelect[3].mPosition = new Vector2(970.0f, 386.0f);
             _mMenuSpriteSelect[3].mOrigin = new Vector2(_mMenuSpriteSelect[3].Width, _mMenuSpriteSelect[3].Height);
             _mMenuSpriteSelect[3].mVisible = false;
         }
@@ -84,7 +84,7 @@ namespace PhareAway
             _mMenuSprite[_mIDChoice].mVisible = false;
             _mMenuSpriteSelect[_mIDChoice].mVisible = true;
 
-            if (InputManager.Singleton.IsKeyJustPressed(Keys.S))
+            if (InputManager.Singleton.IsKeyJustPressed(Keys.Down))
             {
                 if (_mIDChoice < 3)
                 {
@@ -93,7 +93,7 @@ namespace PhareAway
                     _mIDChoice++;
                 }
             }
-            if (InputManager.Singleton.IsKeyJustPressed(Keys.Z))
+            if (InputManager.Singleton.IsKeyJustPressed(Keys.Up))
             {
                 if (_mIDChoice > 0)
                 {
