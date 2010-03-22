@@ -15,6 +15,7 @@ namespace PhareAway
         private PhareAwayGame _mGame;
 
         private Sprite _mSprTuto;
+        private Sprite _mCenter;
 
         private UInt32 _mSceneTuto;
         private Camera _mDefaultCam;
@@ -31,9 +32,13 @@ namespace PhareAway
             _mDefaultCam.SetViewportParam(0, 0, 1.0f, 1.0f);
             _mDefaultCam.Position = new Vector2(0.0f, 0.0f);
 
-            _mSprTuto = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Menu/Tuto_bg", _mContent, _mSceneTuto);
+            _mSprTuto = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Tutorial/Tuto_bg", _mContent, _mSceneTuto);
             _mSprTuto.mPosition = new Vector2(0.0f, 0.0f);
             _mSprTuto.mOrigin = new Vector2(0.0f, 0.0f);
+
+            _mCenter = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Tutorial/Phare_neutre", _mContent, _mSceneTuto);
+            _mCenter.mPosition = new Vector2(0.0f, 0.0f);
+            _mCenter.mOrigin = new Vector2(0.0f, 0.0f);
 
         }
 
