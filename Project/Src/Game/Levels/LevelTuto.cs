@@ -36,9 +36,10 @@ namespace PhareAway
             _mSprTuto.mPosition = new Vector2(0.0f, 0.0f);
             _mSprTuto.mOrigin = new Vector2(0.0f, 0.0f);
 
-            _mCenter = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Tutorial/Phare_neutre", _mContent, _mSceneTuto);
-            _mCenter.mPosition = new Vector2(0.0f, 0.0f);
-            _mCenter.mOrigin = new Vector2(0.0f, 0.0f);
+            _mCenter = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Tutorial/Phare_neutre", _mContent, _mSceneTuto, 4, 15.0f);
+            _mCenter.mPosition = new Vector2(640.0f, 360.0f);
+            _mCenter.mOrigin = new Vector2(_mCenter.Width/2.0f, _mCenter.Height/2.0f);
+            _mCenter.AnimPlayer.Loop = true;
 
         }
 
