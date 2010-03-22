@@ -349,20 +349,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Graphics\Sprites\Menu\Tuto_0.png">
-      <Name>Tuto_0</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Graphics\Sprites\Menu\Credits2.png">
-      <Name>Credits2</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Graphics\Sprites\Inside\Machines\Pipes.png">
       <Name>Pipes</Name>
       <Importer>TextureImporter</Importer>
@@ -449,6 +435,20 @@
   <ItemGroup>
     <Compile Include="Graphics\Backgrounds\bg_Menu.png">
       <Name>bg_Menu</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Graphics\Sprites\Menu\Credits16-9.png">
+      <Name>Credits16-9</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Graphics\Sprites\Menu\Tuto_bg.png">
+      <Name>Tuto_bg</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
