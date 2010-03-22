@@ -31,8 +31,8 @@ namespace PhareAway
             _mDefaultCam.SetViewportParam(0, 0, 1.0f, 1.0f);
             _mDefaultCam.Position = new Vector2(0.0f, 0.0f);
 
-            _mSprCredits = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Menu/Credits2", _mContent, _mSceneCredits);
-            _mSprCredits.mPosition = new Vector2(128.0f, 0.0f);
+            _mSprCredits = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Menu/Credits16-9", _mContent, _mSceneCredits);
+            _mSprCredits.mPosition = new Vector2(0.0f, 0.0f);
             _mSprCredits.mOrigin = new Vector2(0.0f, 0.0f);
 
         }
