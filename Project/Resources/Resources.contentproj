@@ -447,8 +447,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Graphics\Sprites\Menu\Tuto_bg.png">
+    <Compile Include="Graphics\Sprites\Tutorial\Tuto_bg.png">
       <Name>Tuto_bg</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Graphics\Sprites\Tutorial\Phare_neutre.png">
+      <Name>Phare_neutre</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
