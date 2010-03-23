@@ -21,7 +21,8 @@ namespace PhareAway
 
         private float  _mLogoTime = 3.0f;
 
-        public LevelLogos(PhareAwayGame _Game, ContentManager _Content) : base(_Game, _Content)
+        public LevelLogos(PhareAwayGame _Game, ContentManager _Content)
+        : base(_Game, _Content)
         {
             _mSceneLogos = SceneManager.Singleton.CreateScene();
             _mGame = _Game;
@@ -43,7 +44,6 @@ namespace PhareAway
             _mLogo2.mVisible = false;
 
             Timer.Singleton.Initialize();
-
         }
 
         public override void Update(float _Dt)

@@ -22,7 +22,8 @@ namespace PhareAway
 
         private int _mIDChoice = 0;
 
-        public LevelMenu(PhareAwayGame _Game, ContentManager _Content) : base(_Game, _Content)
+        public LevelMenu(PhareAwayGame _Game, ContentManager _Content)
+        : base(_Game, _Content)
         {
             _mSceneMenu = SceneManager.Singleton.CreateScene();
             _mGame = _Game;

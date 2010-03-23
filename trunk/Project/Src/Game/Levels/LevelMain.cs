@@ -25,7 +25,8 @@ namespace PhareAway
         private Camera _mCamPhilo;
         private Camera _mCamOutside;
 
-        public LevelMain(PhareAwayGame _Game, ContentManager _Content) : base(_Game, _Content)
+        public LevelMain(PhareAwayGame _Game, ContentManager _Content)
+        : base(_Game, _Content)
         {
             // Scènes 
             _mSceneInside  = SceneManager.Singleton.CreateScene();

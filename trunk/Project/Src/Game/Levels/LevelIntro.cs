@@ -19,7 +19,8 @@ namespace PhareAway
         private UInt32 _mSceneIntro;
         private Camera _mDefaultCam;
 
-        public LevelIntro(PhareAwayGame _Game, ContentManager _Content) : base(_Game, _Content)
+        public LevelIntro(PhareAwayGame _Game, ContentManager _Content)
+        : base(_Game, _Content)
         {
             _mSceneIntro = SceneManager.Singleton.CreateScene();
             _mGame = _Game;
