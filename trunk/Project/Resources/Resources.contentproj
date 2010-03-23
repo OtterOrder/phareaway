@@ -475,7 +475,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Sounds\" />
+    <Compile Include="Sounds\MUSIC__END_3.wav">
+      <Name>MUSIC__END_3</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
