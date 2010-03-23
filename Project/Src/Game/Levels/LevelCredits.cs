@@ -19,7 +19,8 @@ namespace PhareAway
         private UInt32 _mSceneCredits;
         private Camera _mDefaultCam;
 
-        public LevelCredits(PhareAwayGame _Game, ContentManager _Content) : base(_Game, _Content)
+        public LevelCredits(PhareAwayGame _Game, ContentManager _Content)
+        : base(_Game, _Content)
         {
             _mSceneCredits = SceneManager.Singleton.CreateScene();
             _mGame = _Game;
