@@ -115,6 +115,6 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(SolutionDir)Resources\Sounds\Xbox" "$(SolutionDir)$(OutDir)Resources\Sounds\Xbox" /i /d /y</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(SolutionDir)Resources\Sounds\Xbox" "$(SolutionDir)$(OutDir)Resources\Sounds" /i /d /y</PostBuildEvent>
   </PropertyGroup>
 </Project>

@@ -37,7 +37,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\x86\Debug</OutputPath>
-    <DefineConstants>DEBUG;TRACE;WINDOWS</DefineConstants>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoStdLib>true</NoStdLib>
@@ -158,6 +158,6 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(SolutionDir)Resources\Sounds\Win" "$(SolutionDir)$(OutDir)Resources\Sounds\Win" /i /d /y</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(SolutionDir)Resources\Sounds\Win" "$(SolutionDir)$(OutDir)Resources\Sounds" /i /d /y</PostBuildEvent>
   </PropertyGroup>
 </Project>
