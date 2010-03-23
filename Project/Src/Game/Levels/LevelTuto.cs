@@ -19,6 +19,8 @@ namespace PhareAway
         private int         _mCurrentVideo = 0;
         private VideoPlayer _mPlayer = null;
 
+        private SoundEffectInstance SoundInstance;
+
         public LevelTuto(PhareAwayGame _Game, ContentManager _Content)
         : base(_Game, _Content)
         {
@@ -32,14 +34,22 @@ namespace PhareAway
             _mPlayer = new VideoPlayer();
 
             _mPlayer.Play(_mVideos[0]);
+            _mPlayer.IsMuted = true;    ////.
             _mPlayer.IsLooped = true;
             _mPlayer.Pause();
+
+            SoundInstance = _mContent.Load<SoundEffect>("Sounds/MUSIC__END_3").CreateInstance();    ////.
         }
 
         public override void Update(float _Dt)
         {
             if (_mPlayer.State == MediaState.Paused || _mPlayer.State == MediaState.Stopped)
                 _mPlayer.Resume();
+
+            ////.
+            if (SoundInstance.State == SoundState.Paused || SoundInstance.State == SoundState.Stopped)
+                SoundInstance.Resume();
+            ////.
 
             if (InputManager.Singleton.IsKeyJustPressed(Keys.Enter))
             {
