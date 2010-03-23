@@ -15,38 +15,23 @@ namespace PhareAway
     {
         private PhareAwayGame _mGame;
 
-        /*private Sprite _mSprTuto;
-        private Sprite _mCenter;
-
-        private UInt32 _mSceneTuto;
-        private Camera _mDefaultCam;*/
-
+        private List<Video> _mVideos = new List<Video>();
+        private int         _mCurrentVideo = 0;
         private VideoPlayer _mPlayer = null;
 
         public LevelTuto(PhareAwayGame _Game, ContentManager _Content)
         : base(_Game, _Content)
         {
-            //_mSceneTuto = SceneManager.Singleton.CreateScene();
             _mGame = _Game;
         }
 
         public override void Init()
         {
-            /*_mDefaultCam = SceneManager.Singleton.GetNewCamera(_mSceneTuto);
-            _mDefaultCam.SetViewportParam(0, 0, 1.0f, 1.0f);
-            _mDefaultCam.Position = new Vector2(0.0f, 0.0f);
-
-            _mSprTuto = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Tutorial/Tuto_bg", _mContent, _mSceneTuto);
-            _mSprTuto.mPosition = new Vector2(0.0f, 0.0f);
-            _mSprTuto.mOrigin = new Vector2(0.0f, 0.0f);
-
-            _mCenter = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Tutorial/Phare_neutre", _mContent, _mSceneTuto, 4, 15.0f);
-            _mCenter.mPosition = new Vector2(640.0f, 360.0f);
-            _mCenter.mOrigin = new Vector2(_mCenter.Width/2.0f, _mCenter.Height/2.0f);
-            _mCenter.AnimPlayer.Loop = true;*/
+            _mVideos.Add(_mContent.Load<Video>("Graphics/Videos/Bear"));
 
             _mPlayer = new VideoPlayer();
-            _mPlayer.Play(_mContent.Load<Video>("Graphics/Videos/Bear"));
+
+            _mPlayer.Play(_mVideos[0]);
             _mPlayer.IsLooped = true;
             _mPlayer.Pause();
         }
@@ -58,19 +43,40 @@ namespace PhareAway
 
             if (InputManager.Singleton.IsKeyJustPressed(Keys.Enter))
             {
+                _mPlayer.Play(_mVideos[0]);
                 _mPlayer.Stop();
                 _mGame.ChangeLevel(LevelName.Level_Menu);
+
+                return;
+            }
+            
+            if (InputManager.Singleton.IsKeyJustPressed(Keys.Right))
+            {
+                _mCurrentVideo++;
+                if (_mCurrentVideo >= _mVideos.Count)
+                    _mCurrentVideo = 0;
+
+                _mPlayer.Play(_mVideos[_mCurrentVideo]);
+            }
+            if (InputManager.Singleton.IsKeyJustPressed(Keys.Left))
+            {
+                _mCurrentVideo--;
+                if (_mCurrentVideo < 0)
+                    _mCurrentVideo = _mVideos.Count - 1;
+
+                _mPlayer.Play(_mVideos[_mCurrentVideo]);
             }
         }
 
         public override void Draw(SpriteBatch _SprBatch, GraphicsDeviceManager _GraphicsManager)
         {
-            //SceneManager.Singleton.DrawScene(_SprBatch, _GraphicsManager, _mSceneTuto);
+            _GraphicsManager.GraphicsDevice.Clear(Color.Black);
 
             _SprBatch.Begin();
             
             _SprBatch.Draw(_mPlayer.GetTexture(),
-                            Vector2.Zero, new Rectangle(0, 0, _GraphicsManager.PreferredBackBufferWidth, _GraphicsManager.PreferredBackBufferHeight),
+                            Vector2.Zero,
+                            new Rectangle(0, 0, _mPlayer.Video.Width, _mPlayer.Video.Height),
                             Color.White,
                             0,
                             Vector2.Zero,
