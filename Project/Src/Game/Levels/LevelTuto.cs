@@ -87,5 +87,9 @@ namespace PhareAway
             _SprBatch.End();
 
         }
+
+        public override void InitSound()
+        {
+        }
     }
 }

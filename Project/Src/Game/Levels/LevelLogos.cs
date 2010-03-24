@@ -80,5 +80,9 @@ namespace PhareAway
             }
 
         }
+
+        public override void InitSound()
+        {
+        }
     }
 }

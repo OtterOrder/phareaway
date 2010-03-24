@@ -22,6 +22,8 @@ namespace PhareAway
 
         private int _mIDChoice = 0;
 
+        private Cue _mMenuMusic;
+
         public LevelMenu(PhareAwayGame _Game, ContentManager _Content)
         : base(_Game, _Content)
         {
@@ -78,6 +80,9 @@ namespace PhareAway
             _mMenuSpriteSelect[3].mPosition = new Vector2(970.0f, 386.0f);
             _mMenuSpriteSelect[3].mOrigin = new Vector2(_mMenuSpriteSelect[3].Width, _mMenuSpriteSelect[3].Height);
             _mMenuSpriteSelect[3].mVisible = false;
+
+            //_mMenuMusic = SoundManager.Singleton._mMusicSoundBank.GetCue("MUSIC__MENU");
+            //_mMenuMusic.Play();
         }
 
         public override void Update(float _Dt)
@@ -89,6 +94,7 @@ namespace PhareAway
             {
                 if (_mIDChoice < 3)
                 {
+                    SoundManager.Singleton._mSoundSoundBank.PlayCue("SND__HUD__SELECT");
                     _mMenuSprite[_mIDChoice].mVisible = true;
                     _mMenuSpriteSelect[_mIDChoice].mVisible = false;
                     _mIDChoice++;
@@ -98,6 +104,7 @@ namespace PhareAway
             {
                 if (_mIDChoice > 0)
                 {
+                    SoundManager.Singleton._mSoundSoundBank.PlayCue("SND__HUD__SELECT");
                     _mMenuSprite[_mIDChoice].mVisible = true;
                     _mMenuSpriteSelect[_mIDChoice].mVisible = false;
                     _mIDChoice--;
@@ -106,9 +113,10 @@ namespace PhareAway
 
             if (InputManager.Singleton.IsKeyJustPressed(Keys.Enter))
             {
+                SoundManager.Singleton._mSoundSoundBank.PlayCue("SND__HUD__OK");
                 switch(_mIDChoice)
                 {
-                    case 0: _mGame.ChangeLevel(LevelName.Level_Intro); break;
+                    case 0: _mGame.ChangeLevel(LevelName.Level_Intro); _mMenuMusic.Stop(0); break;
                     case 1: _mGame.ChangeLevel(LevelName.Level_Tuto); break;
                     case 2: _mGame.ChangeLevel(LevelName.Level_Credits); break;
                     case 3: _mGame.Exit(); break;
@@ -119,6 +127,13 @@ namespace PhareAway
         public override void Draw(SpriteBatch _SprBatch, GraphicsDeviceManager _GraphicsManager)
         {
             SceneManager.Singleton.DrawScene(_SprBatch, _GraphicsManager, _mSceneMenu);
+        }
+
+        public override void InitSound()
+        {
+            _mMenuMusic = SoundManager.Singleton._mMusicSoundBank.GetCue("MUSIC__MENU");
+            if(!_mMenuMusic.IsPlaying)
+                _mMenuMusic.Play();
         }
     }
 }

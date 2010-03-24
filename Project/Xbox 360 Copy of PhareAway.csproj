@@ -71,6 +71,7 @@
     <Compile Include="Src\Utilities\InputManager.cs" />
     <Compile Include="Src\Utilities\Obstacle.cs" />
     <Compile Include="Src\Utilities\ObstacleManager.cs" />
+    <Compile Include="Src\Utilities\SoundManager.cs" />
     <Compile Include="Src\Utilities\Sprite.cs" />
     <Compile Include="Src\Utilities\Timer.cs" />
   </ItemGroup>
