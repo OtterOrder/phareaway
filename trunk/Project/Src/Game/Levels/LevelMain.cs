@@ -691,5 +691,9 @@ namespace PhareAway
             _mLighthouse.InputParameters = _mArchi.InputParameters;
 
         }
+
+        public override void InitSound()
+        {
+        }
     }
 }

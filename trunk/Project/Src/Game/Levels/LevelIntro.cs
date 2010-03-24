@@ -50,5 +50,9 @@ namespace PhareAway
         {
             SceneManager.Singleton.DrawScene(_SprBatch, _GraphicsManager, _mSceneIntro);
         }
+
+        public override void InitSound()
+        {
+        }
     }
 }

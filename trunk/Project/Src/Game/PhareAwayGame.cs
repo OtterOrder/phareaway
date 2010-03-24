@@ -62,12 +62,6 @@ namespace PhareAway
         public const int mBackBufferWidth = 1280;
         public const int mBackBufferHeight = 720;
 
-        private AudioEngine _mAudioEngine;
-        private SoundBank   _mSoundSoundBank;
-        private SoundBank   _mMusicSoundBank;
-        private WaveBank    _mSoundWaveBank;
-        private WaveBank    _mMusicWaveBank;
-
         public PhareAwayGame(LevelName _StartLevel)
         {
             _mGraphics = new GraphicsDeviceManager(this);
@@ -85,11 +79,7 @@ namespace PhareAway
             _mSpriteBatch = new SpriteBatch(GraphicsDevice);
             _mContent = new ContentManager(Services, "Resources");
 
-            _mAudioEngine = new AudioEngine("Resources/Sounds/PhareAway.xgs");
-            _mSoundSoundBank = new SoundBank(_mAudioEngine, "Resources/Sounds/Sounds.xsb");
-            _mMusicSoundBank = new SoundBank(_mAudioEngine, "Resources/Sounds/Musics.xsb");
-            _mSoundWaveBank = new WaveBank(_mAudioEngine, "Resources/Sounds/Sounds.xwb");
-            _mMusicWaveBank = new WaveBank(_mAudioEngine, "Resources/Sounds/Musics.xwb", 0, 4);
+            SoundManager.Singleton.Init();
 
             _mMainLevel = new LevelMain(this, _mContent);
             _mMainLevel.Init();
@@ -103,6 +93,8 @@ namespace PhareAway
             _mCreditsLevel.Init();
             _mIntroLevel = new LevelIntro(this, _mContent);
             _mIntroLevel.Init();
+
+
 
             switch (_mStartLevel)
             {
@@ -137,7 +129,7 @@ namespace PhareAway
             _mCurrentLevel.Update(Dt);
             SceneManager.Singleton.Update(Dt);
 
-            _mAudioEngine.Update();
+            SoundManager.Singleton.Update();
         }
 
         protected override void Draw(GameTime gameTime)
@@ -154,10 +146,11 @@ namespace PhareAway
             switch (_Level)
             {
                 case LevelName.Level_Main:
-                    _mCurrentLevel = _mMainLevel;break;
+                    _mCurrentLevel = _mMainLevel; break;
                 case LevelName.Level_Menu:
+                    _mMenuLevel.InitSound();
                     _mCurrentLevel = _mMenuLevel;
-                    _mMusicSoundBank.PlayCue("MUSIC__MENU"); break;
+                    break;
                 case LevelName.Level_Logos:
                     _mCurrentLevel = _mLogosLevel; break;
                 case LevelName.Level_Tuto:

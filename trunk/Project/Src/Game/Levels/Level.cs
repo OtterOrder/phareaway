@@ -23,5 +23,6 @@ namespace PhareAway
         public abstract void Init();
         public abstract void Update(float _Dt);
         public abstract void Draw(SpriteBatch _SprBatch, GraphicsDeviceManager _GraphicsManager);
+        public abstract void InitSound();
     }
 }
