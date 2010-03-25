@@ -74,12 +74,17 @@ namespace PhareAway
 
         }
 
+        protected override void Initialize()
+        {
+            SoundManager.Singleton.Init();
+
+            base.Initialize();
+        }
+
         protected override void LoadContent()
         {
             _mSpriteBatch = new SpriteBatch(GraphicsDevice);
-            _mContent = new ContentManager(Services, "Resources");
-
-            SoundManager.Singleton.Init();
+            _mContent = new ContentManager(Services, "Resources");        
 
             _mMainLevel = new LevelMain(this, _mContent);
             _mMainLevel.Init();
@@ -93,8 +98,6 @@ namespace PhareAway
             _mCreditsLevel.Init();
             _mIntroLevel = new LevelIntro(this, _mContent);
             _mIntroLevel.Init();
-
-
 
             switch (_mStartLevel)
             {
