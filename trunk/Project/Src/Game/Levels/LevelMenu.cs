@@ -80,9 +80,6 @@ namespace PhareAway
             _mMenuSpriteSelect[3].mPosition = new Vector2(970.0f, 386.0f);
             _mMenuSpriteSelect[3].mOrigin = new Vector2(_mMenuSpriteSelect[3].Width, _mMenuSpriteSelect[3].Height);
             _mMenuSpriteSelect[3].mVisible = false;
-
-            //_mMenuMusic = SoundManager.Singleton._mMusicSoundBank.GetCue("MUSIC__MENU");
-            //_mMenuMusic.Play();
         }
 
         public override void Update(float _Dt)
@@ -131,9 +128,12 @@ namespace PhareAway
 
         public override void InitSound()
         {
-            _mMenuMusic = SoundManager.Singleton._mMusicSoundBank.GetCue("MUSIC__MENU");
-            if(!_mMenuMusic.IsPlaying)
-                _mMenuMusic.Play();
+            if (_mMenuMusic == null)
+                _mMenuMusic = SoundManager.Singleton._mMusicSoundBank.GetCue("MUSIC__MENU");
+
+            if (!_mMenuMusic.IsPlaying)
+                    _mMenuMusic.Play();
+
         }
     }
 }

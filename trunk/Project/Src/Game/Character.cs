@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 
 namespace PhareAway
 {
@@ -93,6 +94,8 @@ namespace PhareAway
 
         private UInt32          _mCollisionId;
 
+        private Cue             _mLadderMove;
+
         //-------------------------------------------------------------------------
         public Character()
         {
@@ -147,6 +150,8 @@ namespace PhareAway
 
             _mGameParams = _Parameters.mGameParams;
             _mInputParams = _Parameters.mInputParams;
+
+            _mLadderMove = SoundManager.Singleton._mSoundSoundBank.GetCue("SND__ACTION__LADDER_MOVE");
         }
 
         //------------------------------------------------------------------
@@ -415,18 +420,36 @@ namespace PhareAway
             BoundingBox Ground = CollisionsManager.Singleton.Collide(GetCurrentSprite(), (UInt32)CollisionId.Ground, Vector2.Zero);
             if (_mSpeed.X != 0.0f && Ground == null)
             {
+                _mLadderMove.Stop(0);
+                _mLadderMove = SoundManager.Singleton._mSoundSoundBank.GetCue("SND__ACTION__LADDER_MOVE");
                 ChangeState(State.Idle);
                 return;
             }
 
             BoundingBox Ladder  = CollisionsManager.Singleton.Collide(GetCurrentSprite(), (UInt32)CollisionId.Ladder, Vector2.Zero);
             if (Ladder == null)
+            {
+                _mLadderMove.Stop(0);
+                _mLadderMove = SoundManager.Singleton._mSoundSoundBank.GetCue("SND__ACTION__LADDER_MOVE");
                 return;
+            }
 
             float Direction = 0.0f;
 
             bool Up      = InputManager.Singleton.IsKeyPressed(_mInputParams.mUp);
             bool Down    = InputManager.Singleton.IsKeyPressed(_mInputParams.mDown);
+
+            bool justUp      = InputManager.Singleton.IsKeyJustPressed(_mInputParams.mUp);
+            bool justDown    = InputManager.Singleton.IsKeyJustPressed(_mInputParams.mDown);
+
+            bool ReleaseUp = InputManager.Singleton.IsKeyJustReleased(_mInputParams.mUp);
+            bool ReleaseDown = InputManager.Singleton.IsKeyJustReleased(_mInputParams.mDown);
+
+            if (ReleaseUp ^ ReleaseDown)
+            {
+                _mLadderMove.Stop(0);
+                _mLadderMove = SoundManager.Singleton._mSoundSoundBank.GetCue("SND__ACTION__LADDER_MOVE");      
+            }
 
             if( Up ^ Down)
             {
@@ -460,12 +483,20 @@ namespace PhareAway
             {
                 _mPosition.X = Ladder.Sprite.mPosition.X;
 
+                if (Up ^ Down && !_mLadderMove.IsPlaying)
+                    _mLadderMove.Play();
+
                 _mSpeed.X = 0.0f;
                 _mSpeed.Y = Direction * _mGameParams.mClimbSpeed * _Dt;
 
                 GetCurrentSprite().mFlip = SpriteEffects.None;
                 if (GetCurrentSprite().AnimPlayer != null)
                     GetCurrentSprite().AnimPlayer.Speed = Direction;
+            }
+            else
+            {
+                _mLadderMove.Stop(0);
+                _mLadderMove = SoundManager.Singleton._mSoundSoundBank.GetCue("SND__ACTION__LADDER_MOVE");
             }
         }
 

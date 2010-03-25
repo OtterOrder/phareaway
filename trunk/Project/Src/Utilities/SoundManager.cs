@@ -44,6 +44,8 @@ namespace PhareAway
             _mMusicSoundBank = new SoundBank(_mAudioEngine, "Resources/Sounds/Musics.xsb");
             _mSoundWaveBank = new WaveBank(_mAudioEngine, "Resources/Sounds/Sounds.xwb");
             _mMusicWaveBank = new WaveBank(_mAudioEngine, "Resources/Sounds/Musics.xwb", 0, 250);
+
+            _mAudioEngine.Update();
         }
 
         public void Update()
