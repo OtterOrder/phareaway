@@ -327,7 +327,10 @@ namespace PhareAway
                 _mSpeed.X = -_mGameParams.mWalkSpeed * _Dt;
 
             if (InputManager.Singleton.IsKeyJustPressed(_mInputParams.mJump) && (_mState == State.Idle || _mState == State.Walk || _mState == State.MachineWait))
+            {
+                SoundManager.Singleton._mSoundSoundBank.PlayCue("SND__ACTION__JUMP");
                 _mSpeed.Y = -_mGameParams.mJumpSpeed * _Dt;
+            }
         }
 
         //-----------------------------------
@@ -405,7 +408,11 @@ namespace PhareAway
             if (_mSpeed.X != 0.0f)
                 ChangeState(State.Walk);
             else
+            {
+                if (_mState == State.Fall)
+                    SoundManager.Singleton._mSoundSoundBank.PlayCue("SND__ACTION__JUMP_RECEPTION");
                 ChangeState(State.Idle);
+            }
 
             if (_mSpeed.X > 0.0f)
                 GetCurrentSprite().mFlip = SpriteEffects.FlipHorizontally;

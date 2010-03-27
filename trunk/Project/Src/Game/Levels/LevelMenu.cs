@@ -113,7 +113,11 @@ namespace PhareAway
                 SoundManager.Singleton._mSoundSoundBank.PlayCue("SND__HUD__OK");
                 switch(_mIDChoice)
                 {
-                    case 0: _mGame.ChangeLevel(LevelName.Level_Intro); _mMenuMusic.Stop(0); break;
+                    case 0: 
+                        _mGame.ChangeLevel(LevelName.Level_Intro); 
+                        _mMenuMusic.Stop(0);
+                        _mMenuMusic = SoundManager.Singleton._mMusicSoundBank.GetCue("MUSIC__MENU");
+                        break;
                     case 1: _mGame.ChangeLevel(LevelName.Level_Tuto); break;
                     case 2: _mGame.ChangeLevel(LevelName.Level_Credits); break;
                     case 3: _mGame.Exit(); break;
