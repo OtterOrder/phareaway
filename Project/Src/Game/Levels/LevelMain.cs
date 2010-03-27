@@ -70,7 +70,7 @@ namespace PhareAway
 
         public override void Update(float _Dt)
         {
-            if (InputManager.Singleton.IsKeyJustPressed(Keys.F1))
+            if (InputManager.Singleton.IsKeyJustPressed(Keys.Escape))
             {
                 _mPaused = !_mPaused;
             }
