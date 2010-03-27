@@ -12,25 +12,37 @@ namespace PhareAway
 {
     public class LevelMain : Level
     {
+        private PhareAwayGame _mGame;
         private Background Bg;
         private Sprite Spr, bgDecor;
+
+        private Sprite[] _mMenuSprite;
+        private Sprite[] _mMenuSpriteSelect;
+
+        private int _mIDChoice = 0;
 
         private Character _mArchi, _mPhilo;
         private Lighthouse _mLighthouse;
 
         private UInt32 _mSceneInside;
         private UInt32 _mSceneOutside;
+        private UInt32 _mScenePause;
 
         private Camera _mCamArchi;
         private Camera _mCamPhilo;
         private Camera _mCamOutside;
+        private Camera _mDefaultCam;
 
-        public LevelMain(PhareAwayGame _Game, ContentManager _Content)
-        : base(_Game, _Content)
+        private bool _mPaused = false;
+
+        public LevelMain(PhareAwayGame _Game, ContentManager _Content) : base(_Game, _Content)
         {
             // Scènes 
             _mSceneInside  = SceneManager.Singleton.CreateScene();
             _mSceneOutside = SceneManager.Singleton.CreateScene();
+            _mScenePause = SceneManager.Singleton.CreateScene();
+
+            _mGame = _Game;
         }
 
         public override void Init()
@@ -45,33 +57,54 @@ namespace PhareAway
             _mCamOutside.SetViewportParam(0.34f, 0, 0.32f, 1.0f);
             _mCamOutside.Position = new Vector2(212.0f, 360.0f);
 
+            _mDefaultCam = SceneManager.Singleton.GetNewCamera(_mScenePause);
+            _mDefaultCam.SetViewportParam(0, 0, 1.0f, 1.0f);
+            _mDefaultCam.Position = new Vector2(0.0f, 0.0f);
+
             InitDecorInside();
             InitDecorOutside();
             InitPlayers();
             InitGameObject();
+            InitPauseMenu();
         }
 
         public override void Update(float _Dt)
         {
-            _mArchi.Update(_Dt);
-            _mPhilo.Update(_Dt);
+            if (InputManager.Singleton.IsKeyJustPressed(Keys.F1))
+            {
+                _mPaused = !_mPaused;
+            }
 
-            ObstacleManager.Singleton.Update(_Dt);
+            if (!_mPaused)
+            {
+                _mArchi.Update(_Dt);
+                _mPhilo.Update(_Dt);
 
-            _mLighthouse.Update(_Dt);
-            FlashManager.Singleton.Update(_Dt);
+                ObstacleManager.Singleton.Update(_Dt);
 
-            MachineManager.Singleton.Update(_Dt);
+                _mLighthouse.Update(_Dt);
+                FlashManager.Singleton.Update(_Dt);
+
+                MachineManager.Singleton.Update(_Dt);
 
 
-            _mCamArchi.mFocus = _mArchi.GetPosition();
-            _mCamPhilo.mFocus = _mPhilo.GetPosition();
+                _mCamArchi.mFocus = _mArchi.GetPosition();
+                _mCamPhilo.mFocus = _mPhilo.GetPosition();
+            }
+            else
+                UpdatePauseMenu();
         }
 
         public override void Draw(SpriteBatch _SprBatch, GraphicsDeviceManager _GraphicsManager)
         {
-            SceneManager.Singleton.DrawScene(_SprBatch, _GraphicsManager, _mSceneInside);
-            SceneManager.Singleton.DrawScene(_SprBatch, _GraphicsManager, _mSceneOutside);
+            if(!_mPaused)
+            {
+                SceneManager.Singleton.DrawScene(_SprBatch, _GraphicsManager, _mSceneInside);
+                SceneManager.Singleton.DrawScene(_SprBatch, _GraphicsManager, _mSceneOutside);
+            }
+            else
+                SceneManager.Singleton.DrawScene(_SprBatch, _GraphicsManager, _mScenePause);
+
         }
 
         private void InitDecorInside()
@@ -689,6 +722,91 @@ namespace PhareAway
 
             _mLighthouse.mActive = true;
             _mLighthouse.InputParameters = _mArchi.InputParameters;
+
+        }
+
+        private void InitPauseMenu()
+        {
+            Spr = SceneManager.Singleton.GetNewSprite("Graphics/Backgrounds/Menu_pause", _mContent, _mScenePause);
+            Spr.mPosition = new Vector2(0.0f, 0.0f);
+            Spr.mOrigin = new Vector2(0.0f, 0.0f);
+            Spr.Depth = 0.9f;
+
+            _mMenuSprite = new Sprite[3];
+
+            _mMenuSprite[0] = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Menu/Resume_0", _mContent, _mScenePause);
+            _mMenuSprite[0].mPosition = new Vector2(970.0f, 260.0f);
+            _mMenuSprite[0].mOrigin = new Vector2(_mMenuSprite[0].Width, _mMenuSprite[0].Height);
+            _mMenuSprite[0].Depth = 0.5f;
+
+            _mMenuSprite[1] = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Menu/HowToPlay_0", _mContent, _mScenePause);
+            _mMenuSprite[1].mPosition = new Vector2(970.0f, 310.0f);
+            _mMenuSprite[1].mOrigin = new Vector2(_mMenuSprite[1].Width, _mMenuSprite[1].Height);
+            _mMenuSprite[1].Depth = 0.5f;
+
+            _mMenuSprite[2] = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Menu/ExitToMenu_0", _mContent, _mScenePause);
+            _mMenuSprite[2].mPosition = new Vector2(970.0f, 346.0f);
+            _mMenuSprite[2].mOrigin = new Vector2(_mMenuSprite[2].Width, _mMenuSprite[2].Height);
+            _mMenuSprite[2].Depth = 0.5f;
+
+            _mMenuSpriteSelect = new Sprite[3];
+
+            _mMenuSpriteSelect[0] = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Menu/Resume_1", _mContent, _mScenePause);
+            _mMenuSpriteSelect[0].mPosition = new Vector2(970.0f, 260.0f);
+            _mMenuSpriteSelect[0].mOrigin = new Vector2(_mMenuSpriteSelect[0].Width, _mMenuSpriteSelect[0].Height);
+            _mMenuSpriteSelect[0].mVisible = false;
+            _mMenuSpriteSelect[0].Depth = 0.5f;
+
+            _mMenuSpriteSelect[1] = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Menu/HowToPlay_1", _mContent, _mScenePause);
+            _mMenuSpriteSelect[1].mPosition = new Vector2(970.0f, 310.0f);
+            _mMenuSpriteSelect[1].mOrigin = new Vector2(_mMenuSpriteSelect[1].Width, _mMenuSpriteSelect[1].Height);
+            _mMenuSpriteSelect[1].mVisible = false;
+            _mMenuSpriteSelect[1].Depth = 0.5f;
+
+            _mMenuSpriteSelect[2] = SceneManager.Singleton.GetNewSprite("Graphics/Sprites/Menu/ExitToMenu_1", _mContent, _mScenePause);
+            _mMenuSpriteSelect[2].mPosition = new Vector2(970.0f, 346.0f);
+            _mMenuSpriteSelect[2].mOrigin = new Vector2(_mMenuSpriteSelect[2].Width, _mMenuSpriteSelect[2].Height);
+            _mMenuSpriteSelect[2].mVisible = false;
+            _mMenuSpriteSelect[2].Depth = 0.5f;
+
+        }
+
+        private void UpdatePauseMenu()
+        {
+            _mMenuSprite[_mIDChoice].mVisible = false;
+            _mMenuSpriteSelect[_mIDChoice].mVisible = true;
+
+            if (InputManager.Singleton.IsKeyJustPressed(Keys.Down))
+            {
+                if (_mIDChoice < 2)
+                {
+                    SoundManager.Singleton._mSoundSoundBank.PlayCue("SND__HUD__SELECT");
+                    _mMenuSprite[_mIDChoice].mVisible = true;
+                    _mMenuSpriteSelect[_mIDChoice].mVisible = false;
+                    _mIDChoice++;
+                }
+            }
+            if (InputManager.Singleton.IsKeyJustPressed(Keys.Up))
+            {
+                if (_mIDChoice > 0)
+                {
+                    SoundManager.Singleton._mSoundSoundBank.PlayCue("SND__HUD__SELECT");
+                    _mMenuSprite[_mIDChoice].mVisible = true;
+                    _mMenuSpriteSelect[_mIDChoice].mVisible = false;
+                    _mIDChoice--;
+                }
+            }
+
+            if (InputManager.Singleton.IsKeyJustPressed(Keys.Enter))
+            {
+                SoundManager.Singleton._mSoundSoundBank.PlayCue("SND__HUD__OK");
+                switch (_mIDChoice)
+                {
+                    case 0: _mPaused = !_mPaused; break;
+                    case 1: _mGame.ChangeLevel(LevelName.Level_Tuto); break;
+                    case 2: _mGame.ChangeLevel(LevelName.Level_Menu); break;
+                }
+            }
 
         }
 
