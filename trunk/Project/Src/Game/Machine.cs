@@ -98,6 +98,22 @@ namespace PhareAway
         public void Repair()
         {
             Health += _mParams.mRepairSpeed;
+
+            switch(_mParams.mId)
+            {
+                case MachineId.Zeus:
+                    SoundManager.Singleton._mSoundSoundBank.PlayCue("SND__ACTION__PRAY");
+                    break;
+                case MachineId.Pipes:
+                    SoundManager.Singleton._mSoundSoundBank.PlayCue("SND__ACTION__MAINTENANCE");
+                    break;
+                case MachineId.EngineL:
+                    SoundManager.Singleton._mSoundSoundBank.PlayCue("SND__ACTION__POUR");
+                    break;
+                case MachineId.EngineR:
+                    SoundManager.Singleton._mSoundSoundBank.PlayCue("SND__ACTION__POUR");
+                    break;
+            }
         }
     }
 }
