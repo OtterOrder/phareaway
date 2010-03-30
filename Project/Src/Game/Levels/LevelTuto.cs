@@ -18,6 +18,7 @@ namespace PhareAway
         private List<Video> _mVideos = new List<Video>();
         private int         _mCurrentVideo = 0;
         private VideoPlayer _mPlayer = null;
+        private float       _mScale = 1.0f;
 
         public LevelTuto(PhareAwayGame _Game, ContentManager _Content)
         : base(_Game, _Content)
@@ -27,7 +28,22 @@ namespace PhareAway
 
         public override void Init()
         {
-            _mVideos.Add(_mContent.Load<Video>("Graphics/Videos/Bear"));
+            _mVideos.Add(_mContent.Load<Video>("Graphics/Videos/Tuto-01"));
+            _mVideos.Add(_mContent.Load<Video>("Graphics/Videos/Tuto-02"));
+            _mVideos.Add(_mContent.Load<Video>("Graphics/Videos/Tuto-03"));
+            _mVideos.Add(_mContent.Load<Video>("Graphics/Videos/Tuto-04"));
+            _mVideos.Add(_mContent.Load<Video>("Graphics/Videos/Tuto-05"));
+            _mVideos.Add(_mContent.Load<Video>("Graphics/Videos/Tuto-06"));
+            _mVideos.Add(_mContent.Load<Video>("Graphics/Videos/Tuto-07"));
+            _mVideos.Add(_mContent.Load<Video>("Graphics/Videos/Tuto-08"));
+            _mVideos.Add(_mContent.Load<Video>("Graphics/Videos/Tuto-09"));
+            _mVideos.Add(_mContent.Load<Video>("Graphics/Videos/Tuto-10"));
+            _mVideos.Add(_mContent.Load<Video>("Graphics/Videos/Tuto-11"));
+            _mVideos.Add(_mContent.Load<Video>("Graphics/Videos/Tuto-12"));
+            _mVideos.Add(_mContent.Load<Video>("Graphics/Videos/Tuto-13"));
+            _mVideos.Add(_mContent.Load<Video>("Graphics/Videos/Tuto-14"));
+            _mVideos.Add(_mContent.Load<Video>("Graphics/Videos/Tuto-15"));
+            _mVideos.Add(_mContent.Load<Video>("Graphics/Videos/Tuto-16"));
 
             _mPlayer = new VideoPlayer();
 
@@ -57,6 +73,8 @@ namespace PhareAway
                     _mCurrentVideo = 0;
 
                 _mPlayer.Play(_mVideos[_mCurrentVideo]);
+
+                //float XScale = 
             }
             if (InputManager.Singleton.IsKeyJustPressed(Keys.Left))
             {
