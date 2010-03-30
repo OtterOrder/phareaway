@@ -468,13 +468,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Graphics\Videos\Bear.wmv">
-      <Name>Bear</Name>
-      <Importer>WmvImporter</Importer>
-      <Processor>VideoProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Graphics\Backgrounds\Menu_pause.png">
       <Name>Menu_pause</Name>
       <Importer>TextureImporter</Importer>
@@ -507,6 +500,88 @@
       <Name>Resume_1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Graphics\Videos\Tuto-01.wmv">
+      <Name>Tuto-01</Name>
+      <Importer>WmvImporter</Importer>
+      <Processor>VideoProcessor</Processor>
+    </Compile>
+    <Compile Include="Graphics\Videos\Tuto-02.wmv">
+      <Name>Tuto-02</Name>
+      <Importer>WmvImporter</Importer>
+      <Processor>VideoProcessor</Processor>
+    </Compile>
+    <Compile Include="Graphics\Videos\Tuto-03.wmv">
+      <Name>Tuto-03</Name>
+      <Importer>WmvImporter</Importer>
+      <Processor>VideoProcessor</Processor>
+    </Compile>
+    <Compile Include="Graphics\Videos\Tuto-04.wmv">
+      <Name>Tuto-04</Name>
+      <Importer>WmvImporter</Importer>
+      <Processor>VideoProcessor</Processor>
+    </Compile>
+    <Compile Include="Graphics\Videos\Tuto-05.wmv">
+      <Name>Tuto-05</Name>
+      <Importer>WmvImporter</Importer>
+      <Processor>VideoProcessor</Processor>
+    </Compile>
+    <Compile Include="Graphics\Videos\Tuto-06.wmv">
+      <Name>Tuto-06</Name>
+      <Importer>WmvImporter</Importer>
+      <Processor>VideoProcessor</Processor>
+    </Compile>
+    <Compile Include="Graphics\Videos\Tuto-07.wmv">
+      <Name>Tuto-07</Name>
+      <Importer>WmvImporter</Importer>
+      <Processor>VideoProcessor</Processor>
+    </Compile>
+    <Compile Include="Graphics\Videos\Tuto-08.wmv">
+      <Name>Tuto-08</Name>
+      <Importer>WmvImporter</Importer>
+      <Processor>VideoProcessor</Processor>
+    </Compile>
+    <Compile Include="Graphics\Videos\Tuto-09.wmv">
+      <Name>Tuto-09</Name>
+      <Importer>WmvImporter</Importer>
+      <Processor>VideoProcessor</Processor>
+    </Compile>
+    <Compile Include="Graphics\Videos\Tuto-10.wmv">
+      <Name>Tuto-10</Name>
+      <Importer>WmvImporter</Importer>
+      <Processor>VideoProcessor</Processor>
+    </Compile>
+    <Compile Include="Graphics\Videos\Tuto-11.wmv">
+      <Name>Tuto-11</Name>
+      <Importer>WmvImporter</Importer>
+      <Processor>VideoProcessor</Processor>
+    </Compile>
+    <Compile Include="Graphics\Videos\Tuto-12.wmv">
+      <Name>Tuto-12</Name>
+      <Importer>WmvImporter</Importer>
+      <Processor>VideoProcessor</Processor>
+    </Compile>
+    <Compile Include="Graphics\Videos\Tuto-13.wmv">
+      <Name>Tuto-13</Name>
+      <Importer>WmvImporter</Importer>
+      <Processor>VideoProcessor</Processor>
+    </Compile>
+    <Compile Include="Graphics\Videos\Tuto-14.wmv">
+      <Name>Tuto-14</Name>
+      <Importer>WmvImporter</Importer>
+      <Processor>VideoProcessor</Processor>
+    </Compile>
+    <Compile Include="Graphics\Videos\Tuto-15.wmv">
+      <Name>Tuto-15</Name>
+      <Importer>WmvImporter</Importer>
+      <Processor>VideoProcessor</Processor>
+    </Compile>
+    <Compile Include="Graphics\Videos\Tuto-16.wmv">
+      <Name>Tuto-16</Name>
+      <Importer>WmvImporter</Importer>
+      <Processor>VideoProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
